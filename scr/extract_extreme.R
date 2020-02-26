@@ -32,7 +32,7 @@ extract_extreme <- function(fn, dt) {
       dt2[j,5] <- mean(as.numeric(YA[(2+n_samples):(n_samples*2)+1]), na.rm=TRUE)
     }
   }
-  #colnames(dt2) <- c('Study', 'Design', 'Sheet', 'YA_M', 'YA_SD', 'YA_N', 'OA_M', 'OA_SD', 'OA_N')
+  colnames(dt2) <- c('Study', 'Design', 'Sheet', 'YA_M', 'YA_SD', 'YA_N', 'OA_M', 'OA_SD', 'OA_N')
   return(dt2)
 }
 

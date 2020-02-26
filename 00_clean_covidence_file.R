@@ -1,5 +1,5 @@
 # Sort data from covidence
-# 9.5.19 KLS
+# 9.5.19 KLS & 10.10.19
 
 # load required packages
 #library(gdata)
@@ -10,17 +10,19 @@ library(here)
 source(here('scr', 'extract_continuous.R'))
 
 # set hard-coded variables
-filename = 'review_47118_included_xlsx_20190906031623.xlsx'
+#filename = 'review_47118_included_xlsx_20190906031623.xlsx'
+filename = 'review_47118_included_xlsx_20191011045854.xlsx'
+
 # load data
-n_studies <- nrow(read_excel(here('data', filename), col_names = FALSE))
-names <- read_xlsx(here('data', filename), col_names = FALSE)[,1]
+names <- excel_sheets(here('data', filename))[2:length(names)]
+n_studies<- length(names)
 dt1<- data.frame(matrix(ncol=3,nrow=n_studies))
 dt1[1] <- names
 
 # extract the type of study
 for (i in 1:n_studies+1) {
   print(i)
-  dt <- read_excel(here('data', 'review_47118_included_xlsx_20190906031623.xlsx'), sheet = i)[1:40,]
+  dt <- read_excel(here('data', filename), sheet = i)[1:40,]
   dt1[i-1,2] <- dt[which(dt$Agreed == "Design"),][,2]
   dt1[i-1,3] <- i
 }
