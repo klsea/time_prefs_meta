@@ -11,10 +11,12 @@ source(here('scr', 'extract_continuous.R'))
 
 # set hard-coded variables
 #filename = 'review_47118_included_xlsx_20190906031623.xlsx'
-filename = 'review_47118_included_xlsx_20191011045854.xlsx'
+#filename = 'review_47118_included_xlsx_20191011045854.xlsx'
+filename = 'review_47118_extracted_data_xlsx_20200319142630.xlsx'
 
 # load data
-names <- excel_sheets(here('data', filename))[2:length(names)]
+names <- excel_sheets(here::here('data', filename))
+names <- names[2:length(names)]
 n_studies<- length(names)
 dt1<- data.frame(matrix(ncol=3,nrow=n_studies))
 dt1[1] <- names
