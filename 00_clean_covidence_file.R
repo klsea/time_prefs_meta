@@ -44,6 +44,7 @@ colnames(d2)[which(colnames(d2) == 'Discounting.Baseline.effectsize..d.')] <- 'e
 
 # Separate conditions for correlations
 colnames(d2)[which(colnames(d2) == 'Discounting.Baseline.correlation')] <- 'correlation'
+
 # Hampton 2018
 hampton <- separate_conditions(d2, 'Hampton 2018', c(1, 7, 30, 180, 365), 'Discounting.Baseline.correlation')
 colnames(hampton)[which(colnames(hampton) == 'measure')] <- 'correlation'
@@ -58,13 +59,19 @@ johnson$condition <- paste0('$', johnson$condition)
 johnson['se'] <- NA; johnson['sd'] <- NA; johnson['Fvalue'] <- NA; johnson['mean'] <- NA; johnson['effect_size_d'] <- NA; johnson['rsquare'] <- NA
 d2 <- d2[-which(d2$Study.Identifier == 'Johnson 2015'),]
 
-# Wolfe 2017 (for some reason Covidence recorded this in a different column)
+# Wolfe 2017 and Reimers 2009(for some reason Covidence recorded these in a different column)
 dt <- d2[which(d2$Study.Identifier == 'Wolfe 2017'),] # isolate Wolfe data
 dt <- dt[,colSums(is.na(dt)) == 0] # remove NA columns
 colnames(dt)[which(colnames(dt) == 'Discounting.Baseline.correlation.3')] <- 'correlation'
 dt['se'] <- NA; dt['sd'] <- NA; dt['Fvalue'] <- NA; dt['mean'] <- NA; dt['effect_size_d'] <- NA; dt['condition'] <- NA; dt['rsquare'] <- NA
 wolfe <- dt; rm(dt)
 d2 <- d2[-which(d2$Study.Identifier == 'Wolfe 2017'),]
+
+reimers <- d2[which(d2$Study.Identifier == 'Reimers 2009'),] # isolate Reimers data
+reimers <- reimers[,colSums(is.na(reimers)) == 0] # remove NA columns
+colnames(reimers)[which(colnames(reimers) == 'Discounting.Baseline.correlation.3')] <- 'correlation'
+reimers['se'] <- NA; reimers['sd'] <- NA; reimers['Fvalue'] <- NA; reimers['mean'] <- NA; reimers['effect_size_d'] <- NA; reimers['condition'] <- NA; reimers['rsquare'] <- NA
+d2 <- d2[-which(d2$Study.Identifier == 'Reimers 2009'),]
 
 # remove unneccesary correlation columns
 d2 <- d2[-grep('Discounting.Baseline.correlation', colnames(d2))]
@@ -161,6 +168,7 @@ d2 <- d2[order]
 d2 <- rbind(d2, hampton[order]); rm(hampton)
 d2 <- rbind(d2, johnson[order]); rm(johnson)
 d2 <- rbind(d2, wolfe[order]); rm(wolfe)
+d2 <- rbind(d2, reimers[order]); rm(reimers)
 d2 <- rbind(d2, read[order]); rm(read)
 d2 <- rbind(d2, li[order]); rm(li)
 d2 <- rbind(d2, liu[order]); rm(liu)
