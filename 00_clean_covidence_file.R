@@ -42,9 +42,6 @@ colnames(d2)[which(colnames(d2) == 'Discounting.Baseline.SE')] <- 'se'
 colnames(d2)[which(colnames(d2) == 'Discounting.Baseline.F.value')] <- 'Fvalue'
 colnames(d2)[which(colnames(d2) == 'Discounting.Baseline.effectsize..d.')] <- 'effect_size_d'
 
-# add condition column
-d2$Condition <- NULL
-
 # Separate conditions for correlations
 colnames(d2)[which(colnames(d2) == 'Discounting.Baseline.correlation')] <- 'correlation'
 # Hampton 2018
@@ -78,7 +75,7 @@ read <- separate_conditions(d2, 'Read 2004', c(1, 2, 3), 'Discounting.Baseline.r
 colnames(read)[which(colnames(read) == 'measure')] <- 'rsquare'
 read$condition <- c('0-3 year delays', '0-10 year delays', '7-10 year delays')
 read['se'] <- NA; read['sd'] <- NA; read['Fvalue'] <- NA; read['mean'] <- NA; 
-read['effect_size_d'] <- NA; read['condition'] <- NA; read['correlation'] <- NA
+read['effect_size_d'] <- NA; read['correlation'] <- NA
 d2 <- d2[-which(d2$Study.Identifier == 'Read 2004'),]
 
 # remove unneccesary rsquare columns
@@ -104,7 +101,7 @@ li_sd$condition <- revalue(li_sd$condition, c('1' = '$60, 4 mo', '2.1' = '$75, 3
                                           '3.1' = '$55, 3 mo', '4' = '$115, 3 mo', 
                                           '5' = '$100, 12 mo'))
 li <- merge(li_mean, li_sd)
-li['se'] <- NA; li['Fvalue'] <- NA; li['effect_size_d'] <- NA; li['condition'] <- NA; li['correlation'] <- NA; li['rsquare'] <- NA
+li['se'] <- NA; li['Fvalue'] <- NA; li['effect_size_d'] <- NA; li['correlation'] <- NA; li['rsquare'] <- NA
 rm(li_mean, li_sd)
 d2 <- d2[-which(d2$Study.Identifier == 'Li 2013'),]
 
@@ -121,7 +118,7 @@ liu_sd <- liu_sd[-grep('Discounting.Baseline.Mean', colnames(liu_sd))]
 liu_sd$condition <- revalue(liu_sd$condition, c('1.1' = 'Ln(k) small', '2.2' = 'Ln(k) medium', 
                                           '3' = 'Ln(k) large', '4.1' = 'Ln(k) mean'))
 liu <- merge(liu_mean, liu_sd)
-liu['se'] <- NA; liu['Fvalue'] <- NA; liu['effect_size_d'] <- NA; liu['condition'] <- NA; 
+liu['se'] <- NA; liu['Fvalue'] <- NA; liu['effect_size_d'] <- NA; 
 liu['correlation'] <- NA; liu['rsquare'] <- NA
 rm(liu_mean, liu_sd)
 d2 <- d2[-which(d2$Study.Identifier == 'Liu 2016'),]
@@ -130,7 +127,7 @@ d2 <- d2[-which(d2$Study.Identifier == 'Liu 2016'),]
 green <- separate_conditions(d2, 'GREEN 1994', c('1.000.', '10.000.'), 'Discounting.Baseline.Mean..')
 colnames(green)[which(colnames(green) == 'measure')] <- 'mean'
 green$condition <- revalue(green$condition, c('1.000.' = '$1,000', '10.000.' = '$10,000'))
-green['se'] <- NA; green['Fvalue'] <- NA; green['effect_size_d'] <- NA; green['condition'] <- NA; 
+green['se'] <- NA; green['Fvalue'] <- NA; green['effect_size_d'] <- NA; 
 green['correlation'] <- NA; green['rsquare'] <- NA; green['sd'] <- NA
 d2 <- d2[-which(d2$Study.Identifier == 'GREEN 1994'),]
 
