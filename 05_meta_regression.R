@@ -19,8 +19,6 @@ dt <- dt[order(dt$Design, dt$Study.Identifier),]
 # Remove Eppinger 2012
 dt <- dt[which(dt$Study.Identifier != "Eppinger 2012"),] # wrong data 
 
-
-
 # Design
 m1 <- rma(yi, vi, data = dt, mods = Design, digits = 3, slab=Study.Identifier, method = "REML")
 m1
