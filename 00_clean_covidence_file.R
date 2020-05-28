@@ -134,7 +134,7 @@ d2 <- d2[-which(d2$Study.Identifier == 'Liu 2016'),]
 green <- separate_conditions(d2, 'GREEN 1994', c('1.000.', '10.000.'), 'Discounting.Baseline.Mean..')
 colnames(green)[which(colnames(green) == 'measure')] <- 'mean'
 green$condition <- revalue(green$condition, c('1.000.' = '$1,000', '10.000.' = '$10,000'))
-green['se'] <- NA; green['Fvalue'] <- NA; green['effect_size_d'] <- NA; 
+green['se'] <- NA; green['effect_size_d'] <- NA; 
 green['correlation'] <- NA; green['rsquare'] <- NA; green['sd'] <- NA
 d2 <- d2[-which(d2$Study.Identifier == 'GREEN 1994'),]
 

@@ -25,19 +25,23 @@ dc <- dc[c(1, 6, 8:12, 14, 23:25)]
 
 ## average across multiple values within the same study
 hampton <- dc[which(dc$Study.Identifier == 'Hampton 2018'),]
-hampton <- cbind(hampton[1,1:7], t(colMeans(hampton[8:9])))
+hampton <- cbind(hampton[1,1:9], t(colMeans(hampton[10:11])))
 johnson <- dc[which(dc$Study.Identifier == 'Johnson 2015'),]
-johnson <- cbind(johnson[1,1:7], t(colMeans(johnson[8:9])))
+johnson <- cbind(johnson[1,1:9], t(colMeans(johnson[10:11])))
+read <- dc[which(dc$Study.Identifier == 'Read 2004'),]
+read <- cbind(read[1,1:9], t(colMeans(read[10:11])))
 
 ## remove studies with multiple condition rows and replace with study means
 dc <- dc[-which(dc$Study.Identifier == 'Hampton 2018'),]
 dc <- rbind(dc, hampton)
 dc <- dc[-which(dc$Study.Identifier == 'Johnson 2015'),]
 dc <- rbind(dc, johnson)
-rm(hampton, johnson)
+dc <- dc[-which(dc$Study.Identifier == 'Read 2004'),]
+dc <- rbind(dc, read)
+rm(hampton, johnson, read)
 
 ## remove term for study + conditions
-dc <- dc[-7]
+dc <- dc[-9]
 
 write.csv(dc, here::here('figs', 'continuous_table.csv'), row.names = FALSE)
 

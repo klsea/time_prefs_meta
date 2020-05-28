@@ -9,13 +9,6 @@
 "Sheffer 2016","continuous age","real","days","parameter",34,"18-77",1122,0.0500417292784913,0.000893655049151028
 "Wolfe 2017","continuous age","hypothetical","years","proportion",36.9217,"15-64",13198,-0.0396207192101185,7.57862826828344e-05
 "Reimers 2009","continuous age","hypothetical","months","proportion",NA,"21-65",42863,-0.0500417292784913,2.33317778814746e-05
-"Read 2004","continuous age","hypothetical","years","comparison",48.2,"19-89",123,0.202732554054082,0.00833333333333333
-"Read 2004","continuous age","hypothetical","years","comparison",48.2,"19-89",123,0.467145308103262,0.00833333333333333
-"Read 2004","continuous age","hypothetical","years","comparison",48.2,"19-89",123,0.481211825059603,0.00833333333333333
-"Hampton 2018","continuous age","hypothetical","days","parameter",41,"25-65",2564,0.0500417292784913,0.000390472471690746
-"Hampton 2018","continuous age","hypothetical","days","parameter",41,"25-65",2564,0.0400213538367683,0.000390472471690746
-"Hampton 2018","continuous age","hypothetical","days","parameter",41,"25-65",2564,0.0200026673068496,0.000390472471690746
-"Hampton 2018","continuous age","hypothetical","days","parameter",41,"25-65",2564,0.0600721559210317,0.000390472471690746
-"Hampton 2018","continuous age","hypothetical","days","parameter",41,"25-65",2564,0.0400213538367683,0.000390472471690746
-"Johnson 2015","continuous age","hypothetical","hours","parameter",NA,"",197,-0.21317134656486,0.00515463917525773
-"Johnson 2015","continuous age","hypothetical","hours","parameter",NA,"",197,-0.244774112659353,0.00515463917525773
+"Hampton 2018","continuous age","hypothetical","days","parameter",41,"25-65",2564,0.0420318520359818,0.000390472471690746
+"Johnson 2015","continuous age","hypothetical","hours","parameter",NA,"",197,-0.228972729612106,0.00515463917525773
+"Read 2004","continuous age","hypothetical","years","comparison",48.2,"19-89",123,0.383696562405649,0.00833333333333333

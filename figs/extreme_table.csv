@@ -1,13 +1,7 @@
-"Study.Identifier","Intervention","Authors.name","Email","Year","age_mean","age_range","age_sd","n","effect_size_d","correlation","mean","sd","tvalue","Fvalue","df","conditionID"
-"Sparrow 2018a","Younger","sparrow et al","jspaniol@psych.ryerson.ca",2018,21,"18-30",3.44,36,NA,NA,0.698030634573304,0.301969365426696,NA,NA,NA,NA
-"Sparrow 2018a","Older","sparrow et al","jspaniol@psych.ryerson.ca",2018,70.11,"65-85",4.91,36,NA,NA,0.680525164113786,0.328227571115974,NA,NA,NA,NA
-"Roalf 2012","Younger","roalf et al","",2012,30.14,"21–45 ",5.53,29,NA,NA,0.01,0.03,NA,NA,NA,NA
-"Roalf 2012","Older","roalf et al","",2012,71.3,"65–85 ",4.36,25,NA,NA,0.02,0.04,NA,NA,NA,NA
-"Eppinger 2018","Younger","ben eppinger","ben.eppinger@concordia.ca",2018,24.8,"",2.5,25,NA,NA,0.88,0.13,NA,NA,NA,NA
-"Eppinger 2018","Older","ben eppinger","ben.eppinger@concordia.ca",2018,71.2,"",5.6,25,NA,NA,0.86,0.15,NA,NA,NA,NA
-"Bauer 2010","Younger","michal bauer","bauerm@fsv.cuni.cz",2009,24.017,"20-29",NA,291,NA,NA,3.989,2.805,NA,NA,NA,NA
-"Bauer 2010","Older","michal bauer","bauerm@fsv.cuni.cz",2009,39.909,"30-74",NA,241,NA,NA,4.339,2.757,NA,NA,NA,NA
-"Eppinger 2012","Younger","ben eppinger","ben.eppinger@concordia.ca",2012,20.9,"18-28",3,15,NA,NA,26.8,8.13326502703558,NA,NA,NA,NA
-"Eppinger 2012","Older","ben eppinger","ben.eppinger@concordia.ca",2012,69.7,"65-80",4.4,15,NA,NA,13.3,5.42217668469038,NA,NA,NA,NA
-"Halfmann 2016","Younger","kameko halfmann","kameko-halfmann@uiowa.edu",2016,21,"",NA,77,NA,NA,0.018,0.0789746794865291,NA,NA,NA,NA
-"Halfmann 2016","Older","kameko halfmann","kameko-halfmann@uiowa.edu",2016,77,"",NA,36,NA,NA,0.003,0.03,NA,NA,NA,NA
+"Study.Identifier","Design","Incentive","Magnitude.of.Time.Delay","Measure","N_Older","N_Younger","Age_Mean_Older","Age_Mean_Younger","Age_Range_Younger","yi","vi"
+"Bauer 2010","extreme group","hypothetical","years","proportion",241,291,39.909,24.017,"20-29",0.125568953520777,0.00760062284750052
+"Eppinger 2018","extreme group","real","weeks","proportion",25,25,71.2,24.8,"",-0.140254010974753,0.0801967118759451
+"Roalf 2012","extreme group","real ","days","parameter ",25,29,71.3,30.14,"21–45 ",0.281791424220446,0.0752180031277655
+"Sparrow 2018a","extreme group","real","days","parameter",36,36,70.11,21,"18-30",-0.0549101815635611,0.0555764939447177
+"Li 2013","extreme group","hypothetical","months ","parameter",163,173,66.39,24.76,"18-29",0.161067925361803,0.0119668612385703
+"Liu 2016","extreme group","hypothetical","days","parameter",192,351,68.63,21.67,"18-30",0.33044281887392,0.00815849109723778
