@@ -17,16 +17,11 @@ dt <- read.csv(here::here('data', file), stringsAsFactors = FALSE)
 # Put in alpha order by design
 dt <- dt[order(dt$Design, dt$Study.Identifier),]
 
-# Remove Eppinger 2012
-dt <- dt[which(dt$Study.Identifier != "Eppinger 2012"),] # wrong data 
-
 # Random Effects model
-REM <- rma(yi, vi, data = dt, digits = 3, slab=Study.Identifier, method = "REML")
+REM <- rma(adj_effect_size, adj_variance, data = dt, digits = 3, slab=Study.Identifier, method = "REML")
 REM
 
-# Funnel plot
-forest(REM, 
-       xlab = "Effect size", header="First Author and Year")
-
+# Forest plot
+forest(REM, xlab = "Effect size", header="First Author and Year")
 
 
