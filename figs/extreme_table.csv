@@ -1,7 +1,0 @@
-"Study.Identifier","Design","Incentive","Magnitude.of.Time.Delay","Measure","N_Older","N_Younger","Age_Mean_Older","Age_Mean_Younger","Age_Range_Younger","yi","vi"
-"Bauer 2010","extreme group","hypothetical","years","proportion",241,291,39.909,24.017,"20-29",0.125568953520777,0.00760062284750052
-"Eppinger 2018","extreme group","real","weeks","proportion",25,25,71.2,24.8,"",-0.140254010974753,0.0801967118759451
-"Roalf 2012","extreme group","real ","days","parameter ",25,29,71.3,30.14,"21–45 ",0.281791424220446,0.0752180031277655
-"Sparrow 2018a","extreme group","real","days","parameter",36,36,70.11,21,"18-30",-0.0549101815635611,0.0555764939447177
-"Li 2013","extreme group","hypothetical","months ","parameter",163,173,66.39,24.76,"18-29",0.161067925361803,0.0119668612385703
-"Liu 2016","extreme group","hypothetical","days","parameter",192,351,68.63,21.67,"18-30",0.33044281887392,0.00815849109723778

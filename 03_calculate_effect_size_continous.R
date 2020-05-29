@@ -43,7 +43,11 @@ rm(hampton, johnson, read)
 ## remove term for study + conditions
 dc <- dc[-9]
 
-write.csv(dc, here::here('figs', 'continuous_table.csv'), row.names = FALSE)
+## effect per decade
+dc$adj_effect_size <- dc$yi * 10 
+dc$adj_variance <- dc$vi * 10 
+
+write.csv(dc, here::here('output', 'continuous_table.csv'), row.names = FALSE)
 
 
 
