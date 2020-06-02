@@ -31,13 +31,15 @@ ds <- pivot_wider(ds,
 
 # calculate effect size from t vals
 dt1 <- ds[!is.na(ds$tvalue),]
-dt1$yi <- esc_t(t = dt1$tvalue, grp1n = dt1$n_Older, grp2n = dt1$n_Younger, es.type = "d")[1][[1]]
-dt1$vi <- esc_t(t = dt1$tvalue, grp1n = dt1$n_Older, grp2n = dt1$n_Younger, es.type = "d")[3][[1]]
+dt1$effect_size <- esc_t(t = dt1$tvalue, grp1n = dt1$n_Older, grp2n = dt1$n_Younger, es.type = "d")[1][[1]]
+dt1$std_err <- esc_t(t = dt1$tvalue, grp1n = dt1$n_Older, grp2n = dt1$n_Younger, es.type = "d")[2][[1]]
+dt1$var <- esc_t(t = dt1$tvalue, grp1n = dt1$n_Older, grp2n = dt1$n_Younger, es.type = "d")[3][[1]]
 
 # calculate effect size from f vals
 dt2 <- ds[!is.na(ds$Fvalue),]
-dt2$yi <- esc_f(f = dt2$Fvalue, grp1n = dt2$n_Older, grp2n = dt2$n_Younger, es.type = "d")[1][[1]]
-dt2$vi <- esc_f(f = dt2$Fvalue, grp1n = dt2$n_Older, grp2n = dt2$n_Younger, es.type = "d")[3][[1]]
+dt2$effect_size <- esc_f(f = dt2$Fvalue, grp1n = dt2$n_Older, grp2n = dt2$n_Younger, es.type = "d")[1][[1]]
+dt2$std_err <- esc_f(f = dt2$Fvalue, grp1n = dt2$n_Older, grp2n = dt2$n_Younger, es.type = "d")[2][[1]]
+dt2$var <- esc_f(f = dt2$Fvalue, grp1n = dt2$n_Older, grp2n = dt2$n_Younger, es.type = "d")[3][[1]]
 
 ## average across multiple values within the same study
 dt2 <- cbind(dt2[1, c(1:14)], t(colMeans(dt2[15:16])))
@@ -45,13 +47,14 @@ dt2 <- cbind(dt2[1, c(1:14)], t(colMeans(dt2[15:16])))
 # concatenate data tables
 ds <- bind_rows(dt1, dt2)
 
+# remove unnecessary columns
 ds$tvalue <- NULL
 ds$Fvalue <- NULL
 ds$conditionID <- NULL
 
 ## effect per decade
-ds$age_diff = ds$age_mean_Older - ds$age_mean_Younger
-ds$adj_effect_size <- (ds$yi/ds$age_diff) * 10 # calculate effect per year and then multiply by 10 for decade
-ds$adj_variance <- (ds$vi/ds$age_diff) * 10 
+#ds$age_diff = ds$age_mean_Older - ds$age_mean_Younger
+#ds$adj_effect_size <- (ds$yi/ds$age_diff) * 10 # calculate effect per year and then multiply by 10 for decade
+#ds$adj_variance <- (ds$vi/ds$age_diff) * 10 
 
 write.csv(ds, here::here('output', 'extreme_group_stat_table.csv'), row.names = FALSE)

@@ -1,9 +1,9 @@
-"Study.Identifier","Design","Incentive","Magnitude.of.Time.Delay","Measure","n_Younger","n_Older","age_mean_Younger","age_mean_Older","age_range_Younger","age_range_Older","yi","vi","age_diff","adj_effect_size","adj_variance"
-"Sparrow 2018a","extreme group","real","days","parameter",36,36,21,70.11,"18-30","65-85",-0.0549101815635611,0.0555764939447177,49.11,-0.0111810591658646,0.0113167367022435
-"Roalf 2012","extreme group","real ","days","parameter ",29,25,30.14,71.3,"21–45 ","65–85 ",0.281791424220446,0.0752180031277655,41.16,0.0684624451458809,0.0182745391466874
-"Eppinger 2018","extreme group","real","weeks","proportion",25,25,24.8,71.2,"","",-0.140254010974753,0.0801967118759451,46.4,-0.0302271575376624,0.0172837741111951
-"Bauer 2010","extreme group","hypothetical","years","proportion",291,241,24.017,39.909,"20-29","30-74",0.125568953520777,0.00760062284750052,15.892,0.0790139400457947,0.0047826723178332
-"Eppinger 2012","extreme group","real","weeks","proportion",15,15,20.9,69.7,"18-28","65-80",-1.90027283351894,0.193517280696835,48.8,-0.389400170803062,0.0396551804706629
-"Halfmann 2016","extreme group","real","days","parameter",77,36,21,77,"","",-0.220767351523459,0.0409804466209796,56,-0.0394227413434749,0.0073179368966035
-"Li 2013","extreme group","hypothetical","months ","parameter",173,163,24.76,66.39,"18-29","60-82",0.161067925361803,0.0119668612385703,41.63,0.0386903495944758,0.00287457632442237
-"Liu 2016","extreme group","hypothetical","days","parameter",351,192,21.67,68.63,"18-30",">61",0.33044281887392,0.00815849109723778,46.96,0.0703668694365248,0.00173732774643053
+"Study.Identifier","Design","Incentive","Magnitude.of.Time.Delay","Measure","n_Younger","n_Older","age_mean_Younger","age_mean_Older","age_range_Younger","age_range_Older","effect_size","std_err","var"
+"Sparrow 2018a","extreme group","real","days","parameter",36,36,21,70.11,"18-30","65-85",-0.0549105392619434,0.235747644483815,0.0555769518796671
+"Roalf 2012","extreme group","real ","days","parameter ",29,25,30.14,71.3,"21–45 ","65–85 ",0.28179477483311,0.274298751319105,0.0752398049752203
+"Eppinger 2018","extreme group","real","weeks","proportion",25,25,24.8,71.2,"","",-0.140255972751068,0.283201422463375,0.0802030456852792
+"Bauer 2010","extreme group","hypothetical","years","proportion",291,241,24.017,39.909,"20-29","30-74",0.125568967529813,0.0871817922552759,0.00760066490084208
+"Eppinger 2012","extreme group","real","weeks","proportion",15,15,20.9,69.7,"18-28","65-80",-1.90035263475931,0.443748364727494,0.196912611198325
+"Halfmann 2016","extreme group","real","days","parameter",77,36,21,77,"","",-0.220767919028347,0.202443568759004,0.0409833985318814
+"Li 2013","extreme group","hypothetical","months ","parameter",173,163,24.76,66.39,"18-29","60-82",0.161067970684128,0.109393886436454,0.0119670937142809
+"Liu 2016","extreme group","hypothetical","days","parameter",351,192,21.67,68.63,"18-30",">61",0.330442854253567,0.0903258842665077,0.00815877229996258
