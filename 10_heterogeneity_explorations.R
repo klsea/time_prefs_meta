@@ -40,7 +40,7 @@ plot(inf.analysis, "baujat")
 plot(inf.analysis, "es")
 plot(inf.analysis, "i2")
 
-# GOSH plot
+# GOSH plot # not working
 m.rma <- rma(yi = m.hksj$TE, 
              sei = m.hksj$seTE,
              method = m.hksj$method.tau,

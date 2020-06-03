@@ -28,7 +28,14 @@ m.hksj <- metagen(TE = effect_size,
 m.hksj
 
 # Funnel plot
-meta::funnel(m.hksj)
+meta::funnel(m.hksj, xlab="Hedges' g", 
+             contour = c(.95,.975,.99),
+             col.contour=c("darkblue","blue","lightblue")) +
+  legend(1.4, 0, c("p < 0.05", "p<0.025", "< 0.01"),bty = "n",
+         fill=c("darkblue","blue","lightblue"))
+
+# Eggers test
+eggers.test(x = m.hksj)
 
 # pcurve
 pcurve(m.hksj)

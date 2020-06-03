@@ -34,6 +34,12 @@ m.hksj
 # Forest plot
 meta::forest(m.hksj, leftlabs = c('Author', 'Effect Size', 'Standard Error'))
 
+# REM HKSJ by design
+s.m.hksj <- subgroup.analysis.mixed.effects(x = m.hksj,
+                                            subgroups = dt$Design)
+meta::forest(s.m.hksj)
+
+
 # REM - DerSimonian-Laird
 m.dl <- metagen(TE = effect_size,
                 seTE = std_err,
@@ -48,4 +54,3 @@ m.dl
 
 # Forest plot
 meta::forest(m.dl)
-

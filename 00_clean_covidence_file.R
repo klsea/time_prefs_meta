@@ -179,5 +179,5 @@ d2 <- rbind(d2, whelan[order]); rm(whelan)
 # Fix label in Garza
 d2$Intervention[which(d2$Intervention == 'Old')] <- 'Older'
 
-write.csv(d2, here::here('data', 'covidence.csv'), row.names = FALSE)
+#write.csv(d2, here::here('data', 'covidence.csv'), row.names = FALSE)
 
