@@ -1,8 +1,9 @@
-# Run meta-regression analysis and boxplots
-# 5.22.20 KLS
+# Run meta-regression analysis and bubble plots
+# 6.2.20 KLS
 
 # load required packages
 library(here)
+library(meta)
 library(metafor)
 
 # load source functions
@@ -16,37 +17,61 @@ dt <- read.csv(here::here('data', file))
 # Put in alpha order by design
 dt <- dt[order(dt$Design, dt$Study.Identifier),]
 
-# Design
-m1 <- rma(adj_effect_size, adj_variance, data = dt, mods = Design, digits = 3, slab=Study.Identifier, method = "REML")
-m1
-boxplot(adj_effect_size ~ Design, data = dt)
-
-# Incentive 
-## Fix factors
+# Fix factors
+## Incentive
 levels(dt$Incentive)
 dt$Incentive[which(dt$Incentive == 'real ')] <- 'real'
 dt$Incentive[which(dt$Incentive == '')] <- 'hypothetical'
 dt$Incentive <- factor(dt$Incentive)
 
-m2 <- rma(adj_effect_size, adj_variance, data = dt, mods = Incentive, digits = 3, slab=Study.Identifier, method = "REML")
-m2 
-boxplot(adj_effect_size ~ Incentive, data = dt)
-
-# Delay
-## Fix factors
+## Magnitude
 levels(dt$Magnitude.of.Time.Delay)
 dt$Magnitude.of.Time.Delay[which(dt$Magnitude.of.Time.Delay == 'months ')] <- 'months'
 dt$Magnitude.of.Time.Delay <- ordered(dt$Magnitude.of.Time.Delay, levels = c('hours', 'days', 'weeks', 'months', 'years'))
+dt$Delay <- dt$Magnitude.of.Time.Delay
 
-m3 <- rma(adj_effect_size, adj_variance, data = dt, mods = Magnitude.of.Time.Delay, digits = 3, slab=Study.Identifier, method = "REML")
-m3
-boxplot(adj_effect_size ~ Magnitude.of.Time.Delay, data = dt)
-
-# Measure
-## Fix factors
+## Measure
 levels(dt$Measure)
 dt$Measure[which(dt$Measure == 'parameter ')] <- 'parameter'
 dt$Measure <- factor(dt$Measure)
-m4 <- rma(adj_effect_size, adj_variance, data = dt, mods = Measure, digits = 3, slab=Study.Identifier, method = "REML")
-m4
-boxplot(adj_effect_size ~ Measure, data = dt)
+
+# Random Effects model - Knapp-Hartung (-Sidik-Jonkman) adjustment
+m.hksj <- metagen(TE = effect_size, 
+                  seTE = std_err, 
+                  data = dt, 
+                  studlab= Study.Identifier,
+                  comb.fixed = FALSE,
+                  comb.random = TRUE, 
+                  method.tau = 'SJ', 
+                  hakn = TRUE, 
+                  prediction = TRUE, 
+                  sm = 'SMD')
+
+# Design
+mr1.design <- metareg(m.hksj, Design)
+bubble(mr1.design, 
+       xlab = 'Design', 
+       col.line = 'blue', 
+       studlab = TRUE)
+
+# Incentive
+mr2.incent <- metareg(m.hksj, Incentive)
+bubble(mr2.incent, 
+       xlab = 'Incentive', 
+       col.line = 'blue', 
+       studlab = TRUE)
+
+# Delay
+mr3.delay <- metareg(m.hksj, Delay)
+bubble(mr3.delay, 
+       xlab = 'Delay', 
+       col.line = 'blue', 
+       studlab = TRUE)
+
+# Measure
+mr4.measure <- metareg(m.hksj, Measure)
+bubble(mr4.measure, 
+       xlab = 'Measure', 
+       col.line = 'blue', 
+       studlab = TRUE)
+

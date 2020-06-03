@@ -3,7 +3,8 @@
 
 # load required packages
 library(here)
-library(dmetar) ## this package is not working on my computer
+library(meta)
+library(dmetar) 
 
 # load source functions
 
@@ -14,10 +15,20 @@ file <- 'effect_sizes.csv'
 dt <- read.csv(here::here('data', file))
 
 # Random Effects model
-REM <- rma(adj_effect_size, adj_variance, data = dt, digits = 3, slab=Study.Identifier, method = "REML")
+m.hksj <- metagen(TE = effect_size, 
+                  seTE = std_err, 
+                  data = dt, 
+                  studlab= Study.Identifier,
+                  comb.fixed = FALSE,
+                  comb.random = TRUE, 
+                  method.tau = 'SJ', 
+                  hakn = TRUE, 
+                  prediction = TRUE, 
+                  sm = 'SMD')
+m.hksj
 
 # Funnel plot
-funnel(REM)
+meta::funnel(m.hksj)
 
 # pcurve
-pcurve(REM)
+pcurve(m.hksj)
