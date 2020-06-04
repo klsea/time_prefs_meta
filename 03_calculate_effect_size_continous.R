@@ -20,32 +20,32 @@ dt$conditionID <- interaction(dt$Study.Identifier, dt$condition)
 # Calculate effect sizes for continuous age designs
 dc <- dt[which(dt$Design == 'continuous age'),] # pull out correlational studies
 dc <- dc[!is.na(dc$correlation),] # remove incomplete studies
-dc <- escalc(measure ='ZCOR', ri=correlation, ni=n, data=dc) # yi = effect size, vi = sampling variances
-dc <- dc[c(1, 6, 8:12, 14, 23:25)]
 
-## average across multiple values within the same study
-hampton <- dc[which(dc$Study.Identifier == 'Hampton 2018'),]
-hampton <- cbind(hampton[1,1:9], t(colMeans(hampton[10:11])))
-johnson <- dc[which(dc$Study.Identifier == 'Johnson 2015'),]
-johnson <- cbind(johnson[1,1:9], t(colMeans(johnson[10:11])))
-read <- dc[which(dc$Study.Identifier == 'Read 2004'),]
-read <- cbind(read[1,1:9], t(colMeans(read[10:11])))
+dc <- mutate(dc, 
+             effect_size = esc_rpb(r = correlation, totaln = n, es.type = 'g')[1][[1]], 
+             std_err = esc_rpb(r = correlation, totaln = n, es.type = 'g')[2][[1]], 
+             var =esc_rpb(r = correlation, totaln = n, es.type = 'g')[3][[1]]
+)
 
-## remove studies with multiple condition rows and replace with study means
-dc <- dc[-which(dc$Study.Identifier == 'Hampton 2018'),]
-dc <- rbind(dc, hampton)
-dc <- dc[-which(dc$Study.Identifier == 'Johnson 2015'),]
-dc <- rbind(dc, johnson)
-dc <- dc[-which(dc$Study.Identifier == 'Read 2004'),]
-dc <- rbind(dc, read)
-rm(hampton, johnson, read)
 
-## remove term for study + conditions
-dc <- dc[-9]
+## average effect size across multiple values within the same study 
+average_within_study <- function(df, studyid) {
+  x = df[which(df$Study.Identifier == studyid),] # pull out study of interest
+  newmean <- cbind(x[1,1:23], t(colMeans(x[24:26]))) # average across estimates within same study
+  dt <- df[-which(df$Study.Identifier == studyid),] # remove multiple estimates from df
+  rbind(dt, newmean) # add new mean estimate to df
+}
+
+dc <- average_within_study(dc, 'Hampton 2018')
+dc <- average_within_study(dc, 'Johnson 2015')
+dc <- average_within_study(dc, 'Read 2004')
+
+# remove unnecessary columns
+dc <- dc[c(1, 6, 8:12, 14, 24:26)]
 
 ## effect per decade
-dc$adj_effect_size <- dc$yi * 10 
-dc$adj_variance <- dc$vi * 10 
+#dc$adj_effect_size <- dc$yi * 10 
+#dc$adj_variance <- dc$vi * 10 
 
 write.csv(dc, here::here('output', 'continuous_table.csv'), row.names = FALSE)
 
