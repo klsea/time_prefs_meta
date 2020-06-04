@@ -21,12 +21,12 @@ dt$conditionID <- interaction(dt$Study.Identifier, dt$condition)
 dm <- dt[which(dt$Design == 'extreme group'),] # pull out means
 ds <- dm[is.na(dm$sd),] # pull out no sd files
 
-ds <- ds[c(1:2, 6, 8:12, 14, 20:21, 23)]
+ds <- ds[c(1:2, 6, 8:14, 20:21, 23)]
 
 ds <- pivot_wider(ds, 
-                  id_cols = colnames(ds[c(1:6, 10:12)]), 
+                  id_cols = colnames(ds[c(1:6, 11:13)]), 
                   names_from = 'Intervention', 
-                  values_from = c('n', 'age_mean', 'age_range'))
+                  values_from = c('n', 'age_mean', 'age_range', 'age_sd'))
 
 
 # calculate effect size from t vals
@@ -42,7 +42,7 @@ dt2$std_err <- esc_f(f = dt2$Fvalue, grp1n = dt2$n_Older, grp2n = dt2$n_Younger,
 dt2$var <- esc_f(f = dt2$Fvalue, grp1n = dt2$n_Older, grp2n = dt2$n_Younger, es.type = "d")[3][[1]]
 
 ## average across multiple values within the same study
-dt2 <- cbind(dt2[1, c(1:14)], t(colMeans(dt2[15:16])))
+dt2 <- cbind(dt2[1, c(1:16)], t(colMeans(dt2[17:19])))
 
 # concatenate data tables
 ds <- bind_rows(dt1, dt2)
@@ -58,3 +58,4 @@ ds$conditionID <- NULL
 #ds$adj_variance <- (ds$vi/ds$age_diff) * 10 
 
 write.csv(ds, here::here('output', 'extreme_group_stat_table.csv'), row.names = FALSE)
+

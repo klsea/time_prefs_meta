@@ -13,10 +13,6 @@ file <- 'covidence.csv'
 # load data
 dt <- read.csv(here::here('data', file))
 
-# Fix Eppinger 2012 - SEs recorded as SDs
-dt[which(dt$Study.Identifier == 'Eppinger 2012'), which(colnames(dt) == 'se')] <- dt[which(dt$Study.Identifier == 'Eppinger 2012'), which(colnames(dt) == 'sd')]
-dt[which(dt$Study.Identifier == 'Eppinger 2012'), which(colnames(dt) == 'sd')] <- NA
-
 # pull in values for Sparrow 2018 from plot digitizer and name Sparrow 2018a
 # used https://automeris.io/WebPlotDigitizer/
 sparrow <- read.csv(here::here('data', 'sparrow2018plotdigit.csv'), header = FALSE)

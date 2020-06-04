@@ -25,12 +25,12 @@ dm <- dm[!is.na(dm$sd),]
 ### What to do about Garza 2016???
 # Remove for now
 dm <- dm[-c(grep('Garza', dm$Study.Identifier)),]
-dm <- dm[c(1,2,6,8:10, 11:12, 14, 18:19, 23)]
+dm <- dm[c(1,2,6,8:10, 11:14, 18:19, 23)]
 
 dm <- pivot_wider(dm, 
-                  id_cols = colnames(dm[c(1:6, 12)]), 
+                  id_cols = colnames(dm[c(1:6, 13)]), 
                   names_from = 'Intervention', 
-                  values_from = c('mean', 'sd', 'n', 'age_mean', 'age_range'))
+                  values_from = c('mean', 'sd', 'n', 'age_mean', 'age_range', 'age_sd'))
 dm <- mutate(dm, 
        effect_size = esc_mean_sd(grp1m = mean_Older, grp1sd = sd_Older, grp1n = n_Older, 
                    grp2m = mean_Younger,  grp2sd = sd_Younger,  grp2n = n_Younger, 
@@ -46,7 +46,7 @@ dm <- mutate(dm,
 ## average effect size across multiple values within the same study 
 average_within_study <- function(df, studyid) {
   x = df[which(df$Study.Identifier == studyid),] # pull out study of interest
-  newmean <- cbind(x[1,1:16], t(colMeans(x[17:19]))) # average across estimates within same study
+  newmean <- cbind(x[1,1:18], t(colMeans(x[19:21]))) # average across estimates within same study
   dt <- df[-which(df$Study.Identifier == studyid),] # remove multiple estimates from df
   rbind(dt, newmean) # add new mean estimate to df
 }
