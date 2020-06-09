@@ -76,7 +76,7 @@ s1[which(s1$Intervention == 'Older'), which(colnames(s1) == 'mean')] <- sparrow1
 s1[which(s1$Intervention == 'Older'), which(colnames(s1) == 'se')] <- abs(sparrow1[3,2] - sparrow1[4,2])
 
 s2 <- sparrow
-s2[,which(colnames(s2) == 'Study.Identifier')] <- 'Sparrow 2018b Study 1'
+s2[,which(colnames(s2) == 'Study.Identifier')] <- 'Sparrow 2018b Study 2'
 s2[which(s2$Intervention == 'Younger'), which(colnames(s2) == 'age_mean')] <- 20.84
 s2[which(s2$Intervention == 'Younger'), which(colnames(s2) == 'age_sd')] <- 2.67
 s2[which(s2$Intervention == 'Younger'), which(colnames(s2) == 'n')] <- 31

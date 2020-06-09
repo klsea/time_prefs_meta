@@ -53,7 +53,7 @@ dt[which(dt$Study.Identifier == 'Buono 2015'), which(colnames(dt) == 'Design')] 
 # F85ix Study ID and F value for Green 1994
 dt[which(dt$Study.Identifier == 'GREEN 1994'), which(colnames(dt) == 'Study.Identifier')] <- 'Green 1994'
 dt <- dt[-which(dt$condition == '$10,000'), ]
-dt[which(dt$Study.Identifier == 'GREEN 1994'), which(colnames(dt) == 'Fvalue')] <- 4.852
+dt[which(dt$Study.Identifier == 'Green 1994'), which(colnames(dt) == 'Fvalue')] <- 4.852
 
 # write data file
 write.csv(dt, here::here('data', 'corrected.csv'), row.names = FALSE)
