@@ -8,7 +8,7 @@ library(here)
 #source(here::here('scr', 'conversion_functions.R'))
 
 # set hard-coded variables
-file <- 'cleaned.csv'
+file <- 'covidence.csv'
 
 # load data
 dt <- read.csv(here::here('data', file))
@@ -36,8 +36,19 @@ dt[which(dt$Study.Identifier == 'Kirby 2002'), which(colnames(dt) == 'age_mean')
 dt[which(dt$Study.Identifier == 'Tschernegg 2015'), which(colnames(dt) == 'age_mean')] <- (24.5*51 + 27.15*19)/(51+19)
 
 # Age mean for younger adults in Jimura 2011 - not available
-
 dt$age_mean <- round(dt$age_mean, 2)
+
+# Fix Boyle 2012 design
+dt[which(dt$Study.Identifier == 'Boyle 2012'), which(colnames(dt) == 'Design')] <- 'continuous age'
+
+# Fix Loceknhoff 2011 design
+dt[which(dt$Study.Identifier == 'Löckenhoff 2011'), which(colnames(dt) == 'Design')] <- 'continuous age'
+
+# Fix Buono 2015 design
+dt[which(dt$Study.Identifier == 'Buono 2015'), which(colnames(dt) == 'Design')] <- 'extreme group'
+
+# Fix Study ID for Green 1994
+dt[which(dt$Study.Identifier == 'GREEN 1994'), which(colnames(dt) == 'Study.Identifier')] <- 'Green 1994'
 
 # write data file
 write.csv(dt, here::here('data', 'cleaned.csv'), row.names = FALSE)

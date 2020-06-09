@@ -43,6 +43,17 @@ dc <- average_within_study(dc, 'Read 2004')
 # remove unnecessary columns
 dc <- dc[c(1, 6, 8:12, 14, 24:26)]
 
+# Reversals- Löckenhoff 2011 & Hampton 2018?
+reverse_es <- function(df, studyid) {
+  x = df[which(df$Study.Identifier == studyid),] # pull out study of interest
+  x$effect_size <- x$effect_size * -1 # reverse effect size
+  dt <- df[-which(df$Study.Identifier == studyid),] # remove old effect sizes from df
+  rbind(dt, x) # add new effectsizes to df
+}
+
+dc <- reverse_es(dc, 'Löckenhoff 2011')
+dc <- reverse_es(dc, 'Hampton 2018')
+
 ## effect per decade
 #dc$adj_effect_size <- dc$yi * 10 
 #dc$adj_variance <- dc$vi * 10 

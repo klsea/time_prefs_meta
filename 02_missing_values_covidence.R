@@ -8,7 +8,7 @@ library(here)
 #source(here::here('scr', 'conversion_functions.R'))
 
 # set hard-coded variables
-file <- 'covidence.csv'
+file <- 'cleaned.csv'
 
 # load data
 dt <- read.csv(here::here('data', file))
