@@ -7,6 +7,7 @@ library(tidyverse)
 library(esc)
 
 # load source functions
+source(here::here('scr', 'reverse_es.R'))
 
 # set hard-coded variables
 file <- 'cleaned.csv'
@@ -15,16 +16,15 @@ file <- 'cleaned.csv'
 dt <- read.csv(here::here('data', file))
 
 # make interaction term for study + conditions
-dt$conditionID <- interaction(dt$Study.Identifier, dt$condition)
 
 # Calculate effect sizes from statistics
 dm <- dt[which(dt$Design == 'extreme group'),] # pull out means
 ds <- dm[is.na(dm$sd),] # pull out no sd files
 
-ds <- ds[c(1:2, 6, 8:14, 20:21, 23)]
+ds <- ds[c(1:2, 6, 8:14, 20:21)]
 
 ds <- pivot_wider(ds, 
-                  id_cols = colnames(ds[c(1:6, 11:13)]), 
+                  id_cols = colnames(ds[c(1:6, 11:12)]), 
                   names_from = 'Intervention', 
                   values_from = c('n', 'age_mean', 'age_range', 'age_sd'))
 
@@ -41,16 +41,15 @@ dt2$effect_size <- esc_f(f = dt2$Fvalue, grp1n = dt2$n_Older, grp2n = dt2$n_Youn
 dt2$std_err <- esc_f(f = dt2$Fvalue, grp1n = dt2$n_Older, grp2n = dt2$n_Younger, es.type = "d")[2][[1]]
 dt2$var <- esc_f(f = dt2$Fvalue, grp1n = dt2$n_Older, grp2n = dt2$n_Younger, es.type = "d")[3][[1]]
 
-## average across multiple values within the same study
-dt2 <- cbind(dt2[1, c(1:16)], t(colMeans(dt2[17:19])))
-
 # concatenate data tables
 ds <- bind_rows(dt1, dt2)
 
 # remove unnecessary columns
 ds$tvalue <- NULL
 ds$Fvalue <- NULL
-ds$conditionID <- NULL
+
+# Reversals-Green 1994
+ds <- reverse_es(ds, 'Green 1994')
 
 ## effect per decade
 #ds$age_diff = ds$age_mean_Older - ds$age_mean_Younger

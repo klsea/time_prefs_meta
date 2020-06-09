@@ -7,6 +7,7 @@ library(tidyverse)
 library(esc)
 
 # load source functions
+source(here::here('scr', 'reverse_es.R'))
 
 # set hard-coded variables
 file <- 'cleaned.csv'
@@ -57,6 +58,8 @@ average_within_study <- function(df, studyid) {
 }
 
 dm <- average_within_study(dm, 'Li 2013')
+dm <- average_within_study(dm, 'Eppinger 2018')
+dm <- average_within_study(dm, 'Whelan 2009')
 
 # remove unneccesary columns
 dm$mean_Older <- NULL
@@ -66,13 +69,6 @@ dm$sd_Younger <- NULL
 dm$conditionID <- NULL
 
 # Reversals- Garza 2016, Sparrow 2018a, Sparrow 2018b, Li 2013 
-reverse_es <- function(df, studyid) {
-  x = df[which(df$Study.Identifier == studyid),] # pull out study of interest
-  x$effect_size <- x$effect_size * -1 # reverse effect size
-  dt <- df[-which(df$Study.Identifier == studyid),] # remove old effect sizes from df
-  rbind(dt, x) # add new effectsizes to df
-}
-
 #dm <- reverse_es(dm, 'Garza 2016')
 dm <- reverse_es(dm, 'Sparrow 2018a')
 dm <- reverse_es(dm, 'Sparrow 2018b Study 1')
@@ -82,6 +78,5 @@ dm <- reverse_es(dm, 'Li 2013')
 ## effect per decade - what about variance/se???
 #dm$age_diff = dm$age_mean_Older - dm$age_mean_Younger
 #dm$adj_effect_size <- (dm$yi/dm$age_diff) * 10 # calculate effect per year and then multiply by 10 for decade
-
 
 write.csv(dm, here::here('output', 'extreme_group_table.csv'), row.names = FALSE)
