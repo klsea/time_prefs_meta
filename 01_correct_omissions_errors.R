@@ -20,6 +20,9 @@ dt[which(dt$Study.Identifier == 'Eppinger 2012'), which(colnames(dt) == 'sd')] <
 # Fix Sanchez-Rodrigue 2018 incentive
 dt[which(dt$Study.Identifier == 'Sanchez-Roige 2018'), which(colnames(dt) == 'Incentive')] <- 'hypothetical'
 
+# Fix Tschernegg 2015 measure - correlation is taken from %SS decisions, not model parameters
+dt[which(dt$Study.Identifier == 'Tschernegg 2015'), which(colnames(dt) == 'Measure')] <- 'proportion'
+
 # Age Mean for Gollner 2018 (Data taken from Table 1) - note they claim 96 participants, but Table 1 adds up to 101
 dt[which(dt$Study.Identifier == 'Gollner 2018'), which(colnames(dt) == 'age_mean')] <- (11.3*18 + 21.8*25 + 42.3*18 + 73.4*25 + 90.0*15)/(18+25+18+25+15)
                                                                                                                                           
@@ -51,7 +54,7 @@ dt[which(dt$Study.Identifier == 'Buono 2015'), which(colnames(dt) == 'Design')] 
 dt[which(dt$Study.Identifier == 'GREEN 1994'), which(colnames(dt) == 'Study.Identifier')] <- 'Green 1994'
 
 # write data file
-write.csv(dt, here::here('data', 'cleaned.csv'), row.names = FALSE)
+write.csv(dt, here::here('data', 'corrected.csv'), row.names = FALSE)
                                                                                                                                           
                                                                                                                                           
                                                                                                                                           

@@ -8,14 +8,49 @@ library(here)
 #source(here::here('scr', 'conversion_functions.R'))
 
 # set hard-coded variables
-file <- 'cleaned.csv'
+file <- 'corrected.csv'
 
 # load data
 dt <- read.csv(here::here('data', file))
 
-# pull in values for Sparrow 2018 from plot digitizer and name Sparrow 2018a
+# Eppinger 2018 add means/ses for both Sessions
+eppinger <- dt[which(dt$Study.Identifier == 'Eppinger 2018'),]
+dt <- dt[-which(dt$Study.Identifier == 'Eppinger 2018'),]
+eppinger1 <- read.csv(here::here('data', 'eppinger2018S1plotdigit.csv'), header = FALSE)
+eppinger[, colnames(eppinger) == 'sd'] <- NA
+sess1 <- eppinger
+sess1[,which(colnames(sess1) == 'condition')] <- 'Session 1'
+sess1[which(sess1$Intervention == 'Younger'), which(colnames(sess1) == 'mean')] <- eppinger1[1,2]
+sess1[which(sess1$Intervention == 'Younger'), which(colnames(sess1) == 'se')] <- eppinger1[2,2]
+sess1[which(sess1$Intervention == 'Older'), which(colnames(sess1) == 'mean')] <- eppinger1[3,2]
+sess1[which(sess1$Intervention == 'Older'), which(colnames(sess1) == 'se')] <- eppinger1[4,2]
+
+eppinger2 <- read.csv(here::here('data', 'eppinger2018S2plotdigit.csv'), header = FALSE)
+low <- eppinger
+low[,which(colnames(low) == 'condition')] <- 'Session 2: Low'
+low[which(low$Intervention == 'Younger'), which(colnames(low) == 'mean')] <- eppinger2[1,2]
+low[which(low$Intervention == 'Younger'), which(colnames(low) == 'se')] <- eppinger2[2,2]
+low[which(low$Intervention == 'Older'), which(colnames(low) == 'mean')] <- eppinger2[5,2]
+low[which(low$Intervention == 'Older'), which(colnames(low) == 'se')] <- eppinger2[6,2]
+
+high <- eppinger
+high[,which(colnames(high) == 'condition')] <- 'Session 2: High'
+high[which(high$Intervention == 'Younger'), which(colnames(high) == 'mean')] <- eppinger2[3,2]
+high[which(high$Intervention == 'Younger'), which(colnames(high) == 'se')] <- eppinger2[4,2]
+high[which(high$Intervention == 'Older'), which(colnames(high) == 'mean')] <- eppinger2[7,2]
+high[which(high$Intervention == 'Older'), which(colnames(high) == 'se')] <- eppinger2[8,2]
+sess2 <- rbind(low, high)
+eppinger <-rbind(sess1, sess2)
+dt <- rbind(dt, eppinger)
+
+rm(low, high, eppinger1, eppinger2, eppinger, sess1, sess2)
+
+# Samanez-Larkin 2011 add tvalue
+dt[which(dt$Study.Identifier == 'Samanez-Larkin 2011'), which(colnames(dt) == 'tvalue')] <- 0.20
+
+# Sparrow 2018a pull in values rom plot digitizer and name Sparrow 2018a
 # used https://automeris.io/WebPlotDigitizer/
-sparrow <- read.csv(here::here('data', 'sparrow2018plotdigit.csv'), header = FALSE)
+sparrow <- read.csv(here::here('data', 'sparrow2018aplotdigit.csv'), header = FALSE)
 dt$Study.Identifier <- as.character(dt$Study.Identifier)
 dt[which(dt$correct_data_extracted == 'No mean or sd but we can extract from barplot'),
    which(colnames(dt) == 'Study.Identifier')] <- 'Sparrow 2018a' 
