@@ -53,6 +53,7 @@ reverse_es <- function(df, studyid) {
 
 dc <- reverse_es(dc, 'Löckenhoff 2011')
 dc <- reverse_es(dc, 'Hampton 2018')
+dc <- reverse_es(dc, 'Wolfe 2017')
 
 ## effect per decade
 #dc$adj_effect_size <- dc$yi * 10 

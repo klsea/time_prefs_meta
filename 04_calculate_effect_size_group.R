@@ -43,6 +43,11 @@ dm <- mutate(dm,
                             es.type = 'g')[3][[1]]
 )
 
+# only take mean from Liu 2016
+liu<- dm[which(dm$conditionID == 'Liu 2016.Ln(k) mean'),]
+dm <- dm[-which(dm$Study.Identifier == 'Liu 2016'),]
+dm <- rbind(dm, liu)
+
 ## average effect size across multiple values within the same study 
 average_within_study <- function(df, studyid) {
   x = df[which(df$Study.Identifier == studyid),] # pull out study of interest
@@ -52,7 +57,6 @@ average_within_study <- function(df, studyid) {
 }
 
 dm <- average_within_study(dm, 'Li 2013')
-dm <- average_within_study(dm, 'Liu 2016')
 
 # remove unneccesary columns
 dm$mean_Older <- NULL
@@ -61,9 +65,22 @@ dm$sd_Older <- NULL
 dm$sd_Younger <- NULL
 dm$conditionID <- NULL
 
-## effect per decade - about about variance/se
+# Reversals- Garza 2016, Sparrow 2018a, Sparrow 2018b, Li 2013 
+reverse_es <- function(df, studyid) {
+  x = df[which(df$Study.Identifier == studyid),] # pull out study of interest
+  x$effect_size <- x$effect_size * -1 # reverse effect size
+  dt <- df[-which(df$Study.Identifier == studyid),] # remove old effect sizes from df
+  rbind(dt, x) # add new effectsizes to df
+}
+
+#dm <- reverse_es(dm, 'Garza 2016')
+#dm <- reverse_es(dm, 'Sparrow 2018a')
+#dm <- reverse_es(dm, 'Sparrow 2018b')
+dm <- reverse_es(dm, 'Li 2013')
+
+## effect per decade - what about variance/se???
 #dm$age_diff = dm$age_mean_Older - dm$age_mean_Younger
 #dm$adj_effect_size <- (dm$yi/dm$age_diff) * 10 # calculate effect per year and then multiply by 10 for decade
-#dm$adj_variance <- (dm$vi/dm$age_diff) * 10 
+
 
 write.csv(dm, here::here('output', 'extreme_group_table.csv'), row.names = FALSE)
