@@ -12,7 +12,7 @@ library(tidyverse)
 file <- 'corrected.csv'
 
 # load data
-dt <- read.csv(here::here('data', file))
+dt <- read.csv(here::here('output', file))
 
 # Eppinger 2018 add means/ses for both Sessions
 # used https://automeris.io/WebPlotDigitizer/
@@ -146,5 +146,5 @@ dt[which(dt$se != 'NA'),]$sd <- dt[which(dt$se != 'NA'),]$se * sqrt(dt[which(dt$
 dt$se <- NULL
 
 # write data file
-write.csv(dt, here::here('data', 'cleaned.csv'), row.names = FALSE)
+write.csv(dt, here::here('output', 'cleaned.csv'), row.names = FALSE)
 rm(dt, file, order)

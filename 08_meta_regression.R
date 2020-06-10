@@ -12,7 +12,7 @@ library(metafor)
 file <- 'effect_sizes.csv'
 
 # load data
-dt <- read.csv(here::here('data', file))
+dt <- read.csv(here::here('output', file))
 
 # Put in alpha order by design
 dt <- dt[order(dt$Design, dt$Study.Identifier),]

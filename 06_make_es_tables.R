@@ -30,5 +30,5 @@ tab_df(dt[c(1, 3:15)], file = here::here('figs', 'extreme_group_table.html'))
 d0 <- bind_rows(dc[c(1:5, 9:11)], dt[c(1:5, 14:16)])
 #d0 <- bind_rows(dc[c(1:5, 11:14)], dt[c(1:5, 15:18)])
 
-write.csv(d0, here::here('data', 'effect_sizes.csv'), row.names = FALSE)
+write.csv(d0, here::here('output', 'effect_sizes.csv'), row.names = FALSE)
 rm(d0, dc, dm, ds, dt)

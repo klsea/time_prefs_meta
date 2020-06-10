@@ -11,7 +11,7 @@ library(here)
 file <- 'covidence.csv'
 
 # load data
-dt <- read.csv(here::here('data', file))
+dt <- read.csv(here::here('output', file))
 
 # Remove Read 2004 - can remove after Covidence is fixed
 dt <- dt[-which(dt$Study.Identifier == 'Read 2004'),]
@@ -59,7 +59,7 @@ dt <- dt[-which(dt$condition == '$10,000'), ]
 dt[which(dt$Study.Identifier == 'Green 1994'), which(colnames(dt) == 'Fvalue')] <- 4.852
 
 # write data file
-write.csv(dt, here::here('data', 'corrected.csv'), row.names = FALSE)
+write.csv(dt, here::here('output', 'corrected.csv'), row.names = FALSE)
 rm(dt, file)
                                                                                                                                           
                                                                                                                                           

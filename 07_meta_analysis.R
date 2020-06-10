@@ -13,7 +13,7 @@ library(metafor)
 file <- 'effect_sizes.csv'
 
 # load data
-dt <- read.csv(here::here('data', file), stringsAsFactors = FALSE)
+dt <- read.csv(here::here('output', file), stringsAsFactors = FALSE)
 
 # Put in alpha order by design
 dt <- dt[order(dt$Design, dt$Study.Identifier),]
@@ -35,10 +35,8 @@ m.hksj
 meta::forest(m.hksj, leftlabs = c('Author', 'Effect Size', 'Standard Error'))
 
 # REM HKSJ by design
-s.m.hksj <- subgroup.analysis.mixed.effects(x = m.hksj,
-                                            subgroups = dt$Design)
-meta::forest(s.m.hksj)
-
+#s.m.hksj <- subgroup.analysis.mixed.effects(x = m.hksj, subgroups = dt$Design)
+#meta::forest(s.m.hksj)
 
 # REM - DerSimonian-Laird
 m.dl <- metagen(TE = effect_size,
@@ -55,4 +53,4 @@ m.dl
 # Forest plot
 meta::forest(m.dl)
 
-rm(dt, m.hksj, file)
+rm(dt, m.hksj, file, m.dl)

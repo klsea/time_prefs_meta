@@ -13,7 +13,7 @@ source(here::here('scr', 'reverse_es.R'))
 file <- 'cleaned.csv'
 
 # load data
-dt <- read.csv(here::here('data', file))
+dt <- read.csv(here::here('output', file))
 
 # make interaction term for study + conditions
 dt$conditionID <- interaction(dt$Study.Identifier, dt$condition)
