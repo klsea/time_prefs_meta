@@ -75,3 +75,4 @@ bubble(mr4.measure,
        col.line = 'blue', 
        studlab = TRUE)
 
+rm(dt, m.hksj, mr1.design, mr2.incent, mr3.delay, mr4.measure, file)

@@ -3,6 +3,7 @@
 
 # load required packages
 library(here)
+library(tidyverse)
 
 # load source functions
 #source(here::here('scr', 'conversion_functions.R'))
@@ -44,6 +45,33 @@ sess2 <- rbind(low, high)
 eppinger <-rbind(sess1, sess2)
 dt <- rbind(dt, eppinger)
 rm(low, high, eppinger1, eppinger2, eppinger, sess2, sess1)
+
+# Mahalingam 2018 
+mg <- read.csv(here::here('data', 'Mahalingam 2018_ final.csv'))
+mg$Study.Identifier = paste0('Mahalingam 2018 ', mg$Sample)
+mg$Intervention <- 'Age'
+mg$Authors.name <- mg$Author; mg$Author <- NULL
+mg$Year <- mg$year; mg$year <- NULL
+mg$Email <- mg$email; mg$email <- NULL
+mg$Design <- 'continuous age'
+mg$correct_data_extracted <- 'Yes'
+mg$Magnitude.of.Time.Delay <- mg$magnitude.of.time.delay; mg$magnitude.of.time.delay <- NULL
+mg$Measure <- mg$measure; mg$measure <- NULL
+mg$age_mean <- mg$Age.mean; mg$Age.mean <- NULL
+mg$age_range <- mg$Age; mg$Age <- NULL
+mg$age_sd <- mg$Age.SD; mg$Age.SD <- NULL
+mg$n <- mg$N; mg$N <- NULL
+mg$effect_size_d <- NA; mg$mean <- NA; mg$sd <- NA; mg$se <- NA; mg$rsquare <- NA; mg$tvalue <- NA; mg$Fvalue <- NA; mg$df <- NA; 
+mg$Sample <- NULL; mg$Table <- NULL
+
+mg <- pivot_longer(mg, colnames(mg[1:6]), names_to = 'condition', values_to = 'correlation')
+mg <- mg[!is.na(mg$correlation),]
+
+order <- colnames(dt)
+mg <- mg[order]
+
+dt <- rbind(dt, mg)
+rm(mg)
 
 # Samanez-Larkin 2011 add tvalue
 dt[which(dt$Study.Identifier == 'Samanez-Larkin 2011'), which(colnames(dt) == 'tvalue')] <- 0.20
@@ -119,4 +147,4 @@ dt$se <- NULL
 
 # write data file
 write.csv(dt, here::here('data', 'cleaned.csv'), row.names = FALSE)
-
+rm(dt, file, order)

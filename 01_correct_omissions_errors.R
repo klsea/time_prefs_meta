@@ -13,6 +13,9 @@ file <- 'covidence.csv'
 # load data
 dt <- read.csv(here::here('data', file))
 
+# Remove Read 2004 - can remove after Covidence is fixed
+dt <- dt[-which(dt$Study.Identifier == 'Read 2004'),]
+
 # Fix Eppinger 2012 - SEs recorded as SDs
 dt[which(dt$Study.Identifier == 'Eppinger 2012'), which(colnames(dt) == 'se')] <- dt[which(dt$Study.Identifier == 'Eppinger 2012'), which(colnames(dt) == 'sd')]
 dt[which(dt$Study.Identifier == 'Eppinger 2012'), which(colnames(dt) == 'sd')] <- NA
@@ -50,13 +53,14 @@ dt[which(dt$Study.Identifier == 'Löckenhoff 2011'), which(colnames(dt) == 'Desi
 # Fix Buono 2015 design
 dt[which(dt$Study.Identifier == 'Buono 2015'), which(colnames(dt) == 'Design')] <- 'extreme group'
 
-# F85ix Study ID and F value for Green 1994
+# Fix Study ID and F value for Green 1994
 dt[which(dt$Study.Identifier == 'GREEN 1994'), which(colnames(dt) == 'Study.Identifier')] <- 'Green 1994'
 dt <- dt[-which(dt$condition == '$10,000'), ]
 dt[which(dt$Study.Identifier == 'Green 1994'), which(colnames(dt) == 'Fvalue')] <- 4.852
 
 # write data file
 write.csv(dt, here::here('data', 'corrected.csv'), row.names = FALSE)
+rm(dt, file)
                                                                                                                                           
                                                                                                                                           
                                                                                                                                           

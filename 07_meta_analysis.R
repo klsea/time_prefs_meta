@@ -54,3 +54,5 @@ m.dl
 
 # Forest plot
 meta::forest(m.dl)
+
+rm(dt, m.hksj, file)

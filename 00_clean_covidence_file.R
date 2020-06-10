@@ -178,6 +178,8 @@ d2 <- rbind(d2, whelan[order]); rm(whelan)
 
 # Fix label in Garza
 d2$Intervention[which(d2$Intervention == 'Old')] <- 'Older'
+d2$Intervention[which(d2$Intervention == 'Middle 1')] <- 'Middle_1'
+d2$Intervention[which(d2$Intervention == 'Middle 2')] <- 'Middle_2'
 
 write.csv(d2, here::here('data', 'covidence.csv'), row.names = FALSE)
-
+rm(d1, d2, file, order, separate_conditions)

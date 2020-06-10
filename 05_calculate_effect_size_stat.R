@@ -43,6 +43,7 @@ dt2$var <- esc_f(f = dt2$Fvalue, grp1n = dt2$n_Older, grp2n = dt2$n_Younger, es.
 
 # concatenate data tables
 ds <- bind_rows(dt1, dt2)
+rm(dt1, dt2)
 
 # remove unnecessary columns
 ds$tvalue <- NULL
@@ -52,9 +53,8 @@ ds$Fvalue <- NULL
 ds <- reverse_es(ds, 'Green 1994')
 
 ## effect per decade
-#ds$age_diff = ds$age_mean_Older - ds$age_mean_Younger
-#ds$adj_effect_size <- (ds$yi/ds$age_diff) * 10 # calculate effect per year and then multiply by 10 for decade
-#ds$adj_variance <- (ds$vi/ds$age_diff) * 10 
+ds$age_diff = ds$age_mean_Older - ds$age_mean_Younger
+ds$adj_effect_size <- (ds$effect_size/ds$age_diff) * 10 # calculate effect per year and then multiply by 10 for decade
 
 write.csv(ds, here::here('output', 'extreme_group_stat_table.csv'), row.names = FALSE)
-
+rm(dm, ds, dt, file, reverse_es)

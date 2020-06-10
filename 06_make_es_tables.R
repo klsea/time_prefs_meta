@@ -31,4 +31,4 @@ d0 <- bind_rows(dc[c(1:5, 9:11)], dt[c(1:5, 14:16)])
 #d0 <- bind_rows(dc[c(1:5, 11:14)], dt[c(1:5, 15:18)])
 
 write.csv(d0, here::here('data', 'effect_sizes.csv'), row.names = FALSE)
-
+rm(d0, dc, dm, ds, dt)

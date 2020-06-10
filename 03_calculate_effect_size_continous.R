@@ -4,7 +4,7 @@
 # load required packages
 library(here)
 library(tidyverse)
-library(metafor)
+library(esc)
 
 # load source functions
 source(here::here('scr', 'reverse_es.R'))
@@ -39,7 +39,11 @@ average_within_study <- function(df, studyid) {
 
 dc <- average_within_study(dc, 'Hampton 2018')
 dc <- average_within_study(dc, 'Johnson 2015')
-dc <- average_within_study(dc, 'Read 2004')
+dc <- average_within_study(dc, 'Mahalingam 2018 Sample 3')
+dc <- average_within_study(dc, 'Mahalingam 2018 Sample 4')
+dc <- average_within_study(dc, 'Mahalingam 2018 Sample 5')
+dc <- average_within_study(dc, 'Mahalingam 2018 Sample 6')
+#dc <- average_within_study(dc, 'Read 2004')
 
 # remove unnecessary columns
 dc <- dc[c(1, 6, 8:12, 14, 24:26)]
@@ -50,10 +54,9 @@ dc <- reverse_es(dc, 'Hampton 2018')
 dc <- reverse_es(dc, 'Wolfe 2017')
 
 ## effect per decade
-#dc$adj_effect_size <- dc$yi * 10 
-#dc$adj_variance <- dc$vi * 10 
+dc$adj_effect_size <- dc$effect_size * 10 
 
 write.csv(dc, here::here('output', 'continuous_table.csv'), row.names = FALSE)
-
+rm(dc, dt, file, average_within_study, reverse_es)
 
 

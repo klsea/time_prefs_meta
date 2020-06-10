@@ -39,3 +39,5 @@ eggers.test(x = m.hksj)
 
 # pcurve
 pcurve(m.hksj)
+
+rm(dt, m.hksj, file)
