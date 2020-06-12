@@ -19,7 +19,7 @@ dt <- read.csv(here::here('output', file), stringsAsFactors = FALSE)
 dt <- dt[order(dt$Design, dt$Study.Identifier),]
 
 # Random Effects model - Knapp-Hartung (-Sidik-Jonkman) adjustment ####
-m.hksj <- metagen(TE = effect_size, 
+m.hksj <- metagen(TE = adj_effect_size, 
                   seTE = std_err, 
                   data = dt, 
                   studlab= Study.Identifier,
@@ -39,7 +39,7 @@ meta::forest(m.hksj, leftlabs = c('Author', 'Effect Size', 'Standard Error'))
 #meta::forest(s.m.hksj)
 
 # REM - DerSimonian-Laird ####
-m.dl <- metagen(TE = effect_size,
+m.dl <- metagen(TE = adj_effect_size,
                 seTE = std_err,
                 data=dt,
                 studlab= Study.Identifier,

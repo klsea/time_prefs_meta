@@ -1,6 +1,6 @@
 "Study.Identifier","Design","Incentive","Magnitude.of.Time.Delay","Measure","n_Younger","n_Older","age_mean_Younger","age_mean_Older","age_range_Younger","age_range_Older","age_sd_Younger","age_sd_Older","effect_size","std_err","var","age_diff","adj_effect_size"
 "Roalf 2012","extreme group","real ","days","parameter ",29,25,30.14,71.3,"21–45 ","65–85 ",5.53,4.36,0.28179477483311,0.274298751319105,0.0752398049752203,41.16,0.0684632591917177
-"Bauer 2010","extreme group","hypothetical","years","proportion",291,241,24.02,39.91,"20-29","30-74",NA,NA,0.125568967529813,0.0871817922552759,0.00760066490084208,15.89,0.0790238939772266
+"Bauer 2010","extreme group","hypothetical","years","proportion",291,241,24.017,39.909,"20-29","30-74",NA,NA,0.125568967529813,0.0871817922552759,0.00760066490084208,15.892,0.0790139488609446
 "Eppinger 2012","extreme group","real","weeks","proportion",15,15,20.9,69.7,"18-28","65-80",3,4.4,-1.90035263475931,0.443748364727494,0.196912611198325,48.8,-0.389416523516252
 "Halfmann 2016","extreme group","real","days","parameter",77,36,21,77,"","",NA,NA,-0.220767919028347,0.202443568759004,0.0409833985318814,56,-0.0394228426836334
 "Buono 2015","extreme group","Hypothetical","Weeks","Parameter",20,18,22.5,50,"18-27","45-55",NA,NA,0.706907602153819,0.335284375445775,0.112415612418063,27.5,0.257057309874116

@@ -15,7 +15,7 @@ file <- 'effect_sizes.csv'
 dt <- read.csv(here::here('output', file))
 
 # Random Effects model - hksj ####
-m.hksj <- metagen(TE = effect_size, 
+m.hksj <- metagen(TE = adj_effect_size, 
                   seTE = std_err, 
                   data = dt, 
                   studlab= Study.Identifier,

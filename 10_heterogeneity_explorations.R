@@ -19,7 +19,7 @@ dt <- read.csv(here::here('output', file), stringsAsFactors = FALSE)
 dt <- dt[order(dt$Design, dt$Study.Identifier),]
 
 # Random Effects model - Knapp-Hartung (-Sidik-Jonkman) adjustment ####
-m.hksj <- metagen(TE = effect_size, 
+m.hksj <- metagen(TE = adj_effect_size, 
                   seTE = std_err, 
                   data = dt, 
                   studlab= Study.Identifier,

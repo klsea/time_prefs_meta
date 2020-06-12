@@ -36,7 +36,7 @@ dt$Measure[which(dt$Measure == 'parameter ')] <- 'parameter'
 dt$Measure <- factor(dt$Measure)
 
 # Random Effects model - Knapp-Hartung (-Sidik-Jonkman) adjustment ####
-m.hksj <- metagen(TE = effect_size, 
+m.hksj <- metagen(TE = adj_effect_size, 
                   seTE = std_err, 
                   data = dt, 
                   studlab= Study.Identifier,
