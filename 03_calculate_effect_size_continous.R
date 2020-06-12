@@ -48,13 +48,13 @@ dc <- average_within_study(dc, 'Mahalingam 2018 Sample 6')
 # remove unnecessary columns
 dc <- dc[c(1, 6, 8:12, 14, 24:26)]
 
+## effect per decade
+dc$adj_effect_size <- dc$effect_size * 10 
+
 # Reversals- Löckenhoff 2011 & Hampton 2018?
 dc <- reverse_es(dc, 'Löckenhoff 2011')
 dc <- reverse_es(dc, 'Hampton 2018')
 dc <- reverse_es(dc, 'Wolfe 2017')
-
-## effect per decade
-dc$adj_effect_size <- dc$effect_size * 10 
 
 write.csv(dc, here::here('output', 'continuous_table.csv'), row.names = FALSE)
 rm(dc, dt, file, average_within_study, reverse_es)

@@ -24,9 +24,13 @@ ds <- dm[is.na(dm$sd),]
 dm <- dm[!is.na(dm$sd),]
 dm <- dm[c(1,2,6,8:10, 11:14, 18:19, 23)]
 
-### Remove Garza 2016 because missing age group means
+### Temporarily remove Garza 2016 and Liu 2016 because missing age group means
+garza <- dm[c(grep('Garza', dm$Study.Identifier)),]
+liu <- dm[c(grep('Liu', dm$Study.Identifier)),]
 dm <- dm[-c(grep('Garza', dm$Study.Identifier)),]
+dm <- dm[-c(grep('Liu', dm$Study.Identifier)),]
 
+## Calculate effect sizes
 dm <- pivot_wider(dm, id_cols = colnames(dm[c(1:6, 13)]), names_from = 'Intervention', 
                   values_from = c('mean', 'sd', 'n', 'age_mean', 'age_range', 'age_sd'))
 dm <- mutate(dm, effect_size = esc_mean_sd(grp1m = mean_Older, grp1sd = sd_Older, grp1n = n_Older, 
@@ -37,11 +41,41 @@ dm <- mutate(dm, effect_size = esc_mean_sd(grp1m = mean_Older, grp1sd = sd_Older
                             grp2m = mean_Younger,  grp2sd = sd_Younger,  grp2n = n_Younger, es.type = 'g')[3][[1]]
 )
 
-# only take mean from Liu 2016
-liu<- dm[which(dm$conditionID == 'Liu 2016.Ln(k) mean'),]
-dm <- dm[-which(dm$Study.Identifier == 'Liu 2016'),]
+# calculate effect sizes for within-study age group comparisons for Garza 20156 & Liu 2016
+age_group_comparisons <- function (data, oldergrp, youngergrp, name){ 
+  # data = data frame with just data from this study
+  # row containing data from the older group  row containing data from the younger group
+  dt <- data[c(oldergrp, youngergrp),]
+  dt$Intervention <- c('Older', 'Younger')
+  dt <- pivot_wider(dt, id_cols = colnames(dt[c(1:6, 13)]), names_from = 'Intervention', 
+                    values_from = c('mean', 'sd', 'n', 'age_mean', 'age_range', 'age_sd'))
+  dt <- mutate(dt, effect_size = esc_mean_sd(grp1m = mean_Older, grp1sd = sd_Older, grp1n = n_Older, 
+                                             grp2m = mean_Younger,  grp2sd = sd_Younger,  grp2n = n_Younger, es.type = 'g')[1][[1]], 
+               std_err = esc_mean_sd(grp1m = mean_Older, grp1sd = sd_Older, grp1n = n_Older, 
+                                     grp2m = mean_Younger,  grp2sd = sd_Younger,  grp2n = n_Younger, es.type = 'g')[2][[1]], 
+               var = esc_mean_sd(grp1m = mean_Older, grp1sd = sd_Older, grp1n = n_Older, 
+                                 grp2m = mean_Younger,  grp2sd = sd_Younger,  grp2n = n_Younger, es.type = 'g')[3][[1]]
+  )
+  dt$conditionID <- name
+  return(dt)
+}
+
+## only take mean from Liu 2016 and calculate age group differences
+liu <- liu[which(liu$conditionID == 'Liu 2016.Ln(k) mean'),]
+liu1 <- age_group_comparisons(liu, 1, 3, 'OAvMA')
+liu2 <- age_group_comparisons(liu, 3, 2, 'MAvYA')
+liu <- rbind(liu1, liu2)
 dm <- rbind(dm, liu)
-rm(liu)
+rm(liu, liu1, liu2)
+
+## calculate effects for garza comparisons
+garza1 <- age_group_comparisons(garza, 4, 3, 'OAvMA2')
+garza2 <- age_group_comparisons(garza, 3, 2, 'MA2vMA1')
+garza3 <- age_group_comparisons(garza, 2, 1, 'MA2vYA')
+garza <- rbind(garza1, garza2)
+garza <- rbind(garza, garza3)
+dm <- rbind(dm, garza)
+rm(garza, garza1, garza2, garza3)
 
 ## average effect size across multiple values within the same study 
 average_within_study <- function(df, studyid) {
@@ -56,22 +90,29 @@ dm <- average_within_study(dm, 'Eppinger 2018')
 dm <- average_within_study(dm, 'Whelan 2009')
 
 # remove unneccesary columns
-dm$mean_Older <- NULL
-dm$mean_Younger <- NULL
-dm$sd_Older <- NULL
-dm$sd_Younger <- NULL
-dm$conditionID <- NULL
+dm$mean_Older <- NULL; dm$mean_Younger <- NULL; dm$sd_Older <- NULL; dm$sd_Younger <- NULL; dm$conditionID <- NULL
+
+## effect per decade
+dm$age_diff = dm$age_mean_Older - dm$age_mean_Younger
+dm$adj_effect_size <- (dm$effect_size/dm$age_diff) * 10 # calculate effect per year and then multiply by 10 for decade
+
+# average adj_effect_size within studies (Liu 2016 & Garza 2016)
+average_within_study2 <- function(df, studyid) {
+  x = df[which(df$Study.Identifier == studyid),] # pull out study of interest
+  newmean <- cbind(x[1,1:13], t(colMeans(x[14:18]))) # average across estimates within same study
+  dt <- df[-which(df$Study.Identifier == studyid),] # remove multiple estimates from df
+  rbind(dt, newmean) # add new mean estimate to df
+}
+
+dm <- average_within_study2 (dm, 'Liu 2016')
+dm <- average_within_study2 (dm, 'Garza 2016')
 
 # Reversals- Garza 2016, Sparrow 2018a, Sparrow 2018b, Li 2013 
-#dm <- reverse_es(dm, 'Garza 2016')
+dm <- reverse_es(dm, 'Garza 2016')
 dm <- reverse_es(dm, 'Li 2013')
 dm <- reverse_es(dm, 'Sparrow 2018a')
 dm <- reverse_es(dm, 'Sparrow 2018b Study 1')
 dm <- reverse_es(dm, 'Sparrow 2018b Study 2')
 
-## effect per decade - what about variance/se???
-dm$age_diff = dm$age_mean_Older - dm$age_mean_Younger
-dm$adj_effect_size <- (dm$effect_size/dm$age_diff) * 10 # calculate effect per year and then multiply by 10 for decade
-
 write.csv(dm, here::here('output', 'extreme_group_table.csv'), row.names = FALSE)
-rm(dm, ds, dt, file, average_within_study, reverse_es)
+#rm(dm, ds, dt, file, average_within_study, reverse_es, average_within_study2, age_group_comparisons)

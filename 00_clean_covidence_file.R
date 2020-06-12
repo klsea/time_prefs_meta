@@ -181,5 +181,7 @@ d2$Intervention[which(d2$Intervention == 'Old')] <- 'Older'
 d2$Intervention[which(d2$Intervention == 'Middle 1')] <- 'Middle_1'
 d2$Intervention[which(d2$Intervention == 'Middle 2')] <- 'Middle_2'
 
+d2$rsquare <- NULL
+
 write.csv(d2, here::here('output', 'covidence.csv'), row.names = FALSE)
 rm(d1, d2, file, order, separate_conditions)

@@ -137,9 +137,10 @@ dt[which(dt$condition == '£1,000' & dt$Intervention == 'Older'), which(colnames
 dt[which(dt$condition == '£1,000' & dt$Intervention == 'Older'), which(colnames(dt) == 'sd')] <- sd[6][[1]]
 rm(whelan, mean, sd)
 
-# convert rsquare to r - should be able to remove after getting rid of Read 2004
-dt[which(dt$rsquare != 'NA'),]$correlation <- sqrt(dt[which(dt$rsquare != 'NA'),]$rsquare)
-dt$rsquare <- NULL
+# add assumed means for Buono 2015 & Garza 2016
+dt[which(dt$Study.Identifier == 'Buono 2015'), ]$age_mean <- c(mean(seq(18,27)), mean(seq(45,55)))
+dt[which(dt$Study.Identifier == 'Garza 2016'), ]$age_mean <- c(mean(seq(21,34)), mean(seq(35,49)), mean(seq(50,64)), mean(seq(65,76)))
+dt[which(dt$Study.Identifier == 'Jimura 2011' & dt$Intervention == 'Younger'), ]$age_mean <- 20
 
 # convert se to sd
 dt[which(dt$se != 'NA'),]$sd <- dt[which(dt$se != 'NA'),]$se * sqrt(dt[which(dt$se != 'NA'),]$n)

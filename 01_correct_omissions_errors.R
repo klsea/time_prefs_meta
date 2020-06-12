@@ -58,9 +58,21 @@ dt[which(dt$Study.Identifier == 'GREEN 1994'), which(colnames(dt) == 'Study.Iden
 dt <- dt[-which(dt$condition == '$10,000'), ]
 dt[which(dt$Study.Identifier == 'Green 1994'), which(colnames(dt) == 'Fvalue')] <- 4.852
 
+# Add Liu 2016 middle age group
+liuma <- dt[which(dt$Study.Identifier == 'Liu 2016' & dt$Intervention == 'Older'),]
+liuma$Intervention <- 'Middle'
+liuma$age_mean <- 43.27
+liuma$age_sd <- 6.74
+liuma$age_range <- '31-60'
+liuma$n <- 745
+liuma$mean <- c(-4.22, -3.93, -3.93, -3.64)
+liuma$sd <- c(1.92, 1.76, 1.88, 1.80)
+
+dt <- rbind(dt, liuma)
+
 # write data file
 write.csv(dt, here::here('output', 'corrected.csv'), row.names = FALSE)
-rm(dt, file)
+rm(dt, file, liuma)
                                                                                                                                           
                                                                                                                                           
                                                                                                                                           

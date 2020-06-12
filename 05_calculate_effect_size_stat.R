@@ -49,12 +49,12 @@ rm(dt1, dt2)
 ds$tvalue <- NULL
 ds$Fvalue <- NULL
 
-# Reversals-Green 1994
-ds <- reverse_es(ds, 'Green 1994')
-
 ## effect per decade
 ds$age_diff = ds$age_mean_Older - ds$age_mean_Younger
 ds$adj_effect_size <- (ds$effect_size/ds$age_diff) * 10 # calculate effect per year and then multiply by 10 for decade
+
+# Reversals-Green 1994
+ds <- reverse_es(ds, 'Green 1994')
 
 write.csv(ds, here::here('output', 'extreme_group_stat_table.csv'), row.names = FALSE)
 rm(dm, ds, dt, file, reverse_es)
