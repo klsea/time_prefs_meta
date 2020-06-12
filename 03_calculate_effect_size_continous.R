@@ -15,6 +15,7 @@ file <- 'cleaned.csv'
 # load data
 dt <- read.csv(here::here('output', file))
 
+# calc effect size for continous design ####
 # make interaction term for study + conditions
 dt$conditionID <- interaction(dt$Study.Identifier, dt$condition)
 
@@ -29,7 +30,7 @@ dc <- mutate(dc,
 )
 
 
-## average effect size across multiple values within the same study 
+# average effect size across multiple values within the same study ####
 average_within_study <- function(df, studyid) {
   x = df[which(df$Study.Identifier == studyid),] # pull out study of interest
   newmean <- cbind(x[1,1:23], t(colMeans(x[24:26]))) # average across estimates within same study
@@ -43,15 +44,14 @@ dc <- average_within_study(dc, 'Mahalingam 2018 Sample 3')
 dc <- average_within_study(dc, 'Mahalingam 2018 Sample 4')
 dc <- average_within_study(dc, 'Mahalingam 2018 Sample 5')
 dc <- average_within_study(dc, 'Mahalingam 2018 Sample 6')
-#dc <- average_within_study(dc, 'Read 2004')
 
 # remove unnecessary columns
 dc <- dc[c(1, 6, 8:12, 14, 24:26)]
 
-## effect per decade
+## effect per decade ###
 dc$adj_effect_size <- dc$effect_size * 10 
 
-# Reversals- Löckenhoff 2011 & Hampton 2018?
+# Reversals ####
 dc <- reverse_es(dc, 'Löckenhoff 2011')
 dc <- reverse_es(dc, 'Hampton 2018')
 dc <- reverse_es(dc, 'Wolfe 2017')

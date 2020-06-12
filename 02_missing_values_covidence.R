@@ -14,7 +14,8 @@ file <- 'corrected.csv'
 # load data
 dt <- read.csv(here::here('output', file))
 
-# Eppinger 2018 add means/ses for both Sessions
+# Eppinger 2018 ####
+# add means/ses for both Sessions
 # used https://automeris.io/WebPlotDigitizer/
 eppinger <- dt[which(dt$Study.Identifier == 'Eppinger 2018'),]
 dt <- dt[-which(dt$Study.Identifier == 'Eppinger 2018'),]
@@ -46,7 +47,7 @@ eppinger <-rbind(sess1, sess2)
 dt <- rbind(dt, eppinger)
 rm(low, high, eppinger1, eppinger2, eppinger, sess2, sess1)
 
-# Mahalingam 2018 
+# Mahalingam 2018 ####
 mg <- read.csv(here::here('data', 'Mahalingam 2018_ final.csv'))
 mg$Study.Identifier = paste0('Mahalingam 2018 ', mg$Sample)
 mg$Intervention <- 'Age'
@@ -73,22 +74,21 @@ mg <- mg[order]
 dt <- rbind(dt, mg)
 rm(mg)
 
-# Samanez-Larkin 2011 add tvalue
+# Samanez-Larkin 2011 add tvalue ####
 dt[which(dt$Study.Identifier == 'Samanez-Larkin 2011'), which(colnames(dt) == 'tvalue')] <- 0.20
 
-# Sparrow 2018a pull in values rom plot digitizer and name Sparrow 2018a
+# Sparrow 2018a pull in values rom plot digitizer and name Sparrow 2018a ####
 sparrow <- read.csv(here::here('data', 'sparrow2018aplotdigit.csv'), header = FALSE)
 dt$Study.Identifier <- as.character(dt$Study.Identifier)
 dt[which(dt$correct_data_extracted == 'No mean or sd but we can extract from barplot'),
    which(colnames(dt) == 'Study.Identifier')] <- 'Sparrow 2018a' 
-#dt$Study.Identifier <- factor(dt$Study.Identifier)  
 dt[which(dt$Study.Identifier == 'Sparrow 2018a' & dt$Intervention == 'Younger'), which(colnames(dt) == 'mean')] <- sparrow[1,2]
 dt[which(dt$Study.Identifier == 'Sparrow 2018a' & dt$Intervention == 'Younger'), which(colnames(dt) == 'se')] <- abs(sparrow[1,2] - sparrow[2,2])
 dt[which(dt$Study.Identifier == 'Sparrow 2018a' & dt$Intervention == 'Older'), which(colnames(dt) == 'mean')] <- sparrow[3,2]
 dt[which(dt$Study.Identifier == 'Sparrow 2018a' & dt$Intervention == 'Older'), which(colnames(dt) == 'se')] <- abs(sparrow[3,2] - sparrow[4,2])
 rm(sparrow)
 
-# Sparrow 2018b pull in values rom plot digitizer and name Sparrow 2018b
+# Sparrow 2018b pull in values rom plot digitizer and name Sparrow 2018b ####
 sparrow1 <- read.csv(here::here('data', 'sparrow2018bs1plotdigit.csv'), header = FALSE) # load Study 1data from plotdigitizer
 sparrow2 <- read.csv(here::here('data', 'sparrow2018bS2plotdigit.csv'), header = FALSE)  # load Study 2data from plotdigitizer
 sparrow <- dt[which(dt$Study.Identifier == 'Sparrow 2018'),]
@@ -122,7 +122,7 @@ s3 <- rbind(s1, s2)
 dt <- rbind(dt, s3)
 rm(s1, s2, s3, sparrow, sparrow1, sparrow2)
 
-# calculate means and sds from Whelan 2009
+# calculate means and sds from Whelan 2009 ####
 whelan <- read.csv(here::here('data', 'Whelan2009data.csv'))
 mean <- colMeans(whelan, na.rm = TRUE)
 sd <- apply(whelan, 2, sd, na.rm =TRUE)
@@ -136,11 +136,6 @@ dt[which(dt$condition == '£1,000' & dt$Intervention == 'Younger'), which(colnam
 dt[which(dt$condition == '£1,000' & dt$Intervention == 'Older'), which(colnames(dt) == 'mean')] <- mean[6][[1]]
 dt[which(dt$condition == '£1,000' & dt$Intervention == 'Older'), which(colnames(dt) == 'sd')] <- sd[6][[1]]
 rm(whelan, mean, sd)
-
-# add assumed means for Buono 2015 & Garza 2016
-dt[which(dt$Study.Identifier == 'Buono 2015'), ]$age_mean <- c(mean(seq(18,27)), mean(seq(45,55)))
-dt[which(dt$Study.Identifier == 'Garza 2016'), ]$age_mean <- c(mean(seq(21,34)), mean(seq(35,49)), mean(seq(50,64)), mean(seq(65,76)))
-dt[which(dt$Study.Identifier == 'Jimura 2011' & dt$Intervention == 'Younger'), ]$age_mean <- 20
 
 # convert se to sd
 dt[which(dt$se != 'NA'),]$sd <- dt[which(dt$se != 'NA'),]$se * sqrt(dt[which(dt$se != 'NA'),]$n)

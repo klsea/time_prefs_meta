@@ -18,7 +18,7 @@ dt <- read.csv(here::here('output', file), stringsAsFactors = FALSE)
 # Put in alpha order by design
 dt <- dt[order(dt$Design, dt$Study.Identifier),]
 
-# Random Effects model - Knapp-Hartung (-Sidik-Jonkman) adjustment
+# Random Effects model - Knapp-Hartung (-Sidik-Jonkman) adjustment ####
 m.hksj <- metagen(TE = effect_size, 
                   seTE = std_err, 
                   data = dt, 
@@ -31,14 +31,14 @@ m.hksj <- metagen(TE = effect_size,
                   sm = 'SMD')
 m.hksj
 
-# Forest plot
+# Forest plot - hksj model ####
 meta::forest(m.hksj, leftlabs = c('Author', 'Effect Size', 'Standard Error'))
 
-# REM HKSJ by design
+# REM HKSJ by design ####
 #s.m.hksj <- subgroup.analysis.mixed.effects(x = m.hksj, subgroups = dt$Design)
 #meta::forest(s.m.hksj)
 
-# REM - DerSimonian-Laird
+# REM - DerSimonian-Laird ####
 m.dl <- metagen(TE = effect_size,
                 seTE = std_err,
                 data=dt,
@@ -50,7 +50,7 @@ m.dl <- metagen(TE = effect_size,
                 sm="SMD")
 m.dl
 
-# Forest plot
+# Forest plot - dl model####
 meta::forest(m.dl)
 
 rm(dt, m.hksj, file, m.dl)

@@ -15,6 +15,7 @@ file <- 'cleaned.csv'
 # load data
 dt <- read.csv(here::here('output', file))
 
+# Calculation for two-group papers ####
 # make interaction term for study + conditions
 dt$conditionID <- interaction(dt$Study.Identifier, dt$condition)
 
@@ -41,7 +42,8 @@ dm <- mutate(dm, effect_size = esc_mean_sd(grp1m = mean_Older, grp1sd = sd_Older
                             grp2m = mean_Younger,  grp2sd = sd_Younger,  grp2n = n_Younger, es.type = 'g')[3][[1]]
 )
 
-# calculate effect sizes for within-study age group comparisons for Garza 20156 & Liu 2016
+# Calculate for multi-group papers ####
+
 age_group_comparisons <- function (data, oldergrp, youngergrp, name){ 
   # data = data frame with just data from this study
   # row containing data from the older group  row containing data from the younger group
@@ -60,15 +62,15 @@ age_group_comparisons <- function (data, oldergrp, youngergrp, name){
   return(dt)
 }
 
-## only take mean from Liu 2016 and calculate age group differences
-liu <- liu[which(liu$conditionID == 'Liu 2016.Ln(k) mean'),]
+## Liu 2016 ####
+liu <- liu[which(liu$conditionID == 'Liu 2016.Ln(k) mean'),] # take the mean from paper and get rid of others.
 liu1 <- age_group_comparisons(liu, 1, 3, 'OAvMA')
 liu2 <- age_group_comparisons(liu, 3, 2, 'MAvYA')
 liu <- rbind(liu1, liu2)
 dm <- rbind(dm, liu)
 rm(liu, liu1, liu2)
 
-## calculate effects for garza comparisons
+## Garza 2016 ####
 garza1 <- age_group_comparisons(garza, 4, 3, 'OAvMA2')
 garza2 <- age_group_comparisons(garza, 3, 2, 'MA2vMA1')
 garza3 <- age_group_comparisons(garza, 2, 1, 'MA2vYA')
@@ -77,7 +79,7 @@ garza <- rbind(garza, garza3)
 dm <- rbind(dm, garza)
 rm(garza, garza1, garza2, garza3)
 
-## average effect size across multiple values within the same study 
+## average effect size across multiple values within the same study ####
 average_within_study <- function(df, studyid) {
   x = df[which(df$Study.Identifier == studyid),] # pull out study of interest
   newmean <- cbind(x[1,1:18], t(colMeans(x[19:21]))) # average across estimates within same study
@@ -92,11 +94,11 @@ dm <- average_within_study(dm, 'Whelan 2009')
 # remove unneccesary columns
 dm$mean_Older <- NULL; dm$mean_Younger <- NULL; dm$sd_Older <- NULL; dm$sd_Younger <- NULL; dm$conditionID <- NULL
 
-## effect per decade
+## effect per decade ####
 dm$age_diff = dm$age_mean_Older - dm$age_mean_Younger
 dm$adj_effect_size <- (dm$effect_size/dm$age_diff) * 10 # calculate effect per year and then multiply by 10 for decade
 
-# average adj_effect_size within studies (Liu 2016 & Garza 2016)
+# average adj_effect_size within studies (Liu 2016 & Garza 2016) ####
 average_within_study2 <- function(df, studyid) {
   x = df[which(df$Study.Identifier == studyid),] # pull out study of interest
   newmean <- cbind(x[1,1:13], t(colMeans(x[14:18]))) # average across estimates within same study
@@ -107,7 +109,7 @@ average_within_study2 <- function(df, studyid) {
 dm <- average_within_study2 (dm, 'Liu 2016')
 dm <- average_within_study2 (dm, 'Garza 2016')
 
-# Reversals- Garza 2016, Sparrow 2018a, Sparrow 2018b, Li 2013 
+# Reversals  ####
 dm <- reverse_es(dm, 'Garza 2016')
 dm <- reverse_es(dm, 'Li 2013')
 dm <- reverse_es(dm, 'Sparrow 2018a')
@@ -115,4 +117,4 @@ dm <- reverse_es(dm, 'Sparrow 2018b Study 1')
 dm <- reverse_es(dm, 'Sparrow 2018b Study 2')
 
 write.csv(dm, here::here('output', 'extreme_group_table.csv'), row.names = FALSE)
-#rm(dm, ds, dt, file, average_within_study, reverse_es, average_within_study2, age_group_comparisons)
+rm(dm, ds, dt, file, average_within_study, reverse_es, average_within_study2, age_group_comparisons)

@@ -18,7 +18,7 @@ dt <- read.csv(here::here('output', file), stringsAsFactors = FALSE)
 # Put in alpha order by design
 dt <- dt[order(dt$Design, dt$Study.Identifier),]
 
-# Random Effects model - Knapp-Hartung (-Sidik-Jonkman) adjustment
+# Random Effects model - Knapp-Hartung (-Sidik-Jonkman) adjustment ####
 m.hksj <- metagen(TE = effect_size, 
                   seTE = std_err, 
                   data = dt, 
@@ -31,7 +31,7 @@ m.hksj <- metagen(TE = effect_size,
                   sm = 'SMD')
 m.hksj
 
-# outlier analysis
+# outlier analysis ####
 find.outliers(m.hksj)
 inf.analysis <- InfluenceAnalysis(x = m.hksj, random = TRUE)
 summary(inf.analysis)
@@ -40,7 +40,7 @@ plot(inf.analysis, "baujat")
 plot(inf.analysis, "es")
 plot(inf.analysis, "i2")
 
-# GOSH plot # not working
+# GOSH plot # not working ####
 #m.rma <- rma(yi = m.hksj$TE, 
 #             sei = m.hksj$seTE,
 #             method = m.hksj$method.tau,

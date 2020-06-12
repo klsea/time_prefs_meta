@@ -17,7 +17,7 @@ dt <- read.csv(here::here('output', file))
 # Put in alpha order by design
 dt <- dt[order(dt$Design, dt$Study.Identifier),]
 
-# Fix factors
+# Fix factors ####
 ## Incentive
 levels(dt$Incentive)
 dt$Incentive[which(dt$Incentive == 'real ')] <- 'real'
@@ -35,7 +35,7 @@ levels(dt$Measure)
 dt$Measure[which(dt$Measure == 'parameter ')] <- 'parameter'
 dt$Measure <- factor(dt$Measure)
 
-# Random Effects model - Knapp-Hartung (-Sidik-Jonkman) adjustment
+# Random Effects model - Knapp-Hartung (-Sidik-Jonkman) adjustment ####
 m.hksj <- metagen(TE = effect_size, 
                   seTE = std_err, 
                   data = dt, 
@@ -47,28 +47,28 @@ m.hksj <- metagen(TE = effect_size,
                   prediction = TRUE, 
                   sm = 'SMD')
 
-# Design
+# Design ####
 mr1.design <- metareg(m.hksj, Design)
 bubble(mr1.design, 
        xlab = 'Design', 
        col.line = 'blue', 
        studlab = TRUE)
 
-# Incentive
+# Incentive ####
 mr2.incent <- metareg(m.hksj, Incentive)
 bubble(mr2.incent, 
        xlab = 'Incentive', 
        col.line = 'blue', 
        studlab = TRUE)
 
-# Delay
+# Delay ####
 mr3.delay <- metareg(m.hksj, Delay)
 bubble(mr3.delay, 
        xlab = 'Delay', 
        col.line = 'blue', 
        studlab = TRUE)
 
-# Measure
+# Measure ####
 mr4.measure <- metareg(m.hksj, Measure)
 bubble(mr4.measure, 
        xlab = 'Measure', 
