@@ -10,26 +10,10 @@ library(metafor)
 # load source functions
 
 # set hard-coded variables
-file <- 'effect_sizes.csv'
+file <- 'hksj_model.RDS'
 
 # load data
-dt <- read.csv(here::here('output', file), stringsAsFactors = FALSE)
-
-# Put in alpha order by design
-dt <- dt[order(dt$Design, dt$Study.Identifier),]
-
-# Random Effects model - Knapp-Hartung (-Sidik-Jonkman) adjustment ####
-m.hksj <- metagen(TE = adj_effect_size, 
-                  seTE = std_err, 
-                  data = dt, 
-                  studlab= Study.Identifier,
-                  comb.fixed = FALSE,
-                  comb.random = TRUE, 
-                  method.tau = 'SJ', 
-                  hakn = TRUE, 
-                  prediction = TRUE, 
-                  sm = 'SMD')
-m.hksj
+m.hksj <- readRDS(here::here('output', file))
 
 # outlier analysis ####
 find.outliers(m.hksj)

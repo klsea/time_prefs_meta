@@ -4,40 +4,32 @@
 # load required packages
 library(here)
 library(meta)
+library(metafor)
 library(dmetar) 
 
 # load source functions
 
 # set hard-coded variables
-file <- 'effect_sizes.csv'
+file <- 'hksj_model.RDS'
 
 # load data
-dt <- read.csv(here::here('output', file))
-
-# Random Effects model - hksj ####
-m.hksj <- metagen(TE = adj_effect_size, 
-                  seTE = std_err, 
-                  data = dt, 
-                  studlab= Study.Identifier,
-                  comb.fixed = FALSE,
-                  comb.random = TRUE, 
-                  method.tau = 'SJ', 
-                  hakn = TRUE, 
-                  prediction = TRUE, 
-                  sm = 'SMD')
-m.hksj
+m.hksj <- readRDS(here::here('output', file))
 
 # Contor funnel plot - throwing an error ####
-meta::funnel(m.hksj, xlab="Hedges' g", studlab = TRUE, 
-             contour = c(.95,.975,.99),
-             col.contour=c("darkblue","blue","lightblue")) #+ 
-#  legend(-1.5, 0, c("p < 0.05", "p<0.025", "< 0.01"), bty = "n",
-#         fill=c("darkblue","blue","lightblue"))
+png(file = 'figs/funnelplot.png', width = 1000, height = 800) 
+meta::funnel(m.hksj, xlab="Hedges' g", studlab = TRUE, xlim = c(-17,7),
+             contour = c(.95, .975, .99),
+             col.contour=c("darkblue","blue","lightblue"))  
+  legend(-15, 0, c("p < 0.05", "p<0.025", "< 0.01"), bty = "n",
+         fill=c("darkblue","blue","lightblue"))
+dev.off() 
 
 # Eggers test ####
 eggers.test(x = m.hksj)
 
 # pcurve analysis ####
+png(file = 'figs/pcurve.png', width = 500, height = 500) 
 pcurve(m.hksj)
+dev.off() 
 
-rm(dt, m.hksj, file)
+rm(m.hksj, file)

@@ -48,7 +48,7 @@ dt <- rbind(dt, eppinger)
 rm(low, high, eppinger1, eppinger2, eppinger, sess2, sess1)
 
 # Mahalingam 2018 ####
-mg <- read.csv(here::here('data', 'Mahalingam 2018_ final.csv'))
+mg <- read.csv(here::here('data', 'Mahalingam 2018_final.csv'))
 mg$Study.Identifier = paste0('Mahalingam 2018 ', mg$Sample)
 mg$Intervention <- 'Age'
 mg$Authors.name <- mg$Author; mg$Author <- NULL
