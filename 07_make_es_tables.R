@@ -16,6 +16,7 @@ dm <- read.csv(here::here('output', 'extreme_group_table.csv'))
 ds <- read.csv(here::here('output', 'extreme_group_stat_table.csv'))
 
 # pretty continous table for manuscript
+dc$age_mean <- round(dc$age_mean, 2)
 dc <- dc[order(dc$Study.Identifier), ]
 dc[dc == ''] <- NA
 dc[is.na(dc)] <- '--'

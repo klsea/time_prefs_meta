@@ -13,7 +13,8 @@ file <- 'covidence.csv'
 # load data
 dt <- read.csv(here::here('output', file))
 
-# Remove Read 2004 - can remove after Covidence is fixed ####
+# Remove Read 2004 & Chao 2009 - can remove after Covidence is fixed ####
+dt <- dt[-which(dt$Study.Identifier == 'Chao 2009'),]
 dt <- dt[-which(dt$Study.Identifier == 'Read 2004'),]
 
 # Errors ####

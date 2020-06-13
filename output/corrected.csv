@@ -11,8 +11,6 @@
 "Seaman 2018","Age","kendra seaman","kendra.seaman@duke.edu",2018,"continuous age","","real","weeks","parameter",49.71,"22-83",17.92,89,NA,NA,0.12,NA,NA,NA,NA,NA,NA
 "Löckenhoff 2011","Age","corinna löckenhoff","CEL72@cornell.edu",2011,"continuous age","Yes","real","days","parameter",52,"19-91",20.5,98,NA,NA,0.33,NA,NA,NA,NA,NA,NA
 "Kirby 2002","Age","kris kirby","kkirby@williams.edu",2002,"continuous age","Yes","real","days","parameter",27.4,"10-80",NA,154,NA,NA,0.3,NA,NA,NA,NA,NA,NA
-"Chao 2009","Younger","li-wei chao","chao69@wharton.upenn.edu",2009,"extreme group","missing standard deviation","hypothetical","days","parameter",NA,"",NA,28,NA,NA,NA,0.037,NA,NA,NA,NA,NA
-"Chao 2009","Older","li-wei chao","chao69@wharton.upenn.edu",2009,"extreme group","missing standard deviation","hypothetical","days","parameter",NA,"",NA,36,NA,NA,NA,0.044,NA,NA,NA,NA,NA
 "Tschernegg 2015","Age","melanie tschernegg","martin.kronbichler@sbg.ac.at",2015,"continuous age","yes","hypothetical","months","proportion",25.2192857142857,"19-44",NA,70,NA,NA,-0.097,NA,NA,NA,NA,NA,NA
 "Stoeckel 2013","Age","luke stoeckel","lstoeckel@partners.org",2012,"continuous age","yes","real","days","parameter",33.4,"19-49",9.8,19,NA,NA,-0.585,NA,NA,NA,NA,NA,NA
 "Samanez-Larkin 2011","Younger","gregory samanez-larkin","g.samanezlark@duke.edu",2011,"extreme group","","real","weeks","proportion",22,"19-26",NA,12,NA,NA,NA,0.46,NA,NA,NA,NA,NA
