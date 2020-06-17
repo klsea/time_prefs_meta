@@ -1,5 +1,5 @@
 # Calcs and correct errors/omissions in data extraction
-# 6.4.202
+# 6.4.2020 updated 6.17.20 
 
 # load required packages
 library(here)
@@ -13,19 +13,10 @@ file <- 'covidence.csv'
 # load data
 dt <- read.csv(here::here('output', file))
 
-# Remove Read 2004 & Chao 2009 - can remove after Covidence is fixed ####
-dt <- dt[-which(dt$Study.Identifier == 'Chao 2009'),]
-dt <- dt[-which(dt$Study.Identifier == 'Read 2004'),]
-
 # Errors ####
-# Fix Eppinger 2012 - SEs recorded as SDs
-dt[which(dt$Study.Identifier == 'Eppinger 2012'), which(colnames(dt) == 'se')] <- dt[which(dt$Study.Identifier == 'Eppinger 2012'), which(colnames(dt) == 'sd')]
-dt[which(dt$Study.Identifier == 'Eppinger 2012'), which(colnames(dt) == 'sd')] <- NA
 
-# Fix Study ID and F value for Green 1994
+# Fix Study ID for Green 1994
 dt[which(dt$Study.Identifier == 'GREEN 1994'), which(colnames(dt) == 'Study.Identifier')] <- 'Green 1994'
-dt <- dt[-which(dt$condition == '$10,000'), ]
-dt[which(dt$Study.Identifier == 'Green 1994'), which(colnames(dt) == 'Fvalue')] <- 4.852
 
 # Fix Tschernegg 2015 measure - correlation is taken from %SS decisions, not model parameters
 dt[which(dt$Study.Identifier == 'Tschernegg 2015'), which(colnames(dt) == 'Measure')] <- 'proportion'

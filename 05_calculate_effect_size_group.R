@@ -23,7 +23,7 @@ dt$conditionID <- interaction(dt$Study.Identifier, dt$condition)
 dm <- dt[which(dt$Design == 'extreme group'),] # pull out means
 ds <- dm[is.na(dm$sd),]
 dm <- dm[!is.na(dm$sd),]
-dm <- dm[c(1,2,6,8:10, 11:14, 18:19, 23)]
+dm <- dm[c(1:2, 6, 8:15, 17:18, 21)]
 
 ### Temporarily remove Garza 2016 and Liu 2016 because missing age group means
 garza <- dm[c(grep('Garza', dm$Study.Identifier)),]
@@ -32,7 +32,7 @@ dm <- dm[-c(grep('Garza', dm$Study.Identifier)),]
 dm <- dm[-c(grep('Liu', dm$Study.Identifier)),]
 
 ## Calculate effect sizes
-dm <- pivot_wider(dm, id_cols = colnames(dm[c(1:6, 13)]), names_from = 'Intervention', 
+dm <- pivot_wider(dm, id_cols = colnames(dm[c(1:6, 14)]), names_from = 'Intervention', 
                   values_from = c('mean', 'sd', 'n', 'age_mean', 'age_range', 'age_sd'))
 dm <- mutate(dm, effect_size = esc_mean_sd(grp1m = mean_Older, grp1sd = sd_Older, grp1n = n_Older, 
                    grp2m = mean_Younger,  grp2sd = sd_Younger,  grp2n = n_Younger, es.type = 'r')[1][[1]], 
@@ -43,13 +43,12 @@ dm <- mutate(dm, effect_size = esc_mean_sd(grp1m = mean_Older, grp1sd = sd_Older
 )
 
 # Calculate for multi-group papers ####
-
 age_group_comparisons <- function (data, oldergrp, youngergrp, name){ 
   # data = data frame with just data from this study
   # row containing data from the older group  row containing data from the younger group
   dt <- data[c(oldergrp, youngergrp),]
   dt$Intervention <- c('Older', 'Younger')
-  dt <- pivot_wider(dt, id_cols = colnames(dt[c(1:6, 13)]), names_from = 'Intervention', 
+  dt <- pivot_wider(dt, id_cols = colnames(dt[c(1:6, 14)]), names_from = 'Intervention', 
                     values_from = c('mean', 'sd', 'n', 'age_mean', 'age_range', 'age_sd'))
   dt <- mutate(dt, effect_size = esc_mean_sd(grp1m = mean_Older, grp1sd = sd_Older, grp1n = n_Older, 
                                              grp2m = mean_Younger,  grp2sd = sd_Younger,  grp2n = n_Younger, es.type = 'r')[1][[1]], 
@@ -99,14 +98,6 @@ dm$mean_Older <- NULL; dm$mean_Younger <- NULL; dm$sd_Older <- NULL; dm$sd_Young
 ## effect per decade ####
 dm$adj_effect_size <- dm$effect_size * 10 # calculate effect per year and then multiply by 10 for decade
 
-# average adj_effect_size within studies (Liu 2016 & Garza 2016) ####
-average_within_study2 <- function(df, studyid) {
-  x = df[which(df$Study.Identifier == studyid),] # pull out study of interest
-  newmean <- cbind(x[1,1:13], t(colMeans(x[14:18]))) # average across estimates within same study
-  dt <- df[-which(df$Study.Identifier == studyid),] # remove multiple estimates from df
-  rbind(dt, newmean) # add new mean estimate to df
-}
-
 # Reversals  ####
 dm <- reverse_es(dm, 'Garza 2016')
 dm <- reverse_es(dm, 'Li 2013')
@@ -115,4 +106,4 @@ dm <- reverse_es(dm, 'Sparrow 2018b Study 1')
 dm <- reverse_es(dm, 'Sparrow 2018b Study 2')
 
 write.csv(dm, here::here('output', 'extreme_group_table.csv'), row.names = FALSE)
-rm(dm, ds, dt, file, average_within_study, reverse_es, average_within_study2, age_group_comparisons)
+rm(dm, ds, dt, file, average_within_study, reverse_es, age_group_comparisons)

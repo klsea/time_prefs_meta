@@ -6,7 +6,6 @@ library(here)
 library(tidyverse)
 
 # load source functions
-#source(here::here('scr', 'conversion_functions.R'))
 
 # set hard-coded variables
 file <- 'corrected.csv'
@@ -73,9 +72,6 @@ mg <- mg[order]
 
 dt <- rbind(dt, mg)
 rm(mg)
-
-# Samanez-Larkin 2011 add tvalue ####
-dt[which(dt$Study.Identifier == 'Samanez-Larkin 2011'), which(colnames(dt) == 'tvalue')] <- 0.20
 
 # Sparrow 2018a pull in values rom plot digitizer and name Sparrow 2018a ####
 sparrow <- read.csv(here::here('data', 'sparrow2018aplotdigit.csv'), header = FALSE)

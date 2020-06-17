@@ -19,7 +19,7 @@ dt <- read.csv(here::here('output', file))
 dm <- dt[which(dt$Design == 'extreme group'),] # pull out means
 ds <- dm[is.na(dm$sd),] # pull out no sd files
 
-ds <- ds[c(1:2, 6, 8:14, 20:21)]
+ds <- ds[c(1:2, 6, 8:10, 12:15, 19:20)]
 
 ds <- pivot_wider(ds, 
                   id_cols = colnames(ds[c(1:6, 11:12)]), 
@@ -33,19 +33,13 @@ dt1$effect_size <- esc_t(t = dt1$tvalue, grp1n = dt1$n_Older, grp2n = dt1$n_Youn
 dt1$std_err <- esc_t(t = dt1$tvalue, grp1n = dt1$n_Older, grp2n = dt1$n_Younger, es.type = "r")[2][[1]]
 dt1$var <- esc_t(t = dt1$tvalue, grp1n = dt1$n_Older, grp2n = dt1$n_Younger, es.type = "r")[3][[1]]
 
-# calculate effect size from f vals ####
-dt2 <- ds[!is.na(ds$Fvalue),]
-dt2$effect_size <- esc_f(f = dt2$Fvalue, grp1n = dt2$n_Older, grp2n = dt2$n_Younger, es.type = "r")[1][[1]]
-dt2$std_err <- esc_f(f = dt2$Fvalue, grp1n = dt2$n_Older, grp2n = dt2$n_Younger, es.type = "r")[2][[1]]
-dt2$var <- esc_f(f = dt2$Fvalue, grp1n = dt2$n_Older, grp2n = dt2$n_Younger, es.type = "r")[3][[1]]
-
 # concatenate data tables
-ds <- bind_rows(dt1, dt2)
-rm(dt1, dt2)
+ds <- dt1
 
 # remove unnecessary columns
 ds$tvalue <- NULL
 ds$Fvalue <- NULL
+ds$df <- NULL
 
 ## effect per decade ####
 ds$adj_effect_size <- ds$effect_size * 10 # calculate effect per year and then multiply by 10 for decade
@@ -54,4 +48,4 @@ ds$adj_effect_size <- ds$effect_size * 10 # calculate effect per year and then m
 ds <- reverse_es(ds, 'Green 1994')
 
 write.csv(ds, here::here('output', 'extreme_group_stat_table.csv'), row.names = FALSE)
-rm(dm, ds, dt, file, reverse_es)
+rm(dm, dt1, ds, dt, file, reverse_es)
