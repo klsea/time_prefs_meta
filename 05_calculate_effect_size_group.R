@@ -35,11 +35,11 @@ dm <- dm[-c(grep('Liu', dm$Study.Identifier)),]
 dm <- pivot_wider(dm, id_cols = colnames(dm[c(1:6, 13)]), names_from = 'Intervention', 
                   values_from = c('mean', 'sd', 'n', 'age_mean', 'age_range', 'age_sd'))
 dm <- mutate(dm, effect_size = esc_mean_sd(grp1m = mean_Older, grp1sd = sd_Older, grp1n = n_Older, 
-                   grp2m = mean_Younger,  grp2sd = sd_Younger,  grp2n = n_Younger, es.type = 'g')[1][[1]], 
+                   grp2m = mean_Younger,  grp2sd = sd_Younger,  grp2n = n_Younger, es.type = 'r')[1][[1]], 
        std_err = esc_mean_sd(grp1m = mean_Older, grp1sd = sd_Older, grp1n = n_Older, 
-                                grp2m = mean_Younger,  grp2sd = sd_Younger,  grp2n = n_Younger, es.type = 'g')[2][[1]], 
+                                grp2m = mean_Younger,  grp2sd = sd_Younger,  grp2n = n_Younger, es.type = 'r')[2][[1]], 
        var = esc_mean_sd(grp1m = mean_Older, grp1sd = sd_Older, grp1n = n_Older, 
-                            grp2m = mean_Younger,  grp2sd = sd_Younger,  grp2n = n_Younger, es.type = 'g')[3][[1]]
+                            grp2m = mean_Younger,  grp2sd = sd_Younger,  grp2n = n_Younger, es.type = 'r')[3][[1]]
 )
 
 # Calculate for multi-group papers ####
@@ -52,11 +52,11 @@ age_group_comparisons <- function (data, oldergrp, youngergrp, name){
   dt <- pivot_wider(dt, id_cols = colnames(dt[c(1:6, 13)]), names_from = 'Intervention', 
                     values_from = c('mean', 'sd', 'n', 'age_mean', 'age_range', 'age_sd'))
   dt <- mutate(dt, effect_size = esc_mean_sd(grp1m = mean_Older, grp1sd = sd_Older, grp1n = n_Older, 
-                                             grp2m = mean_Younger,  grp2sd = sd_Younger,  grp2n = n_Younger, es.type = 'g')[1][[1]], 
+                                             grp2m = mean_Younger,  grp2sd = sd_Younger,  grp2n = n_Younger, es.type = 'r')[1][[1]], 
                std_err = esc_mean_sd(grp1m = mean_Older, grp1sd = sd_Older, grp1n = n_Older, 
-                                     grp2m = mean_Younger,  grp2sd = sd_Younger,  grp2n = n_Younger, es.type = 'g')[2][[1]], 
+                                     grp2m = mean_Younger,  grp2sd = sd_Younger,  grp2n = n_Younger, es.type = 'r')[2][[1]], 
                var = esc_mean_sd(grp1m = mean_Older, grp1sd = sd_Older, grp1n = n_Older, 
-                                 grp2m = mean_Younger,  grp2sd = sd_Younger,  grp2n = n_Younger, es.type = 'g')[3][[1]]
+                                 grp2m = mean_Younger,  grp2sd = sd_Younger,  grp2n = n_Younger, es.type = 'r')[3][[1]]
   )
   dt$conditionID <- name
   return(dt)
@@ -90,13 +90,14 @@ average_within_study <- function(df, studyid) {
 dm <- average_within_study(dm, 'Li 2013')
 dm <- average_within_study(dm, 'Eppinger 2018')
 dm <- average_within_study(dm, 'Whelan 2009')
+dm <- average_within_study(dm, 'Liu 2016')
+dm <- average_within_study(dm, 'Garza 2016')
 
 # remove unneccesary columns
 dm$mean_Older <- NULL; dm$mean_Younger <- NULL; dm$sd_Older <- NULL; dm$sd_Younger <- NULL; dm$conditionID <- NULL
 
 ## effect per decade ####
-dm$age_diff = dm$age_mean_Older - dm$age_mean_Younger
-dm$adj_effect_size <- (dm$effect_size/dm$age_diff) * 10 # calculate effect per year and then multiply by 10 for decade
+dm$adj_effect_size <- dm$effect_size * 10 # calculate effect per year and then multiply by 10 for decade
 
 # average adj_effect_size within studies (Liu 2016 & Garza 2016) ####
 average_within_study2 <- function(df, studyid) {
@@ -105,9 +106,6 @@ average_within_study2 <- function(df, studyid) {
   dt <- df[-which(df$Study.Identifier == studyid),] # remove multiple estimates from df
   rbind(dt, newmean) # add new mean estimate to df
 }
-
-dm <- average_within_study2 (dm, 'Liu 2016')
-dm <- average_within_study2 (dm, 'Garza 2016')
 
 # Reversals  ####
 dm <- reverse_es(dm, 'Garza 2016')

@@ -24,9 +24,9 @@ dc <- dt[which(dt$Design == 'continuous age'),] # pull out correlational studies
 dc <- dc[!is.na(dc$correlation),] # remove incomplete studies
 
 dc <- mutate(dc, 
-             effect_size = esc_rpb(r = correlation, totaln = n, es.type = 'g')[1][[1]], 
-             std_err = esc_rpb(r = correlation, totaln = n, es.type = 'g')[2][[1]], 
-             var =esc_rpb(r = correlation, totaln = n, es.type = 'g')[3][[1]]
+             effect_size = esc_rpb(r = correlation, totaln = n)[1][[1]], 
+             std_err = esc_rpb(r = correlation, totaln = n)[2][[1]], 
+             var =esc_rpb(r = correlation, totaln = n)[3][[1]]
 )
 
 
@@ -57,6 +57,6 @@ dc <- reverse_es(dc, 'Hampton 2018')
 dc <- reverse_es(dc, 'Wolfe 2017')
 
 write.csv(dc, here::here('output', 'continuous_table.csv'), row.names = FALSE)
-rm(dc, dt, file, average_within_study, reverse_es)
+#rm(dc, dt, file, average_within_study, reverse_es)
 
 

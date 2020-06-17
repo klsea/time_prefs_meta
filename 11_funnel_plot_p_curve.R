@@ -15,7 +15,7 @@ file <- 'hksj_model.RDS'
 # load data
 m.hksj <- readRDS(here::here('output', file))
 
-# Contor funnel plot - throwing an error ####
+# Contor funnel plot
 png(file = 'figs/funnelplot.png', width = 1000, height = 800) 
 meta::funnel(m.hksj, xlab="Hedges' g", studlab = TRUE, xlim = c(-17,7),
              contour = c(.95, .975, .99),
