@@ -1,14 +1,14 @@
-"Study.Identifier","Design","Incentive","Magnitude.of.Time.Delay","Measure","n_Younger","n_Older","age_mean_Younger","age_mean_Older","age_range_Younger","age_range_Older","age_sd_Younger","age_sd_Older","effect_size","std_err","var","adj_effect_size"
-"Roalf 2012","extreme group","real ","days","parameter ",29,25,30.14,71.3,"21–45 ","65–85 ",5.53,4.36,0.14114920438684,0.135510979331612,0.0183632255194126,1.4114920438684
-"Bauer 2010","extreme group","hypothetical","years","proportion",291,241,24.017,39.909,"20-29","30-74",NA,NA,0.0624729257396948,0.0433571363124407,0.00187984126921556,0.624729257396948
-"Eppinger 2012","extreme group","real","weeks","proportion",15,15,20.9,69.7,"18-28","65-80",3,4.4,-0.698675783566588,0.216606658363069,0.0469184444472152,-6.98675783566588
-"Halfmann 2016","extreme group","real","days","parameter",77,36,21,77,"","",NA,NA,-0.103012187552832,0.0939071662905474,0.00881855588072052,-1.03012187552832
-"Buono 2015","extreme group","Hypothetical","Weeks","Parameter",20,18,22.5,50,"18-27","45-55",NA,NA,0.339704155054956,0.165129936144305,0.0272678958110224,3.39704155054956
-"Eppinger 2018","extreme group","real","weeks","proportion",25,25,24.8,71.2,"","",2.5,5.6,-0.287718795358231,0.144516759700695,0.020906846272312,-2.87718795358231
-"Whelan 2009","extreme group","hypothetical","years","parameter",16,10,46,73,"","",3.4,4.12,0.0975251044697287,0.19380497039873,0.0375620242712661,0.975251044697287
-"Liu 2016","extreme group","hypothetical","days","parameter",745,192,43.27,68.63,"31-60",">61",6.74,5.46,0.0765363514923766,0.0314683160792178,0.000991783963216383,0.765363514923766
-"Garza 2016","extreme group","hypothetical","days/weeks/months/years","parameter ",139,9,57,70.5,"50-64","65-76",NA,NA,-0.0322894716860322,0.0644787262638139,0.00431199591824997,-0.322894716860322
-"Li 2013","extreme group","hypothetical","months ","parameter",173,163,24.76,66.39,"18-29","60-82",2.91,4.93,-0.0801126764217207,0.0545911833885566,0.00298021495981294,-0.801126764217208
-"Sparrow 2018a","extreme group","real","days","parameter",36,36,21,70.11,"18-30","65-85",3.44,4.91,0.0295510932213579,0.117066368373082,0.0137045346040621,0.295510932213579
-"Sparrow 2018b Study 1","extreme group","real","days","parameter",32,30,25.28,70.57,"18-35","65-85",5.22,4.88,-0.476413844428722,0.134762544082774,0.0181609432876615,-4.76413844428722
-"Sparrow 2018b Study 2","extreme group","real","days","parameter",31,23,20.84,71.35,"18-30","65-97",2.67,6.96,-0.475640745609667,0.14416857479081,0.0207845779572135,-4.75640745609667
+"Study.Identifier","Design","Incentive","Magnitude.of.Time.Delay","Measure","n_Younger","n_Older","age_mean_Younger","age_mean_Older","age_range_Younger","age_range_Older","age_sd_Younger","age_sd_Older","fishers_z","var_fishers_z"
+"Roalf 2012","extreme group","real ","days","parameter ",29,25,30.14,71.3,"21–45 ","65–85 ",5.53,4.36,0.140050359014407,0.0196078431372549
+"Bauer 2010","extreme group","hypothetical","years","proportion",291,241,24.017,39.909,"20-29","30-74",NA,NA,0.0624659370813364,0.00189035916824197
+"Eppinger 2012","extreme group","real","weeks","proportion",15,15,20.9,69.7,"18-28","65-80",3,4.4,-0.845671595744602,0.037037037037037
+"Halfmann 2016","extreme group","real","days","parameter",77,36,21,77,"","",NA,NA,-0.102681009347155,0.00909090909090909
+"Buono 2015","extreme group","Hypothetical","Weeks","Parameter",20,18,22.5,50,"18-27","45-55",NA,NA,0.346614431198436,0.0285714285714286
+"Eppinger 2018","extreme group","real","weeks","proportion",25,25,24.8,71.2,"","",2.5,5.6,-0.306261062657478,0.0212765957446809
+"Whelan 2009","extreme group","hypothetical","years","parameter",16,10,46,73,"","",3.4,4.12,0.0974715694939264,0.0434782608695652
+"Liu 2016","extreme group","hypothetical","days","parameter",745,192,43.27,68.63,"31-60",">61",6.74,5.46,0.0717689972300975,0.00107066381156317
+"Garza 2016","extreme group","hypothetical","days/weeks/months/years","parameter ",139,9,57,70.5,"50-64","65-76",NA,NA,-0.0287890158733157,0.00689655172413793
+"Li 2013","extreme group","hypothetical","months ","parameter",173,163,24.76,66.39,"18-29","60-82",2.91,4.93,-0.0804116021864868,0.003003003003003
+"Sparrow 2018a","extreme group","real","days","parameter",36,36,21,70.11,"18-30","65-85",3.44,4.91,0.0292417541197954,0.0144927536231884
+"Sparrow 2018b Study 1","extreme group","real","days","parameter",32,30,25.28,70.57,"18-35","65-85",5.22,4.88,-0.512342082892121,0.0169491525423729
+"Sparrow 2018b Study 2","extreme group","real","days","parameter",31,23,20.84,71.35,"18-30","65-97",2.67,6.96,-0.510425045525061,0.0196078431372549

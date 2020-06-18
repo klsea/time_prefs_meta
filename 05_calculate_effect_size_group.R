@@ -1,11 +1,10 @@
-# Convert to effect sizes using esc package
+# Convert to effect sizes using metafor package
 # 6.2.2020 KLS
-# 6.18.20 CHANGE THIS SCRIPT TO D
 
 # load required packages
 library(here)
 library(tidyverse)
-library(esc)
+library(metafor)
 
 # load source functions
 source(here::here('scr', 'reverse_es.R'))
@@ -35,13 +34,8 @@ dm <- dm[-c(grep('Liu', dm$Study.Identifier)),]
 ## Calculate effect sizes
 dm <- pivot_wider(dm, id_cols = colnames(dm[c(1:6, 14)]), names_from = 'Intervention', 
                   values_from = c('mean', 'sd', 'n', 'age_mean', 'age_range', 'age_sd'))
-dm <- mutate(dm, effect_size = esc_mean_sd(grp1m = mean_Older, grp1sd = sd_Older, grp1n = n_Older, 
-                   grp2m = mean_Younger,  grp2sd = sd_Younger,  grp2n = n_Younger, es.type = 'r')[1][[1]], 
-       std_err = esc_mean_sd(grp1m = mean_Older, grp1sd = sd_Older, grp1n = n_Older, 
-                                grp2m = mean_Younger,  grp2sd = sd_Younger,  grp2n = n_Younger, es.type = 'r')[2][[1]], 
-       var = esc_mean_sd(grp1m = mean_Older, grp1sd = sd_Older, grp1n = n_Older, 
-                            grp2m = mean_Younger,  grp2sd = sd_Younger,  grp2n = n_Younger, es.type = 'r')[3][[1]]
-)
+dm <- escalc(measure = 'SMD', m1i = mean_Older, sd1i = sd_Older, n1i = n_Older, 
+       m2i = mean_Younger, sd2i = sd_Younger, n2i = n_Younger, data = dm, var.names = c('cohens_d', 'var_cohens_d'))
 
 # Calculate for multi-group papers ####
 age_group_comparisons <- function (data, oldergrp, youngergrp, name){ 
@@ -51,13 +45,8 @@ age_group_comparisons <- function (data, oldergrp, youngergrp, name){
   dt$Intervention <- c('Older', 'Younger')
   dt <- pivot_wider(dt, id_cols = colnames(dt[c(1:6, 14)]), names_from = 'Intervention', 
                     values_from = c('mean', 'sd', 'n', 'age_mean', 'age_range', 'age_sd'))
-  dt <- mutate(dt, effect_size = esc_mean_sd(grp1m = mean_Older, grp1sd = sd_Older, grp1n = n_Older, 
-                                             grp2m = mean_Younger,  grp2sd = sd_Younger,  grp2n = n_Younger, es.type = 'r')[1][[1]], 
-               std_err = esc_mean_sd(grp1m = mean_Older, grp1sd = sd_Older, grp1n = n_Older, 
-                                     grp2m = mean_Younger,  grp2sd = sd_Younger,  grp2n = n_Younger, es.type = 'r')[2][[1]], 
-               var = esc_mean_sd(grp1m = mean_Older, grp1sd = sd_Older, grp1n = n_Older, 
-                                 grp2m = mean_Younger,  grp2sd = sd_Younger,  grp2n = n_Younger, es.type = 'r')[3][[1]]
-  )
+  dt <- escalc(measure = 'SMD', m1i = mean_Older, sd1i = sd_Older, n1i = n_Older, 
+               m2i = mean_Younger, sd2i = sd_Younger, n2i = n_Younger, data = dt, var.names = c('cohens_d', 'var_cohens_d'))
   dt$conditionID <- name
   return(dt)
 }
@@ -82,7 +71,7 @@ rm(garza, garza1, garza2, garza3)
 ## average effect size across multiple values within the same study ####
 average_within_study <- function(df, studyid) {
   x = df[which(df$Study.Identifier == studyid),] # pull out study of interest
-  newmean <- cbind(x[1,1:18], t(colMeans(x[19:21]))) # average across estimates within same study
+  newmean <- cbind(x[1,1:18], t(colMeans(x[19:20]))) # average across estimates within same study
   dt <- df[-which(df$Study.Identifier == studyid),] # remove multiple estimates from df
   rbind(dt, newmean) # add new mean estimate to df
 }
@@ -93,11 +82,21 @@ dm <- average_within_study(dm, 'Whelan 2009')
 dm <- average_within_study(dm, 'Liu 2016')
 dm <- average_within_study(dm, 'Garza 2016')
 
+# convert cohen's d to fisher z ####
+dm <- mutate(dm, 
+       a = ((n_Older + n_Younger)^2) / (n_Older * n_Younger),
+       r = cohens_d / (sqrt(cohens_d^2 + a)),
+       var_r = (a^2 * var_cohens_d) / (cohens_d^2 + a)^3,
+       fishers_z = 0.5 * log((1 + r) / (1 - r)),
+       var_fishers_z = 1 / ((n_Older + n_Younger) - 3),
+       )
+
 # remove unneccesary columns
 dm$mean_Older <- NULL; dm$mean_Younger <- NULL; dm$sd_Older <- NULL; dm$sd_Younger <- NULL; dm$conditionID <- NULL
+dm$cohens_d <- NULL; dm$var_cohens_d <- NULL; dm$a <- NULL; dm$r <-NULL; dm$var_r <- NULL
 
 ## effect per decade ####
-dm$adj_effect_size <- dm$effect_size * 10 # calculate effect per year and then multiply by 10 for decade
+#dm$adj_effect_size <- dm$effect_size * 10 # calculate effect per year and then multiply by 10 for decade
 
 # Reversals  ####
 dm <- reverse_es(dm, 'Garza 2016')

@@ -1,4 +1,4 @@
-# Convert to effect sizes
+# Convert to effect sizes usng metafor
 # 5.13.20 KLS
 
 # load required packages
