@@ -15,13 +15,13 @@ file <- 'effect_sizes.csv'
 
 # load data
 dt <- read.csv(here::here('output', file), stringsAsFactors = FALSE)
-dt <- dt[which(dt$Study.Identifier != 'Stoeckel 2013'),]
+#dt <- dt[which(dt$Study.Identifier != 'Stoeckel 2013'),]
 
 # Put in alpha order by design
 dt <- dt[order(dt$Design, dt$Study.Identifier),]
 
 # Random Effects model - Knapp-Hartung (-Sidik-Jonkman) adjustment ####
-m.cor <- metacor(cor = effect_size, 
+m.cor <- metacor(cor = fishers_z, 
                   n = n, 
                   data = dt, 
                   studlab= Study.Identifier,
@@ -38,24 +38,21 @@ dev.off()
 
 # REM HKSJ by design ####
 s.m.cor <- subgroup.analysis.mixed.effects(x = m.cor, subgroups = dt$Design)
-saveRDS(s.m.cor, here::here('output', 'hksj_model_subgroup.RDS'))
+saveRDS(s.m.cor, here::here('output', 'cor_model_subgroup.RDS'))
 
 # Forest plot - hksj model with subgroups ####
 meta::forest(s.m.cor)
 
 png(file = 'figs/forestplotsubgroup.png', width = 600, height = 800) 
-meta::forest(s.m.hksj)
+meta::forest(s.m.cor)
 dev.off() 
 
 # REM - DerSimonian-Laird ####
-m.dl <- metagen(TE = adj_effect_size,
-                seTE = std_err,
+m.dl <- metacor(cor = fishers_z,
+                n = n,
                 data=dt,
                 studlab= Study.Identifier,
-                comb.fixed = FALSE,
-                comb.random = TRUE,
-                hakn = FALSE,
-                prediction=TRUE,
+                method.tau = 'SJ', 
                 sm="ZCOR")
 m.dl
 saveRDS(m.dl, here::here('output', 'dl_model.RDS'))
@@ -63,4 +60,4 @@ saveRDS(m.dl, here::here('output', 'dl_model.RDS'))
 # Forest plot - dl model####
 meta::forest(m.dl)
 
-rm(dt, m.hksj, file, m.dl, s.m.hksj)
+rm(dt, m.cor, file, m.dl, s.m.cor)

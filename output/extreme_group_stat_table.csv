@@ -1,4 +1,4 @@
-"Study.Identifier","Design","Incentive","Magnitude.of.Time.Delay","Measure","n_Younger","n_Older","age_mean_Younger","age_mean_Older","age_range_Younger","age_range_Older","age_sd_Younger","age_sd_Older","effect_size","std_err","var","adj_effect_size"
-"Samanez-Larkin 2011","extreme group","real","weeks","proportion",12,12,22,73.4,"19-26","63-85",NA,NA,0.0426014322842305,0.218217890235992,0.0476190476190476,0.426014322842305
-"Jimura 2011","extreme group","hypothetical","weeks/months/years","parameter",20,20,20,71,"","60-84",NA,7.5,0.327954039583902,0.164398987305357,0.027027027027027,3.27954039583902
-"Green 1994","extreme group","hypothetical","months/years","parameter",12,12,20.3,67.9,"","",NA,NA,-0.718977335868758,0.218217890235992,0.0476190476190476,-7.18977335868758
+"Study.Identifier","Design","Incentive","Magnitude.of.Time.Delay","Measure","n_Younger","n_Older","age_mean_Younger","age_mean_Older","age_range_Younger","age_range_Older","age_sd_Younger","age_sd_Older","fishers_z","var_fishers_z"
+"Samanez-Larkin 2011","extreme group","real","weeks","proportion",12,12,22,73.4,"19-26","63-85",NA,NA,0.0426272325760944,0.0476190476190476
+"Jimura 2011","extreme group","hypothetical","weeks/months/years","parameter",20,20,20,71,"","60-84",NA,7.5,0.340533994514831,0.027027027027027
+"Green 1994","extreme group","hypothetical","months/years","parameter",12,12,20.3,67.9,"","",NA,NA,-0.905524749728718,0.0476190476190476

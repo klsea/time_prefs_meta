@@ -29,13 +29,11 @@ ds <- pivot_wider(ds,
 
 
 # calculate effect size from t vals ####
-dt1 <- ds[!is.na(ds$tvalue),]
-dt1$effect_size <- esc_t(t = dt1$tvalue, grp1n = dt1$n_Older, grp2n = dt1$n_Younger, es.type = "r")[1][[1]]
-dt1$std_err <- esc_t(t = dt1$tvalue, grp1n = dt1$n_Older, grp2n = dt1$n_Younger, es.type = "r")[2][[1]]
-dt1$var <- esc_t(t = dt1$tvalue, grp1n = dt1$n_Older, grp2n = dt1$n_Younger, es.type = "r")[3][[1]]
-
-# concatenate data tables
-ds <- dt1
+ds <- ds[!is.na(ds$tvalue),]
+ds <- mutate(ds, 
+             fishers_z = esc_t(t = tvalue, grp1n = n_Older, grp2n = n_Younger, es.type = "r")[8][[1]], 
+             var_fishers_z = 1 / ((n_Older + n_Younger) - 3)
+             )
 
 # remove unnecessary columns
 ds$tvalue <- NULL
@@ -43,7 +41,7 @@ ds$Fvalue <- NULL
 ds$df <- NULL
 
 ## effect per decade ####
-ds$adj_effect_size <- ds$effect_size * 10 # calculate effect per year and then multiply by 10 for decade
+#ds$adj_effect_size <- ds$effect_size * 10 # calculate effect per year and then multiply by 10 for decade
 
 # Reversals ####
 ds <- reverse_es(ds, 'Green 1994')
