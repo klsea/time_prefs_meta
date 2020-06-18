@@ -1,11 +1,10 @@
 # Convert to effect sizes
 # 5.13.20 KLS
-#6.18.20 THIS SCRIPT IS NOT DOING WHAT I THINK IT SHOULD BE DOING - FIX
 
 # load required packages
 library(here)
 library(tidyverse)
-library(esc)
+library(metafor)
 
 # load source functions
 source(here::here('scr', 'reverse_es.R'))
@@ -23,19 +22,12 @@ dt$conditionID <- interaction(dt$Study.Identifier, dt$condition)
 # Calculate effect sizes for continuous age designs
 dc <- dt[which(dt$Design == 'continuous age'),] # pull out correlational studies
 dc <- dc[!is.na(dc$correlation),] # remove incomplete studies
-
-# CHANGE BELOW TO METAFOR FUNCTION - THIS IS INCORRECT FUNCTION FROM ESC PACKAGE
-dc <- mutate(dc, 
-             effect_size = esc_rpb(r = correlation, totaln = n)[1][[1]], 
-             std_err = esc_rpb(r = correlation, totaln = n)[2][[1]], 
-             var =esc_rpb(r = correlation, totaln = n)[3][[1]]
-)
-
+dc <- escalc(measure = 'ZCOR', ri = correlation, ni = n, data = dc, var.names = c('fishers_z', 'var_fishers_z'))
 
 # average effect size across multiple values within the same study ####
 average_within_study <- function(df, studyid) {
   x = df[which(df$Study.Identifier == studyid),] # pull out study of interest
-  newmean <- cbind(x[1,1:21], t(colMeans(x[22:24]))) # average across estimates within same study
+  newmean <- cbind(x[1,1:21], t(colMeans(x[22:23]))) # average across estimates within same study
   dt <- df[-which(df$Study.Identifier == studyid),] # remove multiple estimates from df
   rbind(dt, newmean) # add new mean estimate to df
 }
@@ -48,10 +40,10 @@ dc <- average_within_study(dc, 'Mahalingam 2018 Sample 5')
 dc <- average_within_study(dc, 'Mahalingam 2018 Sample 6')
 
 # remove unnecessary columns
-dc <- dc[c(1, 6, 8:12, 14:15, 22:24)]
+dc <- dc[c(1, 6, 8:12, 14:15, 22:23)]
 
 ## effect per decade ###
-dc$adj_effect_size <- dc$effect_size * 10 
+#dc$adj_effect_size <- dc$effect_size * 10 
 
 # Reversals ####
 dc <- reverse_es(dc, 'Löckenhoff 2011')
