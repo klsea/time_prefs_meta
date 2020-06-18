@@ -1,5 +1,6 @@
 # Convert to effect sizes from t or F vals
 # 5.29.20 KLS
+#6.20.20 CHANGE THIS SCRIPT
 
 # load required packages
 library(here)

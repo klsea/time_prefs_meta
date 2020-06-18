@@ -1,5 +1,6 @@
 # Convert to effect sizes using esc package
 # 6.2.2020 KLS
+# 6.18.20 CHANGE THIS SCRIPT TO D
 
 # load required packages
 library(here)

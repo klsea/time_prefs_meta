@@ -1,5 +1,6 @@
 # Convert to effect sizes
 # 5.13.20 KLS
+#6.18.20 THIS SCRIPT IS NOT DOING WHAT I THINK IT SHOULD BE DOING - FIX
 
 # load required packages
 library(here)
@@ -23,6 +24,7 @@ dt$conditionID <- interaction(dt$Study.Identifier, dt$condition)
 dc <- dt[which(dt$Design == 'continuous age'),] # pull out correlational studies
 dc <- dc[!is.na(dc$correlation),] # remove incomplete studies
 
+# CHANGE BELOW TO METAFOR FUNCTION - THIS IS INCORRECT FUNCTION FROM ESC PACKAGE
 dc <- mutate(dc, 
              effect_size = esc_rpb(r = correlation, totaln = n)[1][[1]], 
              std_err = esc_rpb(r = correlation, totaln = n)[2][[1]], 
