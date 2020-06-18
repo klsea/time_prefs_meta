@@ -10,11 +10,9 @@ library(metafor)
 # load source functions
 
 # set hard-coded variables
-#file <- 'hksj_model.RDS'
 file <- 'cor_model.RDS'
 
 # load data
-#m.hksj <- readRDS(here::here('output', file))
 m.cor <- readRDS(here::here('output', file))
 
 # outlier analysis ####

@@ -18,7 +18,7 @@ dt <- read.csv(here::here('output', file), stringsAsFactors = FALSE)
 #dt <- dt[which(dt$Study.Identifier != 'Stoeckel 2013'),]
 
 # Put in alpha order by design
-dt <- dt[order(dt$Design, dt$Study.Identifier),]
+dt <- dt[order(dt$fishers_z),]
 
 # Random Effects model - Knapp-Hartung (-Sidik-Jonkman) adjustment ####
 m.cor <- metacor(cor = fishers_z, 
@@ -32,7 +32,7 @@ saveRDS(m.cor, here::here('output', 'cor_model.RDS'))
 
 # Forest plot - hksj model ####
 
-png(file = 'figs/forestplot.png', width = 600, height = 800) 
+png(file = 'figs/forestplot.png', width = 600, height = 750) 
 meta::forest(m.cor)
 dev.off() 
 

@@ -67,4 +67,4 @@ bubble(delay, xlab = 'Delay', col.line = 'blue')
 measure <- metareg(m.cor, Measure)
 bubble(measure, xlab = 'Measure', col.line = 'blue')
 
-rm(dt, m.cor, design, incent, delay, measure, file)
+#rm(dt, m.cor, design, incent, delay, measure, file)

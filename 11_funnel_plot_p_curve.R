@@ -32,4 +32,6 @@ png(file = 'figs/pcurve.png', width = 500, height = 500)
 pcurve(m.cor)
 dev.off() 
 
+pcurve(m.cor, effect.estimation = TRUE, N = m.cor$n, dmin = 0, dmax = 1)
+
 rm(m.cor, file)
