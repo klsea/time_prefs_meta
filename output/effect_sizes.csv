@@ -1,6 +1,6 @@
 "Study.Identifier","Design","Incentive","Magnitude.of.Time.Delay","Measure","n","fishers_z","var_fishers_z"
 "Kirby 2002","continuous age","real","days","parameter",154,0.309519604203112,0.00662251655629139
-"Sanchez-Roige 2018","continuous age","hypothetical","days","parameter",23664,0.00100000033333351,0.0000422636405900004
+"Sanchez-Roige 2018","continuous age","hypothetical","days","parameter",23664,0.00100000033333351,4.22636405900004e-05
 "Seaman 2018","continuous age","real","weeks","parameter",89,0.120581028408444,0.0116279069767442
 "Tschernegg 2015","continuous age","hypothetical","months","proportion",70,-0.0973059534291224,0.0149253731343284
 "Stoeckel 2013","continuous age","real","days","parameter",19,-0.670030583040341,0.0625
@@ -8,13 +8,14 @@
 "Bickel 2014","continuous age","hypothetical","days","parameter",1163,-0.046633775583691,0.000862068965517241
 "Boyle 2012","continuous age","hypothetical","months","parameter",388,-0.0350143021802417,0.0025974025974026
 "Sheffer 2016","continuous age","real","days","parameter",1122,0.0500417292784913,0.000893655049151028
-"Reimers 2009","continuous age","hypothetical","months","proportion",42863,-0.0500417292784913,0.0000233317778814746
+"Reimers 2009","continuous age","hypothetical","months","proportion",42863,-0.0500417292784913,2.33317778814746e-05
 "Chao 2009","continuous age","hypothetical","months","parameter",175,0.0777457306729151,0.00581395348837209
-"Lee 2018","continuous age","hypothetical","days","parameter",11157,-0.0713706088138308,0.000089653935807782
+"Lee 2018","continuous age","hypothetical","days","parameter",11157,-0.0713706088138308,8.9653935807782e-05
 "Li unpublished Study 2","continuous age","hypothetical","days","parameter",619,0.0622518850742946,0.00162337662337662
 "O'Hora 2016","continuous age","hypothetical","days","parameter",840,-0.0136070858286138,0.001194743130227
 "Sisso unpublished","continuous age","hypothetical","weeks","proportion",2630,-0.00737202610577622,0.000380662352493338
 "Lempert unpublished","continuous age","hypothetical","days","parameter",74,-0.06963338037275,0.0140845070422535
+"Halfmann 2013","continuous age","hypothetical","weeks","parameter",48,0.0486663119486759,0.0222222222222222
 "Johnson 2015","continuous age","hypothetical","hours","parameter",197,-0.228972729612106,0.00515463917525773
 "Mahalingam 2018 Sample 3","continuous age","hypothetical/real","year","parameter",189,-0.0224466367748611,0.00537634408602151
 "Mahalingam 2018 Sample 4","continuous age","hypothetical","year","parameter",208,0.10350303479908,0.0048780487804878
@@ -22,7 +23,7 @@
 "Mahalingam 2018 Sample 6","continuous age","hypothetical","year","parameter",420,0.0282455494555796,0.00239808153477218
 "Löckenhoff 2011","continuous age","real","days","parameter",98,-0.342828254415394,0.0105263157894737
 "Hampton 2018","continuous age","hypothetical","days","parameter",2564,-0.0420318520359818,0.000390472471690746
-"Wolfe 2017","continuous age","hypothetical","years","proportion",13198,0.0396207192101185,0.0000757862826828344
+"Wolfe 2017","continuous age","hypothetical","years","proportion",13198,0.0396207192101185,7.57862826828344e-05
 "Roalf 2012","extreme group","real ","days","parameter ",54,0.140050359014407,0.0196078431372549
 "Bauer 2010","extreme group","hypothetical","years","proportion",532,0.0624659370813364,0.00189035916824197
 "Eppinger 2012","extreme group","real","weeks","proportion",30,-0.845671595744602,0.037037037037037

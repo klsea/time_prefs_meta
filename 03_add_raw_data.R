@@ -1,5 +1,5 @@
 # Calc correlation with age in raw data
-# 6.12.20 KLS updated 6.29.20 with Lempert unpublished
+# 6.12.20 KLS updated 6.29.20 with Lempert unpublished and Halfmann added
 
 # load required packages
 library(here)
@@ -15,6 +15,7 @@ file3 <- 'LiYeetal_unpub.csv'
 file4 <- "OHoraetal_Nature_2016.csv"
 file5 <- 'Sissoetal_unpub_summary.csv'
 file6 <- 'Lempert_unpub.csv'
+file7 <- 'Halfmann_2013_Neuroscience.csv'
 
 # load data
 dt <- read.csv(here::here('output', file))
@@ -24,10 +25,11 @@ li <- read.csv(here::here('data', file3))
 ohora <- read.csv(here::here('data', file4))
 sisso <- read.csv(here::here('data', file5))
 lempert <- read.csv(here::here('data', file6))
+halfmann <- read.csv(here::here('data', file7))
 
 # setup overall doc ####
 names <- colnames(dt)
-d1 <- data.frame(matrix(ncol = length(names), nrow = 6))
+d1 <- data.frame(matrix(ncol = length(names), nrow = 7))
 colnames(d1) <- names
 
 # Chao 2009 ####
@@ -118,6 +120,7 @@ d1$age_sd[5] <-sd(sisso$age, na.rm = TRUE)
 d1$correlation[5] <- cor(sisso[c(2,3)], use = 'complete.obs')[1,2]
 rm(sisso)
 
+
 # Lempert unpublished (psyarxiv) ####
 # Normal controls from Lempert, Wolk & Kable
 # higher discount rate = greater discounting
@@ -137,8 +140,25 @@ d1$correlation[6] <- cor(lempert[c(2,3)], use = 'complete.obs')[1,2]
 rm(lempert)
 
 
+# Halfmann 2013 ####
+# All participants from Halfmann 2013
+# higher discount rate = greater discounting
+d1$Study.Identifier[7] <- "Halfmann 2013"
+d1$Intervention[7] <- 'age'
+d1$Year[7] <- '2013'
+d1$Design[7] <- 'continuous age'
+d1$Incentive[7] <- 'hypothetical'
+d1$Magnitude.of.Time.Delay[7] <- 'weeks'
+d1$Measure[7] <- 'parameter'
+d1$n[7] <- nrow(halfmann)
+d1$age_mean[7] <- mean(halfmann$age, na.rm = TRUE)
+d1$age_range[7] <- paste0(min(halfmann$age, na.rm = TRUE), ' - ', max(halfmann$age, na.rm = TRUE))
+d1$age_sd[7] <-sd(halfmann$age, na.rm = TRUE)
+d1$correlation[7] <- cor(halfmann[c(14,3)], use = 'complete.obs')[1,2]
+rm(halfmann)
+
 # add to existing and save ####
 dt <- rbind(dt, d1)
 write.csv(dt, here::here('output', 'complete.csv'), row.names = FALSE)
-rm(file, file1, file2, file3, file4, file5, file6, names, d1, dt)
+rm(file, file1, file2, file3, file4, file5, file6, file7, names, d1, dt)
 
