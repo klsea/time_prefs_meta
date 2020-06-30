@@ -1,5 +1,5 @@
 # Calc correlation with age in raw data
-# 6.12.20 KLS
+# 6.12.20 KLS updated 6.29.20 with Lempert unpublished
 
 # load required packages
 library(here)
@@ -14,6 +14,7 @@ file2 <- 'Lee_2018_PRSB_reformatted.csv'
 file3 <- 'LiYeetal_unpub.csv'
 file4 <- "OHoraetal_Nature_2016.csv"
 file5 <- 'Sissoetal_unpub_summary.csv'
+file6 <- 'Lempert_unpub.csv'
 
 # load data
 dt <- read.csv(here::here('output', file))
@@ -22,10 +23,11 @@ lee <- read.csv(here::here('data', file2))
 li <- read.csv(here::here('data', file3))
 ohora <- read.csv(here::here('data', file4))
 sisso <- read.csv(here::here('data', file5))
+lempert <- read.csv(here::here('data', file6))
 
 # setup overall doc ####
 names <- colnames(dt)
-d1 <- data.frame(matrix(ncol = length(names), nrow = 5))
+d1 <- data.frame(matrix(ncol = length(names), nrow = 6))
 colnames(d1) <- names
 
 # Chao 2009 ####
@@ -116,8 +118,27 @@ d1$age_sd[5] <-sd(sisso$age, na.rm = TRUE)
 d1$correlation[5] <- cor(sisso[c(2,3)], use = 'complete.obs')[1,2]
 rm(sisso)
 
+# Lempert unpublished (psyarxiv) ####
+# Normal controls from Lempert, Wolk & Kable
+# higher discount rate = greater discounting
+lempert <- lempert[-75,]
+d1$Study.Identifier[6] <- "Lempert unpublished"
+d1$Intervention[6] <- 'age'
+d1$Year[6] <- NA
+d1$Design[6] <- 'continuous age'
+d1$Incentive[6] <- 'hypothetical'
+d1$Magnitude.of.Time.Delay[6] <- 'days'
+d1$Measure[6] <- 'parameter'
+d1$n[6] <- nrow(lempert)
+d1$age_mean[6] <- mean(lempert$age, na.rm = TRUE)
+d1$age_range[6] <- paste0(min(lempert$age, na.rm = TRUE), ' - ', max(lempert$age, na.rm = TRUE))
+d1$age_sd[6] <-sd(lempert$age, na.rm = TRUE)
+d1$correlation[6] <- cor(lempert[c(2,3)], use = 'complete.obs')[1,2]
+rm(lempert)
+
+
 # add to existing and save ####
 dt <- rbind(dt, d1)
 write.csv(dt, here::here('output', 'complete.csv'), row.names = FALSE)
-rm(file, file1, file2, file3, file4, file5, names, d1, dt)
+rm(file, file1, file2, file3, file4, file5, file6, names, d1, dt)
 
