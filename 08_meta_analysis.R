@@ -36,17 +36,6 @@ png(file = 'figs/forestplot.png', width = 600, height = 750)
 meta::forest(m.cor)
 dev.off() 
 
-# REM HKSJ by design ####
-s.m.cor <- subgroup.analysis.mixed.effects(x = m.cor, subgroups = dt$Design)
-saveRDS(s.m.cor, here::here('output', 'cor_model_subgroup.RDS'))
-
-# Forest plot - hksj model with subgroups ####
-meta::forest(s.m.cor)
-
-png(file = 'figs/forestplotsubgroup.png', width = 600, height = 800) 
-meta::forest(s.m.cor)
-dev.off() 
-
 # REM - DerSimonian-Laird ####
 m.dl <- metacor(cor = fishers_z,
                 n = n,
@@ -60,4 +49,4 @@ saveRDS(m.dl, here::here('output', 'dl_model.RDS'))
 # Forest plot - dl model####
 meta::forest(m.dl)
 
-rm(dt, m.cor, file, m.dl, s.m.cor)
+rm(dt, m.cor, file, m.dl)

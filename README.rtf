@@ -1,0 +1,119 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf600
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Bold;\f2\froman\fcharset0 Times-Roman;
+}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue233;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c93333;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 README for time_prefs_meta GitHub repository\
+\
+Below is a description of each R script in the main directory of this repository:\
+\
+
+\f1\b 00_clean_covidence_file.R 
+\f0\b0 - Cleans the file containing data extracted from the systematic review on Covidence.\
+- Input file = data/review_47118_extracted_data_csv_20200617040346.csv. \
+- Output file = output/cleaned.csv. 
+\f1\b *This input file is shared on OSF*
+\f0\b0 \
+\
+
+\f1\b 01_correct_omissions_errors.R
+\f0\b0  - This script corrects errors and omissions in the systematic review file. \
+- Input file = output/cleaned.csv. \
+- Output file = output/corrected.csv\
+\
+
+\f1\b 02_missing_values_covidence.R 
+\f0\b0 - Adds data from studies that were missing in the systematic review file (mostly data extracted by plot digitizer). \
+- Input file = output/corrected.csv. \
+- Output file = output/cleaned.csv\
+\
+
+\f1\b 03_add_raw_data.R 
+\f0\b0 -  Adds summary from raw data files. \
+- Input file = output/cleaned.csv. \
+- Output file = output/complete.csv 
+\f1\b *This output file is shared on OSF*\
+\
+04_calculate_effect_size_continuous.R - 
+\f0\b0 Calculates the effect sizes for all continuous designs. \
+- Input file = output/complete.csv. \
+- Output file = output/continuous_table.csv\
+\
+
+\f1\b 05_calculate_effect_size_group.R 
+\f0\b0 - Calculates the effect sizes for all group designs with means/SD/SE reported. \
+- Input file = output/complete.csv. \
+- Output file = output/extreme_group_table.csv\
+\
+
+\f1\b 06_calculate_effect_size_stat.R
+\f0\b0  - Calculates the effect sizes for all group designs with t values reported. \
+- Input file = output/complete.csv. \
+- Output file = output/extreme_group_stat_table.csv\
+\
+
+\f1\b 07_make_es_tables.R
+\f0\b0  - Creates publication-ready tables of effect sizes and merges together effect size tables for data analysis. \
+- Input files =  output/continuous_table.csv, output/extreme_group_table.csv, output/extreme_group_stat_table.csv \
+- Output files = figs/continuous_table.html, figs/extreme_group_table.html, output/effect_sizes.csv\
+\
+
+\f1\b 08_meta_analysis.R 
+\f0\b0 - Conducts basic meta-analysis and forest plot. \
+- Input file = output/effect_sizes.csv. \
+- Output files = figs/forestplot.png, output/cor_model.RDS, output/dl_model.RDS\
+\
+
+\f1\b 09_heterogeneity_explorations.R
+\f0\b0  - Runs outlier and influence analyses. \
+- Input file = output/cor_model.RDS\
+- no output files\
+\
+
+\f1\b 10_funnel_plot_p_curve.R
+\f0\b0  - Creates funnel plot, runs egger tests, and p-curve analysis. \
+- Input file = output/cor_model.RDS. \
+- Output files = figs/funnelplot.png, figs/funnelplot2.png, figs/funnelplot3.png, figs/pcurve.png\
+\
+11_meta_regression.R - Runs 4 meta-regressions described in text.\
+- Input file = output/effect_sizes.csv\
+- no output files\
+\
+12_nonlinear_analysis.RMD - Markdown file with nonlinear analyses.\
+- Input file = data/overview.xlsx\
+- Output file = 12_nonlinear_analysis.html\
+\
+Below is a description of each directory inside this repository:\
+\
+
+\f1\b /data 
+\f0\b0 - not shared on GitHub; contains raw data shared with authors by other researchers. Some files \
+relevant files shared on OSF: {\field{\*\fldinst{HYPERLINK "https://osf.io/ch9eg/"}}{\fldrslt 
+\f2 \cf2 \expnd0\expndtw0\kerning0
+\ul \ulc2 https://osf.io/ch9eg/}}
+\f2 \cf2 \expnd0\expndtw0\kerning0
+\ul \ulc2 .\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0 \cf0 \kerning1\expnd0\expndtw0 \ulnone \
+
+\f1\b /figs 
+\f0\b0 - contains figures and tables for manuscript. All contents of this directory can be deleted and regenerated from scripts.\
+\
+
+\f1\b /notes 
+\f0\b0 - contains notes for researchers\
+\
+
+\f1\b /output 
+\f0\b0 - contains interim data sets and other script output. All contents of this directory can be deleted and regenerated from scripts. \
+\
+
+\f1\b /scr 
+\f0\b0 - Contains functions and other helper scripts.
+\f2 \cf2 \expnd0\expndtw0\kerning0
+\ul \
+}

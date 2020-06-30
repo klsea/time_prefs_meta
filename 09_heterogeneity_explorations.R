@@ -24,13 +24,4 @@ summary(inf.analysis)
 #plot(inf.analysis, "es")
 #plot(inf.analysis, "i2")
 
-# GOSH plot # not working ####
-#m.rma <- rma(yi = m.hksj$TE, 
-#             sei = m.hksj$seTE,
-#             method = m.hksj$method.tau,
-#             test = "knha")
-#dat.gosh <- gosh(m.rma)
-#plot(dat.gosh, alpha= 0.1, col = "blue") # not working
-#gosh.diagnostics(dat.gosh) # not working
-
 rm(dt, inf.analysis, m.cor, file)

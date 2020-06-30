@@ -1,0 +1,134 @@
+---
+title: "Age differences in temporal discounting"
+output:
+  html_document: default
+  html_notebook: default
+---
+
+```{r,message=F,warning=F,echo=F}
+library(readxl)
+library(readr)
+library(tidyverse)
+library(ggplot2)
+library(pander)
+library(kableExtra)
+
+source("twolines.R")
+
+path="~/Desktop/continuous_age/"
+
+overview <- read_excel(paste0(path,"overview.xlsx"))
+overview <- overview %>% 
+  filter(use==1)
+```
+
+
+```{r,message=F,warning=F,echo=F}
+is_outlier <- function(x) {
+  return(x < quantile(x, 0.25,na.rm=T) - 3 * IQR(x,na.rm=T) | x > quantile(x, 0.75,na.rm=T) + 3 * IQR(x,na.rm=T))
+}
+
+plot_list_linear = list()
+plot_list_quad = list()
+for (file in 1:nrow(overview))
+{
+  # read data
+  data <- read_csv(paste0(path,overview[file,"study"]))
+  overview[file,"n"]=nrow(data) # before outlier removal
+  
+  data <- data %>% 
+    rename(tempdisc = as.character(overview[file,"outcome"])) %>%  # create generic outcome label (tempdisc)
+    filter(!is.na(age)) %>% 
+    filter(!is.na(tempdisc)) %>% 
+    mutate(outlier = is_outlier(tempdisc)) %>% # identify outliers
+    #filter(outlier == FALSE) %>% # remove outliers
+    mutate(tempdisc = scale(tempdisc)) %>% # scale outcome variable (tempdisc)
+    select(age,tempdisc,outlier) 
+
+  if(overview[file,"reverse"]==1) # reverse data sets
+  {
+    data<-data %>% 
+      mutate(tempdisc=tempdisc*-1)
+  }
+  
+  overview[file,"n_nooutliers"]=nrow(data)
+  overview[file,c("min_age","max_age","age_diff")]=c(range(data$age),max(data$age)-min(data$age))
+ 
+  model1=lm(tempdisc~age,data)
+  overview[file,c("m1_int","m1_age")]=coef(model1)
+  overview[file,c("m1_r2")]=summary(model1)$r.squared
+  
+  fstat <- summary(model1)$fstatistic
+  pf<-pf(fstat[1], fstat[2], fstat[3], lower.tail=FALSE)
+
+  #overview[file,c("m1_stat")]=paste0("F(", fstat[2],",", fstat[3],")=",round(fstat[1],2),", p=",round(pf,3))
+  
+  overview[file,c("m1_F")]=round(fstat[1],2)
+  overview[file,c("m1_p")]=round(pf,3)
+  
+  model2=lm(tempdisc~age+I(age^2),data)
+  overview[file,c("m2_int","m2_age","m2_age2")]=coef(model2)
+  overview[file,c("m2_r2")]=summary(model2)$r.squared
+  
+  fstat <- summary(model2)$fstatistic
+  pf<-pf(fstat[1], fstat[2], fstat[3], lower.tail=FALSE)
+
+  #overview[file,c("m2_stat")]=paste0("F(", fstat[2],",", fstat[3],")=",round(fstat[1],2),", p=",round(pf,3))
+  overview[file,c("m2_F")]=round(fstat[1],2)
+  overview[file,c("m2_p")]=round(pf,3)
+  
+  data$m1_prediction=predict(model1)
+  data$m2_prediction=predict(model2)
+  
+  overview[file,c("delta_F","delta_p")]=unlist(anova(model1,model2)[5:6])[c(2,4)]
+  
+  twolines_results=twolines(tempdisc~age,data=data,graph=0)
+  overview[file,c("twolines")]=twolines_results$u.sig
+  
+  plot_list_linear[[file]] <- ggplot(data,aes(x=age,y=tempdisc)) +
+    geom_point(col=rgb(.05,.05,.05,.05)) + 
+    theme_minimal() + 
+    xlim(10, 90) +
+    geom_line(aes(x=age,y=m1_prediction),lwd=.5,col="red")+
+    #geom_line(aes(x=age,y=m2_prediction),lwd=.5,lty=2,col="red")+
+    ggtitle(overview[file,"label"]) +
+    xlab("Age") +
+    ylab("Temp Disc")
+  
+  plot_list_quad[[file]] <- ggplot(data,aes(x=age,y=tempdisc)) +
+    geom_point(col=rgb(.05,.05,.05,.05)) + 
+    theme_minimal() + 
+    xlim(10, 90) +
+    #geom_line(aes(x=age,y=m1_prediction),lwd=.5,col="red")+
+    geom_line(aes(x=age,y=m2_prediction),lwd=.5,lty=1,col="red")+
+    ggtitle(overview[file,"label"]) +
+    xlab("Age") +
+    ylab("Temp Disc")
+}
+
+```
+
+# Raw-data Analysis
+```{r,message=F,warning=F,echo=F}
+
+library(gridExtra)
+grid.arrange(plot_list_linear[[1]],plot_list_linear[[2]],plot_list_linear[[3]],
+             plot_list_linear[[4]],plot_list_linear[[5]],plot_list_linear[[6]],
+             plot_list_linear[[7]],plot_list_linear[[8]],plot_list_linear[[9]],
+             plot_list_linear[[10]],plot_list_quad[[11]],plot_list_linear[[12]],
+             nrow=4)
+```
+
+# Summary Table
+```{r,message=F,warning=F,echo=F}
+
+overview_round<-overview %>% 
+  select(label,n,starts_with("m1"),starts_with("m2"),starts_with("delta"),"twolines")  
+
+labels = c("Study","N","Intcpt","Age","R2","F","p","Intcpt","Age","Age2","R2","F","p","F","p","U")
+
+kable(overview_round,format = "markdown", padding = 2,digits=3,col.names=labels)
+
+write.csv(overview_round,"results.csv",row.names = F)
+```
+
