@@ -13,11 +13,9 @@ library(ggplot2)
 library(pander)
 library(kableExtra)
 
-source("twolines.R")
+source("scr/twolines.R")
 
-path="~/Desktop/continuous_age/"
-
-overview <- read_excel(paste0(path,"overview.xlsx"))
+overview <- read_excel("data/overview.xlsx")
 overview <- overview %>% 
   filter(use==1)
 ```
@@ -39,6 +37,7 @@ for (file in 1:nrow(overview))
   data <- data %>% 
     rename(tempdisc = as.character(overview[file,"outcome"])) %>%  # create generic outcome label (tempdisc)
     filter(!is.na(age)) %>% 
+    mutate(age = age/10) %>% 
     filter(!is.na(tempdisc)) %>% 
     mutate(outlier = is_outlier(tempdisc)) %>% # identify outliers
     #filter(outlier == FALSE) %>% # remove outliers
@@ -129,6 +128,6 @@ labels = c("Study","N","Intcpt","Age","R2","F","p","Intcpt","Age","Age2","R2","F
 
 kable(overview_round,format = "markdown", padding = 2,digits=3,col.names=labels)
 
-write.csv(overview_round,"results.csv",row.names = F)
+write.csv(overview_round,"output/results.csv",row.names = F)
 ```
 

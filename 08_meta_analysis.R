@@ -36,6 +36,10 @@ png(file = 'figs/forestplot.png', width = 600, height = 750)
 meta::forest(m.cor)
 dev.off() 
 
+# for presentation
+#ggsave(file = here::here('figs', 'forestplot.svg'), plot = meta::forest(m.cor), width = 7.5, height = 10)
+
+
 # REM - DerSimonian-Laird ####
 m.dl <- metacor(cor = fishers_z,
                 n = n,

@@ -38,6 +38,10 @@ png(file = 'figs/funnelplot3.png', width = 800, height = 800)
 meta::funnel(m.cor, xlim = c(-1.5,.5))  
 dev.off() 
 
+# for presentation
+ggsave(file = here::here('figs', 'funnelplot.svg'), plot = meta::funnel(m.cor, xlim = c(-1.5,.5)), width = 5, height = 5)
+
+
 # Eggers test ####
 eggers.test(x = m.cor)
 
@@ -47,5 +51,9 @@ pcurve(m.cor)
 dev.off() 
 
 pcurve(m.cor, effect.estimation = TRUE, N = m.cor$n, dmin = 0, dmax = 1)
+
+# for presentation
+ggsave(file = here::here('figs', 'pcurve.svg'), plot = pcurve(m.cor), width = 5, height = 5)
+
 
 rm(m.cor, file)
