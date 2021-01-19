@@ -47,4 +47,4 @@ ds$df <- NULL
 ds <- reverse_es(ds, 'Green 1994')
 
 write.csv(ds, here::here('output', 'extreme_group_stat_table.csv'), row.names = FALSE)
-rm(dm, dt1, ds, dt, file, reverse_es)
+rm(dm, ds, dt, file, reverse_es)

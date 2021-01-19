@@ -30,6 +30,33 @@ dt[which(dt$Study.Identifier == 'Löckenhoff 2011'), which(colnames(dt) == 'Desi
 # Fix Buono 2015 design
 dt[which(dt$Study.Identifier == 'Buono 2015'), which(colnames(dt) == 'Design')] <- 'extreme group'
 
+#added in revision
+# Fix Samanez-Larkin 2011 sample size for older
+dt[which(dt$Study.Identifier == 'Samanez-Larkin 2011' & dt$Intervention == 'Older'), which(colnames(dt) == 'n')] <- 13
+
+# Fix Liu magnitude of delay and age range
+dt[which(dt$Study.Identifier == 'Liu 2016'), which(colnames(dt) == 'Magnitude.of.Time.Delay')] <- 'months'
+dt[which(dt$Study.Identifier == 'Liu 2016' & dt$Intervention == 'Older'), which(colnames(dt) == 'age_range')] <- '61-87'
+
+# Fix Sparrow 2019 Study ID and measure 
+dt[which(dt$Study.Identifier == 'Sparrow 2018'), which(colnames(dt) == 'Study.Identifier')] <- 'Sparrow 2019'
+dt[which(dt$Study.Identifier == 'Sparrow 2019'), which(colnames(dt) == 'Measure')] <- 'proportion'
+
+# Fix Hampton 2018 delay
+dt[which(dt$Study.Identifier == 'Hampton 2018'), which(colnames(dt) == 'Magnitude.of.Time.Delay')] <- 'years'
+
+# Fix Halfmann 2016 incentive
+dt[which(dt$Study.Identifier == 'Halfmann 2016'), which(colnames(dt) == 'Incentive')] <- 'hypothetical'
+
+# Fix Buono 2015 delay
+dt[which(dt$Study.Identifier == 'Buono 2015'), which(colnames(dt) == 'Magnitude.of.Time.Delay')] <- 'years'
+
+# Fix Bickel 2014 age SD
+dt[which(dt$Study.Identifier == 'Bickel 2014'), which(colnames(dt) == 'age_sd')] <- 11.25
+
+# Fix Sheffer 2016 incentive
+dt[which(dt$Study.Identifier == 'Sheffer 2016'), which(colnames(dt) == 'Incentive')] <- 'hypothetical'
+
 # Omissions ####
 # Fix Sanchez-Rodrigue 2018 incentive
 dt[which(dt$Study.Identifier == 'Sanchez-Roige 2018'), which(colnames(dt) == 'Incentive')] <- 'hypothetical'
@@ -43,7 +70,7 @@ dt[which(dt$Study.Identifier == 'Johnson 2015'), which(colnames(dt) == 'age_mean
 # Age mean for Kirby 2002 - Table 4 27.4 Median - make a star in table with exception
 dt[which(dt$Study.Identifier == 'Kirby 2002'), which(colnames(dt) == 'age_mean')] <- 27.4
 
-# Age mean for Tschernegg 2015
+# Age mean for Tschernegg 2015 
 dt[which(dt$Study.Identifier == 'Tschernegg 2015'), which(colnames(dt) == 'age_mean')] <- (24.5*51 + 27.15*19)/(51+19)
 
 # Add Liu 2016 middle age group 

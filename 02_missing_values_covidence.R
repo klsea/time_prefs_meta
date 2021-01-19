@@ -73,7 +73,7 @@ mg <- mg[order]
 dt <- rbind(dt, mg)
 rm(mg)
 
-# Sparrow 2018a pull in values rom plot digitizer and name Sparrow 2018a ####
+# Sparrow 2018a pull in values rom plot digitizer and name Sparrow 2018a #### - this will change to Sparrow 2019
 sparrow <- read.csv(here::here('data', 'sparrow2018aplotdigit.csv'), header = FALSE)
 dt$Study.Identifier <- as.character(dt$Study.Identifier)
 dt[which(dt$correct_data_extracted == 'No mean or sd but we can extract from barplot'),
