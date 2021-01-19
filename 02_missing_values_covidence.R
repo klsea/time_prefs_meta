@@ -1,5 +1,6 @@
 # Calculate missing values 
 # 3.20.20 updated 6.9.20
+# revised 1.19.21
 
 # load required packages
 library(here)
@@ -73,20 +74,18 @@ mg <- mg[order]
 dt <- rbind(dt, mg)
 rm(mg)
 
-# Sparrow 2018a pull in values rom plot digitizer and name Sparrow 2018a #### - this will change to Sparrow 2019
+# Sparrow 2018a pull in values rom plot digitizer and name Sparrow 2018a - this will change to Sparrow 2019 #### 
 sparrow <- read.csv(here::here('data', 'sparrow2018aplotdigit.csv'), header = FALSE)
-dt$Study.Identifier <- as.character(dt$Study.Identifier)
-dt[which(dt$correct_data_extracted == 'No mean or sd but we can extract from barplot'),
-   which(colnames(dt) == 'Study.Identifier')] <- 'Sparrow 2018a' 
-dt[which(dt$Study.Identifier == 'Sparrow 2018a' & dt$Intervention == 'Younger'), which(colnames(dt) == 'mean')] <- sparrow[1,2]
-dt[which(dt$Study.Identifier == 'Sparrow 2018a' & dt$Intervention == 'Younger'), which(colnames(dt) == 'se')] <- abs(sparrow[1,2] - sparrow[2,2])
-dt[which(dt$Study.Identifier == 'Sparrow 2018a' & dt$Intervention == 'Older'), which(colnames(dt) == 'mean')] <- sparrow[3,2]
-dt[which(dt$Study.Identifier == 'Sparrow 2018a' & dt$Intervention == 'Older'), which(colnames(dt) == 'se')] <- abs(sparrow[3,2] - sparrow[4,2])
+dt[which(dt$Study.Identifier == 'Sparrow 2019' & dt$Intervention == 'Younger'), which(colnames(dt) == 'mean')] <- sparrow[1,2]
+dt[which(dt$Study.Identifier == 'Sparrow 2019' & dt$Intervention == 'Younger'), which(colnames(dt) == 'se')] <- abs(sparrow[1,2] - sparrow[2,2])
+dt[which(dt$Study.Identifier == 'Sparrow 2019' & dt$Intervention == 'Older'), which(colnames(dt) == 'mean')] <- sparrow[3,2]
+dt[which(dt$Study.Identifier == 'Sparrow 2019' & dt$Intervention == 'Older'), which(colnames(dt) == 'se')] <- abs(sparrow[3,2] - sparrow[4,2])
 rm(sparrow)
 
 # Sparrow 2018b pull in values rom plot digitizer and name Sparrow 2018b ####
 sparrow1 <- read.csv(here::here('data', 'sparrow2018bs1plotdigit.csv'), header = FALSE) # load Study 1data from plotdigitizer
-sparrow2 <- read.csv(here::here('data', 'sparrow2018bS2plotdigit.csv'), header = FALSE)  # load Study 2data from plotdigitizer
+#sparrow2 <- read.csv(here::here('data', 'sparrow2018bS2plotdigit.csv'), header = FALSE)  # load Study 2data from plotdigitizer
+sparrow2 <- read.csv(here::here('data', 'sparrow2018bS2plotdigitupdate.csv'), header = FALSE)  # load Study 2data from updated plotdigitizer
 sparrow <- dt[which(dt$Study.Identifier == 'Sparrow 2018'),]
 sparrow[, colnames(sparrow) == 'tvalue'] <- NA
 sparrow[, colnames(sparrow) == 'effect_size_d'] <- NA

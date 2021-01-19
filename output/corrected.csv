@@ -7,8 +7,8 @@
 "Roalf 2012","Younger","roalf et al","",2012,"extreme group","yes","real ","days","parameter ",NA,30.14,"21–45 ",5.53,29,NA,0.01,0.03,NA,NA,NA
 "Roalf 2012","Older","roalf et al","",2012,"extreme group","yes","real ","days","parameter ",NA,71.3,"65–85 ",4.36,25,NA,0.02,0.04,NA,NA,NA
 "Sanchez-Roige 2018","Age","sanchez-roige","aap@ucsd.edu",2018,"continuous age","yes","hypothetical","days","parameter",NA,53.79,"18-101",16.08,23664,0.001,NA,NA,NA,NA,NA
-"Sparrow 2019","Younger","erika sparrow","jspaniol@psych.ryerson.ca",2018,"extreme group","","real","days","proportion",NA,25.28,"18-35",5.22,32,NA,NA,NA,NA,4.53,48.66
-"Sparrow 2019","Older","erika sparrow","jspaniol@psych.ryerson.ca",2018,"extreme group","","real","days","proportion",NA,70.57,"65-85",4.88,30,NA,NA,NA,NA,4.53,48.66
+"Sparrow 2018","Younger","erika sparrow","jspaniol@psych.ryerson.ca",2018,"extreme group","","real","days","proportion",NA,25.28,"18-35",5.22,32,NA,NA,NA,NA,4.53,48.66
+"Sparrow 2018","Older","erika sparrow","jspaniol@psych.ryerson.ca",2018,"extreme group","","real","days","proportion",NA,70.57,"65-85",4.88,30,NA,NA,NA,NA,4.53,48.66
 "Eppinger 2018","Younger","ben eppinger","ben.eppinger@concordia.ca",2018,"extreme group","yes","real","weeks","proportion",NA,24.8,"",2.5,25,NA,0.88,0.04,NA,NA,NA
 "Eppinger 2018","Older","ben eppinger","ben.eppinger@concordia.ca",2018,"extreme group","yes","real","weeks","proportion",NA,71.2,"",5.6,25,NA,0.86,0.06,NA,NA,NA
 "Seaman 2018","Age","kendra seaman","kendra.seaman@duke.edu",2018,"continuous age","","real","weeks","parameter",NA,49.71,"22-83",17.92,89,0.12,NA,NA,NA,NA,NA

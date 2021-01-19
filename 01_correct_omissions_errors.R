@@ -38,9 +38,13 @@ dt[which(dt$Study.Identifier == 'Samanez-Larkin 2011' & dt$Intervention == 'Olde
 dt[which(dt$Study.Identifier == 'Liu 2016'), which(colnames(dt) == 'Magnitude.of.Time.Delay')] <- 'months'
 dt[which(dt$Study.Identifier == 'Liu 2016' & dt$Intervention == 'Older'), which(colnames(dt) == 'age_range')] <- '61-87'
 
-# Fix Sparrow 2019 Study ID and measure 
-dt[which(dt$Study.Identifier == 'Sparrow 2018'), which(colnames(dt) == 'Study.Identifier')] <- 'Sparrow 2019'
+# Fix Study ID and measure in Sparrow 2019 and measure in Sparrow 2018
+dt[which(dt$correct_data_extracted == 'No mean or sd but we can extract from barplot'),
+    which(colnames(dt) == 'Study.Identifier')] <- 'Sparrow 2019' 
+#dt[which(dt$Study.Identifier == 'Sparrow 2018'), which(colnames(dt) == 'Study.Identifier')] <- 'Sparrow 2019'
 dt[which(dt$Study.Identifier == 'Sparrow 2019'), which(colnames(dt) == 'Measure')] <- 'proportion'
+dt[which(dt$Study.Identifier == 'Sparrow 2018'), which(colnames(dt) == 'Measure')] <- 'proportion'
+
 
 # Fix Hampton 2018 delay
 dt[which(dt$Study.Identifier == 'Hampton 2018'), which(colnames(dt) == 'Magnitude.of.Time.Delay')] <- 'years'
