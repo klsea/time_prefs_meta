@@ -39,7 +39,7 @@ d1$Intervention[1] <- 'age'
 d1$Year[1] <- 2009
 d1$Design[1] <- 'continuous age'
 d1$Incentive[1] <- 'hypothetical'
-d1$Magnitude.of.Time.Delay[1] <- 'months'
+d1$Magnitude.of.Time.Delay[1] <- 'days' # changed from months to days in revision
 d1$Measure[1] <- 'parameter'
 d1$n[1] <- nrow(chao)
 d1$age_mean[1] <- mean(chao$age)
@@ -93,7 +93,7 @@ d1$Intervention[4] <- 'age'
 d1$Year[4] <- 2016
 d1$Design[4] <- 'continuous age'
 d1$Incentive[4] <- 'hypothetical'
-d1$Magnitude.of.Time.Delay[4] <- 'days'
+d1$Magnitude.of.Time.Delay[4] <- 'years' #changed from days to years in revision based on Table 3
 d1$Measure[4] <- 'parameter'
 d1$n[4] <- nrow(ohora)
 d1$age_mean[4] <- mean(ohora$age, na.rm = TRUE)
@@ -129,7 +129,7 @@ d1$Study.Identifier[6] <- "Lempert unpublished"
 d1$Intervention[6] <- 'age'
 d1$Year[6] <- NA
 d1$Design[6] <- 'continuous age'
-d1$Incentive[6] <- 'hypothetical'
+d1$Incentive[6] <- 'real' # changed to real in revision - incentive compatible on p. 19
 d1$Magnitude.of.Time.Delay[6] <- 'days'
 d1$Measure[6] <- 'parameter'
 d1$n[6] <- nrow(lempert)
