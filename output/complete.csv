@@ -93,10 +93,10 @@
 "Mahalingam 2018 Sample 6","Age","vaishali mahalingam","vm298@cam.ac.uk","2018","continuous age","Yes","hypothetical","year","parameter","X1.year.1000",35.79,"18-74",11.5,420,0.083,NA,NA,NA,NA
 "Mahalingam 2018 Sample 6","Age","vaishali mahalingam","vm298@cam.ac.uk","2018","continuous age","Yes","hypothetical","year","parameter","mean..1000.",35.79,"18-74",11.5,420,0.04,NA,NA,NA,NA
 "Mahalingam 2018 Sample 6","Age","vaishali mahalingam","vm298@cam.ac.uk","2018","continuous age","Yes","hypothetical","year","parameter","X1.month..100.",35.79,"18-74",11.5,420,-0.011,NA,NA,NA,NA
-"Sparrow 2018b Study 1","Younger","erika sparrow","jspaniol@psych.ryerson.ca","2018","extreme group","","real","days","proportion",NA,25.28,"18-35",5.22,32,NA,0.519774011299435,0.372862332829066,NA,48.66
-"Sparrow 2018b Study 1","Older","erika sparrow","jspaniol@psych.ryerson.ca","2018","extreme group","","real","days","proportion",NA,70.57,"65-85",4.88,30,NA,0.853107344632768,0.216613440821257,NA,48.66
-"Sparrow 2018b Study 2","Younger","erika sparrow","jspaniol@psych.ryerson.ca","2018","extreme group","","real","days","proportion",NA,20.84,"18-30",2.67,31,NA,0.519774011299435,0.36699011807731,NA,48.66
-"Sparrow 2018b Study 2","Older","erika sparrow","jspaniol@psych.ryerson.ca","2018","extreme group","","real","days","proportion",NA,71.35,"65-97",6.96,23,NA,0.853107344632768,0.189665653464349,NA,48.66
+"Sparrow 2018 Study 1","Younger","erika sparrow","jspaniol@psych.ryerson.ca","2018","extreme group","","real","days","proportion",NA,25.28,"18-35",5.22,32,NA,0.519774011299435,0.372862332829066,NA,48.66
+"Sparrow 2018 Study 1","Older","erika sparrow","jspaniol@psych.ryerson.ca","2018","extreme group","","real","days","proportion",NA,70.57,"65-85",4.88,30,NA,0.853107344632768,0.216613440821257,NA,48.66
+"Sparrow 2018 Study 2","Younger","erika sparrow","jspaniol@psych.ryerson.ca","2018","extreme group","","real","days","proportion",NA,20.84,"18-30",2.67,31,NA,0.737556561085973,0.277128542946287,NA,48.66
+"Sparrow 2018 Study 2","Older","erika sparrow","jspaniol@psych.ryerson.ca","2018","extreme group","","real","days","proportion",NA,71.35,"65-97",6.96,23,NA,0.760180995475113,0.303808331793567,NA,48.66
 "Chao 2009","age",NA,NA,"2009","continuous age",NA,"hypothetical","days","parameter",NA,46.52,"15 - 91",15.086280590953,175,0.0775894664085864,NA,NA,NA,NA
 "Lee 2018","age",NA,NA,"2018","continuous age",NA,"hypothetical","days","parameter",NA,26.7874787129157,"18 - 91.5",9.10005378638174,11157,-0.0712496735395659,NA,NA,NA,NA
 "Li unpublished Study 2","age",NA,NA,NA,"continuous age",NA,"hypothetical","days","parameter",NA,45.5185783521809,"18 - 86",16.2814314565207,619,0.0621715946797776,NA,NA,NA,NA
