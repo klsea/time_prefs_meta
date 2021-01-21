@@ -101,7 +101,7 @@ dm$cohens_d <- NULL; dm$var_cohens_d <- NULL; dm$a <- NULL; dm$r <-NULL; dm$var_
 # Reversals  ####
 dm <- reverse_es(dm, 'Garza 2016')
 dm <- reverse_es(dm, 'Li 2013')
-dm <- reverse_es(dm, 'Sparrow 2018a')
+dm <- reverse_es(dm, 'Sparrow 2019')
 dm <- reverse_es(dm, 'Sparrow 2018b Study 1')
 dm <- reverse_es(dm, 'Sparrow 2018b Study 2')
 

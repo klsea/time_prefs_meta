@@ -92,14 +92,14 @@ sparrow[, colnames(sparrow) == 'effect_size_d'] <- NA
 dt <- dt[-which(dt$Study.Identifier == 'Sparrow 2018'),] # remove empty row from data frame
 
 s1 <- sparrow
-s1[,which(colnames(s1) == 'Study.Identifier')] <- 'Sparrow 2018b Study 1'
+s1[,which(colnames(s1) == 'Study.Identifier')] <- 'Sparrow 2018 Study 1'
 s1[which(s1$Intervention == 'Younger'), which(colnames(s1) == 'mean')] <- sparrow1[1,2]
 s1[which(s1$Intervention == 'Younger'), which(colnames(s1) == 'se')] <- abs(sparrow1[1,2] - sparrow1[2,2])
 s1[which(s1$Intervention == 'Older'), which(colnames(s1) == 'mean')] <- sparrow1[3,2]
 s1[which(s1$Intervention == 'Older'), which(colnames(s1) == 'se')] <- abs(sparrow1[3,2] - sparrow1[4,2])
 
 s2 <- sparrow
-s2[,which(colnames(s2) == 'Study.Identifier')] <- 'Sparrow 2018b Study 2'
+s2[,which(colnames(s2) == 'Study.Identifier')] <- 'Sparrow 2018 Study 2'
 s2[which(s2$Intervention == 'Younger'), which(colnames(s2) == 'age_mean')] <- 20.84
 s2[which(s2$Intervention == 'Younger'), which(colnames(s2) == 'age_sd')] <- 2.67
 s2[which(s2$Intervention == 'Younger'), which(colnames(s2) == 'n')] <- 31
