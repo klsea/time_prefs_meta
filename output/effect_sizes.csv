@@ -7,14 +7,14 @@
 "Gollner 2018","continuous age","hypothetical","days","parameter",96,0.134810787862631,0.010752688172043
 "Bickel 2014","continuous age","hypothetical","days","parameter",1163,-0.046633775583691,0.000862068965517241
 "Boyle 2012","continuous age","hypothetical","months","parameter",388,-0.0350143021802417,0.0025974025974026
-"Sheffer 2016","continuous age","real","days","parameter",1122,0.0500417292784913,0.000893655049151028
+"Sheffer 2016","continuous age","hypothetical","days","parameter",1122,0.0500417292784913,0.000893655049151028
 "Reimers 2009","continuous age","hypothetical","months","proportion",42863,-0.0500417292784913,2.33317778814746e-05
-"Chao 2009","continuous age","hypothetical","months","parameter",175,0.0777457306729151,0.00581395348837209
+"Chao 2009","continuous age","hypothetical","days","parameter",175,0.0777457306729151,0.00581395348837209
 "Lee 2018","continuous age","hypothetical","days","parameter",11157,-0.0713706088138308,8.9653935807782e-05
 "Li unpublished Study 2","continuous age","hypothetical","days","parameter",619,0.0622518850742946,0.00162337662337662
-"O'Hora 2016","continuous age","hypothetical","days","parameter",840,-0.0136070858286138,0.001194743130227
+"O'Hora 2016","continuous age","hypothetical","years","parameter",840,-0.0136070858286138,0.001194743130227
 "Sisso unpublished","continuous age","hypothetical","weeks","proportion",2630,-0.00737202610577622,0.000380662352493338
-"Lempert unpublished","continuous age","hypothetical","days","parameter",74,-0.06963338037275,0.0140845070422535
+"Lempert unpublished","continuous age","real","days","parameter",74,-0.06963338037275,0.0140845070422535
 "Halfmann 2013","continuous age","hypothetical","weeks","parameter",48,0.0486663119486759,0.0222222222222222
 "Johnson 2015","continuous age","hypothetical","hours","parameter",197,-0.228972729612106,0.00515463917525773
 "Mahalingam 2018 Sample 3","continuous age","hypothetical/real","year","parameter",189,-0.0224466367748611,0.00537634408602151
@@ -22,21 +22,21 @@
 "Mahalingam 2018 Sample 5","continuous age","hypothetical","year","parameter",151,0.00820655730339853,0.00675675675675676
 "Mahalingam 2018 Sample 6","continuous age","hypothetical","year","parameter",420,0.0282455494555796,0.00239808153477218
 "Löckenhoff 2011","continuous age","real","days","parameter",98,-0.342828254415394,0.0105263157894737
-"Hampton 2018","continuous age","hypothetical","days","parameter",2564,-0.0420318520359818,0.000390472471690746
+"Hampton 2018","continuous age","hypothetical","years","parameter",2564,-0.0420318520359818,0.000390472471690746
 "Wolfe 2017","continuous age","hypothetical","years","proportion",13198,0.0396207192101185,7.57862826828344e-05
 "Roalf 2012","extreme group","real ","days","parameter ",54,0.140050359014407,0.0196078431372549
 "Bauer 2010","extreme group","hypothetical","years","proportion",532,0.0624659370813364,0.00189035916824197
 "Eppinger 2012","extreme group","real","weeks","proportion",30,-0.845671595744602,0.037037037037037
-"Halfmann 2016","extreme group","real","days","parameter",113,-0.102681009347155,0.00909090909090909
-"Buono 2015","extreme group","Hypothetical","Weeks","Parameter",38,0.346614431198436,0.0285714285714286
+"Halfmann 2016","extreme group","hypothetical","days","parameter",113,-0.102681009347155,0.00909090909090909
+"Buono 2015","extreme group","Hypothetical","years","Parameter",38,0.346614431198436,0.0285714285714286
 "Eppinger 2018","extreme group","real","weeks","proportion",50,-0.306261062657478,0.0212765957446809
 "Whelan 2009","extreme group","hypothetical","years","parameter",26,0.0974715694939264,0.0434782608695652
-"Liu 2016","extreme group","hypothetical","days","parameter",937,0.0717689972300975,0.00107066381156317
+"Liu 2016","extreme group","hypothetical","months","parameter",937,0.0717689972300975,0.00107066381156317
 "Garza 2016","extreme group","hypothetical","days/weeks/months/years","parameter ",148,-0.0287890158733157,0.00689655172413793
 "Li 2013","extreme group","hypothetical","months ","parameter",336,-0.0804116021864868,0.003003003003003
-"Sparrow 2018a","extreme group","real","days","parameter",72,0.0292417541197954,0.0144927536231884
-"Sparrow 2018b Study 1","extreme group","real","days","parameter",62,-0.512342082892121,0.0169491525423729
-"Sparrow 2018b Study 2","extreme group","real","days","parameter",54,-0.510425045525061,0.0196078431372549
-"Samanez-Larkin 2011","extreme group","real","weeks","proportion",24,0.0426272325760944,0.0476190476190476
+"Sparrow 2019","extreme group","real","days","proportion",72,0.0292417541197954,0.0144927536231884
+"Sparrow 2018 Study 1","extreme group","real","days","proportion",62,-0.512342082892121,0.0169491525423729
+"Sparrow 2018 Study 2","extreme group","real","days","proportion",54,-0.510425045525061,0.0196078431372549
+"Samanez-Larkin 2011","extreme group","real","weeks","proportion",25,0.0416908044695255,0.0454545454545455
 "Jimura 2011","extreme group","hypothetical","weeks/months/years","parameter",40,0.340533994514831,0.027027027027027
 "Green 1994","extreme group","hypothetical","months/years","parameter",24,-0.905524749728718,0.0476190476190476
