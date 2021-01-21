@@ -102,8 +102,8 @@ dm$cohens_d <- NULL; dm$var_cohens_d <- NULL; dm$a <- NULL; dm$r <-NULL; dm$var_
 dm <- reverse_es(dm, 'Garza 2016')
 dm <- reverse_es(dm, 'Li 2013')
 dm <- reverse_es(dm, 'Sparrow 2019')
-dm <- reverse_es(dm, 'Sparrow 2018b Study 1')
-dm <- reverse_es(dm, 'Sparrow 2018b Study 2')
+dm <- reverse_es(dm, 'Sparrow 2018 Study 1')
+dm <- reverse_es(dm, 'Sparrow 2018 Study 2')
 
 write.csv(dm, here::here('output', 'extreme_group_table.csv'), row.names = FALSE)
 rm(dm, ds, dt, file, average_within_study, reverse_es, age_group_comparisons)

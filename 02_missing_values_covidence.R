@@ -108,10 +108,10 @@ s2[which(s2$Intervention == 'Older'), which(colnames(s2) == 'age_mean')] <- 71.3
 s2[which(s2$Intervention == 'Older'), which(colnames(s2) == 'age_sd')] <- 6.96
 s2[which(s2$Intervention == 'Older'), which(colnames(s2) == 'n')] <- 23
 s2[which(s2$Intervention == 'Older'), which(colnames(s2) == 'age_range')] <- '65-97'
-s2[which(s2$Intervention == 'Younger'), which(colnames(s2) == 'mean')] <- sparrow1[1,2]
-s2[which(s2$Intervention == 'Younger'), which(colnames(s2) == 'se')] <- abs(sparrow1[1,2] - sparrow1[2,2])
-s2[which(s2$Intervention == 'Older'), which(colnames(s2) == 'mean')] <- sparrow1[3,2]
-s2[which(s2$Intervention == 'Older'), which(colnames(s2) == 'se')] <- abs(sparrow1[3,2] - sparrow1[4,2])
+s2[which(s2$Intervention == 'Younger'), which(colnames(s2) == 'mean')] <- sparrow2[1,2]
+s2[which(s2$Intervention == 'Younger'), which(colnames(s2) == 'se')] <- abs(sparrow2[1,2] - sparrow2[2,2])
+s2[which(s2$Intervention == 'Older'), which(colnames(s2) == 'mean')] <- sparrow2[3,2]
+s2[which(s2$Intervention == 'Older'), which(colnames(s2) == 'se')] <- abs(sparrow2[3,2] - sparrow2[4,2])
 
 s3 <- rbind(s1, s2)
 dt <- rbind(dt, s3)
