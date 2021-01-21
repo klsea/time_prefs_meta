@@ -1,4 +1,4 @@
 "Study.Identifier","Design","Incentive","Magnitude.of.Time.Delay","Measure","n_Younger","n_Older","age_mean_Younger","age_mean_Older","age_range_Younger","age_range_Older","age_sd_Younger","age_sd_Older","fishers_z","var_fishers_z"
-"Samanez-Larkin 2011","extreme group","real","weeks","proportion",12,12,22,73.4,"19-26","63-85",NA,NA,0.0426272325760944,0.0476190476190476
+"Samanez-Larkin 2011","extreme group","real","weeks","proportion",12,13,22,73.4,"19-26","63-85",NA,NA,0.0416908044695255,0.0454545454545455
 "Jimura 2011","extreme group","hypothetical","weeks/months/years","parameter",20,20,20,71,"","60-84",NA,7.5,0.340533994514831,0.027027027027027
 "Green 1994","extreme group","hypothetical","months/years","parameter",12,12,20.3,67.9,"","",NA,NA,-0.905524749728718,0.0476190476190476
