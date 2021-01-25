@@ -18,12 +18,15 @@ priors <- c(prior(normal(0,1), class = Intercept),
 dt <- read.csv(here::here('output', file))
 
 # run meta
-m.brms <- brm(fishers_z|se(var_fishers_z) ~ 1  + ( 1 | Study.Identifier), 
+m.brm <- brm(fishers_z|se(var_fishers_z) ~ 1  + ( 1 | Study.Identifier), 
               data = dt, 
               prior = priors, 
               iter = 6000, 
               control = list(max_treedepth = 18))
 
 # check convergence
-pp_check(m.brms) # look at plot to see if replications are similar to observed data
-summary(m.brms) # look for rhat values to be less than 1.01
+pp_check(m.brm) # look at plot to see if replications are similar to observed data
+summary(m.brm) # look for rhat values to be less than 1.01
+
+# save model
+saveRDS(m.brm, here::here('output', 'bayesian_model.rds'))
