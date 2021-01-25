@@ -6,6 +6,7 @@ library(here)
 library(meta)
 library(metafor)
 library(brms)
+library(ggplot2)
 
 # load source functions
 
@@ -30,3 +31,30 @@ summary(m.brm) # look for rhat values to be less than 1.01
 
 # save model
 saveRDS(m.brm, here::here('output', 'bayesian_model.rds'))
+
+# posterior distribution
+post.samples <- posterior_samples(m.brm, c("^b", "^sd"))
+names(post.samples)
+names(post.samples) <- c("smd", "tau")
+
+# density plot of poterior distributions
+
+#Plot for SMD
+ggplot(aes(x = smd), data = post.samples) +
+  geom_density(fill = "lightblue", color = "lightblue", alpha = 0.7) +
+  geom_point(y = 0, x = mean(post.samples$smd)) +
+  labs(x = expression(italic(SMD)),
+       y = element_blank()) +
+  theme_minimal()
+
+# Plot for tau
+ggplot(aes(x = tau), data = post.samples) +
+  geom_density(fill = "lightgreen", color = "lightgreen", alpha = 0.7) +
+  geom_point(y = 0, x = mean(post.samples$tau)) +
+  labs(x = expression(tau),
+       y = element_blank()) +
+  theme_minimal()
+
+# Empirical Cumulative Distriubtion Factor
+smd.ecdf <- ecdf(post.samples$smd)
+smd.ecdf(0.3) # can change
