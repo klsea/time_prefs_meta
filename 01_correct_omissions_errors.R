@@ -45,7 +45,6 @@ dt[which(dt$correct_data_extracted == 'No mean or sd but we can extract from bar
 dt[which(dt$Study.Identifier == 'Sparrow 2019'), which(colnames(dt) == 'Measure')] <- 'proportion'
 dt[which(dt$Study.Identifier == 'Sparrow 2018'), which(colnames(dt) == 'Measure')] <- 'proportion'
 
-
 # Fix Hampton 2018 delay
 dt[which(dt$Study.Identifier == 'Hampton 2018'), which(colnames(dt) == 'Magnitude.of.Time.Delay')] <- 'years'
 
