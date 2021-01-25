@@ -18,19 +18,24 @@ priors <- c(prior(normal(0,1), class = Intercept),
 # load data
 dt <- read.csv(here::here('output', file))
 
-# run meta
-m.brm <- brm(fishers_z|se(var_fishers_z) ~ 1  + ( 1 | Study.Identifier), 
-              data = dt, 
-              prior = priors, 
-              iter = 6000, 
-              control = list(max_treedepth = 18))
+# run meta ####
+# run this code to fit the model- takes a few minutes to complete
+# m.brm <- brm(fishers_z|se(var_fishers_z) ~ 1  + ( 1 | Study.Identifier), 
+#               data = dt, 
+#               prior = priors, 
+#               iter = 6000, 
+#               control = list(max_treedepth = 18))
+# 
+# # save model
+# saveRDS(m.brm, here::here('output', 'bayesian_model.rds'))
+
+# load model from saved ####
+# load the model that has already been fit (see code above)
+m.brm <- readRDS(here::here('output', 'bayesian_model.rds'))
 
 # check convergence
 pp_check(m.brm) # look at plot to see if replications are similar to observed data
 summary(m.brm) # look for rhat values to be less than 1.01
-
-# save model
-saveRDS(m.brm, here::here('output', 'bayesian_model.rds'))
 
 # posterior distribution
 post.samples <- posterior_samples(m.brm, c("^b", "^sd"))
