@@ -35,6 +35,7 @@ m.brm <- readRDS(here::here('output', 'bayesian_model.rds'))
 
 # check convergence
 pp_check(m.brm) # look at plot to see if replications are similar to observed data
+pp_check(m.brm, nsamples = 1e3, type = "stat_2d") + theme_bw(base_size = 20) # another way to visualize
 summary(m.brm) # look for rhat values to be less than 1.01
 
 # posterior distribution
@@ -62,4 +63,11 @@ ggplot(aes(x = tau), data = post.samples) +
 
 # Empirical Cumulative Distriubtion Factor
 smd.ecdf <- ecdf(post.samples$smd)
-smd.ecdf(0.3) # can change
+smd.ecdf(0) # can change
+
+#
+# working thru Worked example #2 on https://www.barelysignificant.com/slides/RGUG2019#77
+library(tidyverse)
+summary(m.brm)
+posterior_summary(m.brm)
+m.brm %>% plot(combo = c("hist", "trace"), theme = theme_bw(base_size = 18) )
