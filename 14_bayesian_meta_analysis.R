@@ -20,14 +20,14 @@ dt <- read.csv(here::here('output', file))
 
 # run meta ####
 # run this code to fit the model- takes a few minutes to complete
-# m.brm <- brm(fishers_z|se(var_fishers_z) ~ 1  + ( 1 | Study.Identifier), 
-#               data = dt, 
-#               prior = priors, 
-#               iter = 6000, 
-#               control = list(max_treedepth = 18))
-# 
-# # save model
-# saveRDS(m.brm, here::here('output', 'bayesian_model.rds'))
+m.brm <- brm(fishers_z|se(var_fishers_z) ~ 1  + ( 1 | Study.Identifier),
+              data = dt,
+              prior = priors, sample_prior = TRUE,
+              iter = 6000,
+              control = list(max_treedepth = 18))
+
+# save model
+saveRDS(m.brm, here::here('output', 'bayesian_model.rds'))
 
 # load model from saved ####
 # load the model that has already been fit (see code above)
@@ -63,11 +63,23 @@ ggplot(aes(x = tau), data = post.samples) +
 
 # Empirical Cumulative Distriubtion Factor
 smd.ecdf <- ecdf(post.samples$smd)
-smd.ecdf(0) # can change
+smd.ecdf(0) # can change to test different values
 
 #
 # working thru Worked example #2 on https://www.barelysignificant.com/slides/RGUG2019#77
 library(tidyverse)
 summary(m.brm)
 posterior_summary(m.brm)
-m.brm %>% plot(combo = c("hist", "trace"), theme = theme_bw(base_size = 18) )
+
+# https://vuorre.netlify.app/post/2017/03/21/bayes-factors-with-brms/
+m.brm$fit
+samples <- posterior_samples(m.brm, c("b_Intercept", "prior_Intercept")) # added underscore to avoid pulling in study IDs with a "b" - missing prior_b data 
+head(samples)
+gather(samples, Type, value) %>% 
+  ggplot(aes(value, col=Type)) +
+  geom_density() +
+  labs(x = bquote(theta), y = "Density")
+
+h <- hypothesis(m.brm, "Intercept = 0")
+print(h, digits = 4)
+plot(h)
