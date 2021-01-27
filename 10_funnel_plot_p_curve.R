@@ -55,5 +55,6 @@ pcurve(m.cor, effect.estimation = TRUE, N = m.cor$n, dmin = 0, dmax = 1)
 # for presentation
 ggsave(file = here::here('figs', 'pcurve.svg'), plot = pcurve(m.cor), width = 5, height = 5)
 
+# post-code editing out of % signs per reviewer request
 
 rm(m.cor, file)
