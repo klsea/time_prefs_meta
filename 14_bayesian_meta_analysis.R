@@ -1,4 +1,4 @@
-# Run meta-regression analysis and bubble plots for older age in extreme-groups
+# Run bayesian meta-analysis using brms
 # 1.24.21 KLS
 
 # load required packages
@@ -13,7 +13,9 @@ library(ggplot2)
 # set hard-coded variables
 file <- 'effect_sizes.csv'
 priors <- c(prior(normal(0,1), class = Intercept), 
-            prior(cauchy(0,0.5), class = sd))
+             prior(cauchy(0,0.5), class = sd))
+# priors <- c(prior(normal(-1,1), class = Intercept), 
+#             prior(cauchy(0,0.5), class = sd))
 
 # load data
 dt <- read.csv(here::here('output', file))
@@ -80,6 +82,7 @@ gather(samples, Type, value) %>%
   geom_density() +
   labs(x = bquote(theta), y = "Density")
 
-h <- hypothesis(m.brm, "Intercept = 0")
+h <- hypothesis(m.brm, "Intercept = 0", class = "b")
 print(h, digits = 4)
 plot(h)
+
