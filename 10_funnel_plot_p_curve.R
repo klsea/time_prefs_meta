@@ -58,3 +58,4 @@ ggsave(file = here::here('figs', 'pcurve.svg'), plot = pcurve(m.cor), width = 5,
 # post-code editing out of % signs per reviewer request
 
 rm(m.cor, file)
+

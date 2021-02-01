@@ -6,7 +6,7 @@ library(here)
 library(tidyverse)
 library(meta)
 library(metafor)
-library(dmetar)
+#library(dmetar)
 
 # load source functions
 
@@ -54,3 +54,4 @@ saveRDS(m.dl, here::here('output', 'dl_model.RDS'))
 meta::forest(m.dl)
 
 rm(dt, m.cor, file, m.dl)
+

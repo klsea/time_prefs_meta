@@ -1,11 +1,17 @@
 # Run more heterogeneity analyses
 # 6.2.20 KLS
 
+#install dmetar package
+install.packages("devtools")
+devtools::install_github("MathiasHarrer/dmetar")
+devtools::install("~/Path/To/The/Folder/dmetar-master")
+
 # load required packages
 library(here) 
 library(tidyverse)
 library(meta)
 library(metafor)
+library(dmetar)
 
 # load source functions
 

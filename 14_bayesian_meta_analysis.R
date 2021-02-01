@@ -41,15 +41,15 @@ summary(m.brm) # look for rhat values to be less than 1.01
 # posterior distribution
 post.samples <- posterior_samples(m.brm, c("^b", "^sd"))
 names(post.samples)
-names(post.samples) <- c("smd", "tau")
+names(post.samples) <- c("mu", "tau")
 
 # density plot of poterior distributions
 
 #Plot for SMD
-ggplot(aes(x = smd), data = post.samples) +
+ggplot(aes(x = mu), data = post.samples) +
   geom_density(fill = "lightblue", color = "lightblue", alpha = 0.7) +
   geom_point(y = 0, x = mean(post.samples$smd)) +
-  labs(x = expression(italic(SMD)),
+  labs(x = expression(italic(mu)),
        y = element_blank()) +
   theme_minimal()
 
@@ -63,7 +63,16 @@ ggplot(aes(x = tau), data = post.samples) +
 
 # Empirical Cumulative Distriubtion Factor
 smd.ecdf <- ecdf(post.samples$smd)
-smd.ecdf(0) # can change to test different values
+smd.ecdf(-0) # can change to test different values
+smd.ecdf(-0.1) # can change to test different values
+
+# posterior and prior distribution graphed togehter
+# samples <- posterior_samples(m.brm, c('b_Intercept', 'prior_Intercept'))
+# 
+# gather(samples, Type, value) %>% 
+#   ggplot(aes(value, col=Type)) +
+#   geom_density() +
+#   labs(x = bquote(theta), y = "Density") 
 
 #testing hypotheses
 
@@ -74,9 +83,9 @@ Credibility1 <- round(hypothesis(m.brm, "Intercept < 0")$hypothesis$Post.Prob*10
 
 plot(h1)
 
-h2 <- hypothesis(m.brm, "Intercept < -0.2")
+h2 <- hypothesis(m.brm, "Intercept < -0.1")
 print(h2, digits = 4)
-EvidenceRatio2 <- round(hypothesis(m.brm, "Intercept < -0.2")$hypothesis$Evid.Ratio, 3)
-Credibility2 <- round(hypothesis(m.brm, "Intercept < -0.2")$hypothesis$Post.Prob*100, 0)
+EvidenceRatio2 <- round(hypothesis(m.brm, "Intercept < -0.1")$hypothesis$Evid.Ratio, 3)
+Credibility2 <- round(hypothesis(m.brm, "Intercept < -0.1")$hypothesis$Post.Prob*100, 0)
 
-
+plot(h2)
