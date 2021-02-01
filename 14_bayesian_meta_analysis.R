@@ -14,8 +14,6 @@ library(ggplot2)
 file <- 'effect_sizes.csv'
 priors <- c(prior(normal(0,1), class = Intercept), 
              prior(cauchy(0,0.5), class = sd))
-# priors <- c(prior(normal(-1,1), class = Intercept), 
-#             prior(cauchy(0,0.5), class = sd))
 
 # load data
 dt <- read.csv(here::here('output', file))
@@ -67,22 +65,18 @@ ggplot(aes(x = tau), data = post.samples) +
 smd.ecdf <- ecdf(post.samples$smd)
 smd.ecdf(0) # can change to test different values
 
-#
-# working thru Worked example #2 on https://www.barelysignificant.com/slides/RGUG2019#77
-library(tidyverse)
-summary(m.brm)
-posterior_summary(m.brm)
+#testing hypotheses
 
-# https://vuorre.netlify.app/post/2017/03/21/bayes-factors-with-brms/
-m.brm$fit
-samples <- posterior_samples(m.brm, c("b_Intercept", "prior_Intercept")) # added underscore to avoid pulling in study IDs with a "b" - missing prior_b data 
-head(samples)
-gather(samples, Type, value) %>% 
-  ggplot(aes(value, col=Type)) +
-  geom_density() +
-  labs(x = bquote(theta), y = "Density")
+h1 <- hypothesis(m.brm, "Intercept < 0")
+print(h1, digits = 4)
+EvidenceRatio1 <- round(hypothesis(m.brm, "Intercept < 0")$hypothesis$Evid.Ratio, 3)
+Credibility1 <- round(hypothesis(m.brm, "Intercept < 0")$hypothesis$Post.Prob*100, 0)
 
-h <- hypothesis(m.brm, "Intercept = 0", class = "b")
-print(h, digits = 4)
-plot(h)
+plot(h1)
+
+h2 <- hypothesis(m.brm, "Intercept < -0.2")
+print(h2, digits = 4)
+EvidenceRatio2 <- round(hypothesis(m.brm, "Intercept < -0.2")$hypothesis$Evid.Ratio, 3)
+Credibility2 <- round(hypothesis(m.brm, "Intercept < -0.2")$hypothesis$Post.Prob*100, 0)
+
 
