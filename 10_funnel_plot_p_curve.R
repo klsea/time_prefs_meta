@@ -35,7 +35,7 @@ dev.off()
 
 # Regular funnel plot
 png(file = 'figs/funnelplot3.png', width = 800, height = 800) 
-meta::funnel(m.cor, xlim = c(-1.5,.5))  
+meta::funnel(m.cor, xlim = c(-1.5,.5))
 dev.off() 
 
 # for presentation
