@@ -76,16 +76,17 @@ smd.ecdf(-0.1) # can change to test different values
 
 #testing hypotheses
 
-h1 <- hypothesis(m.brm, "Intercept < 0")
+h1 <- hypothesis(m.brm, "Intercept > 0")
 print(h1, digits = 4)
-EvidenceRatio1 <- round(hypothesis(m.brm, "Intercept < 0")$hypothesis$Evid.Ratio, 3)
-Credibility1 <- round(hypothesis(m.brm, "Intercept < 0")$hypothesis$Post.Prob*100, 0)
+EvidenceRatio1 <- round(hypothesis(m.brm, "Intercept > 0")$hypothesis$Evid.Ratio, 3)
+Credibility1 <- round(hypothesis(m.brm, "Intercept > 0")$hypothesis$Post.Prob*100, 0)
 
-plot(h1)
-
-h2 <- hypothesis(m.brm, "Intercept < -0.1")
+h2 <- hypothesis(m.brm, "Intercept < 0")
 print(h2, digits = 4)
-EvidenceRatio2 <- round(hypothesis(m.brm, "Intercept < -0.1")$hypothesis$Evid.Ratio, 3)
-Credibility2 <- round(hypothesis(m.brm, "Intercept < -0.1")$hypothesis$Post.Prob*100, 0)
+EvidenceRatio2 <- round(hypothesis(m.brm, "Intercept < 0")$hypothesis$Evid.Ratio, 3)
+Credibility2 <- round(hypothesis(m.brm, "Intercept < 0")$hypothesis$Post.Prob*100, 0)
 
-plot(h2)
+h3 <- hypothesis(m.brm, "Intercept < -0.1")
+print(h3, digits = 4)
+EvidenceRatio3 <- round(hypothesis(m.brm, "Intercept < -0.1")$hypothesis$Evid.Ratio, 3)
+Credibility3 <- round(hypothesis(m.brm, "Intercept < -0.1")$hypothesis$Post.Prob*100, 0)
