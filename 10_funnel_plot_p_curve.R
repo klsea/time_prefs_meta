@@ -6,6 +6,7 @@ library(here)
 library(meta)
 library(metafor)
 library(dmetar) 
+library(ggplot2)
 
 # load source functions
 

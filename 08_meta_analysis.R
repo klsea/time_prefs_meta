@@ -33,7 +33,7 @@ saveRDS(m.cor, here::here('output', 'cor_model.RDS'))
 # Forest plot - hksj model ####
 
 png(file = 'figs/forestplot.png', width = 600, height = 750) 
-meta::forest(m.cor, print.pval.Q = FALSE, print.I2.ci = TRUE, print.tau2 = FALSE)
+meta::forest(m.cor, print.pval.Q = FALSE, print.I2.ci = TRUE, print.tau2 = FALSE, digits.weight = 2)
 dev.off() 
 
 # for presentation
