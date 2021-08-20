@@ -36,8 +36,11 @@ png(file = 'figs/forestplot.png', width = 600, height = 750)
 meta::forest(m.cor, print.pval.Q = FALSE, print.I2.ci = TRUE, print.tau2 = FALSE, digits.weight = 2)
 dev.off() 
 
+# for pub
+ggsave(file = here::here('figs', 'forestplot.svg'), plot = meta::forest(m.cor, print.pval.Q = FALSE, print.I2.ci = TRUE, print.tau2 = FALSE, digits.weight = 2), width = 7.5, height = 10)
+
 # for presentation
-#ggsave(file = here::here('figs', 'forestplot.svg'), plot = meta::forest(m.cor), width = 7.5, height = 10)
+ggsave(file = here::here('figs', 'forestplot_present.svg'), plot = meta::forest(m.cor), width = 7.5, height = 10)
 
 
 # REM - DerSimonian-Laird ####
